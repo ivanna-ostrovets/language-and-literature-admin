@@ -23,9 +23,6 @@ import { appRoutes } from './app.routes';
     AppComponent,
     PageNotFoundComponent,
   ],
-  providers: [
-    TodosService
-  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule {
