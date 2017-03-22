@@ -5,8 +5,8 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './createTestForm.component.html',
   styleUrls: ['./createTestForm.component.scss']
 })
-export class createTestFormComponent {
-  getNumbersRange() : number[] {
+export class CreateTestFormComponent {
+  getNumbersRange(): number[] {
     return Array(answersQuantity).fill().map((x, i) => i + 1);
   }
 

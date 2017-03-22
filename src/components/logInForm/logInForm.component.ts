@@ -6,7 +6,7 @@ import { Location } from '@angular/common';
   templateUrl: './logInForm.component.html',
   styleUrls: ['./logInForm.component.scss']
 })
-export class logInFormComponent {
+export class LogInFormComponent {
   userLogin : string = "admin";
   password : string = "password";
 

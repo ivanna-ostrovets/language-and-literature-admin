@@ -7,8 +7,8 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 
 import { PageNotFoundComponent } from '../components/pageNotFound/pageNotFound.component';
-import { logInFormComponent } from '../components/logInForm/logInForm.component';
-import { logInFormComponent } from '../components/createTestForm/createTestForm.component';
+import { LogInFormComponent } from '../components/logInForm/logInForm.component';
+import { CreateTestFormComponent } from '../components/createTestForm/createTestForm.component';
 
 import { appRoutes } from './app.routes';
 
@@ -22,6 +22,8 @@ import { appRoutes } from './app.routes';
   declarations: [
     AppComponent,
     PageNotFoundComponent,
+    LogInFormComponent,
+    CreateTestFormComponent
   ],
   bootstrap: [ AppComponent ]
 })
