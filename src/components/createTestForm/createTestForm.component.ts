@@ -6,4 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./createTestForm.component.scss']
 })
 export class createTestFormComponent {
+  getNumbersRange() : number[] {
+    return Array(answersQuantity).fill().map((x, i) => i + 1);
+  }
+
+  onSubmit() {
+  }
 }
