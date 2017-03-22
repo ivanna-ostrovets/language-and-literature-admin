@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { range } from 'lodash.range';
+const range = require('lodash.range');
 
 @Component({
   selector: 'llta-create-test-form',
