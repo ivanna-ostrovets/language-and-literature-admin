@@ -1,13 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 
+import { range } from 'lodash.range';
+
 @Component({
   selector: 'llta-create-test-form',
   templateUrl: './createTestForm.component.html',
   styleUrls: ['./createTestForm.component.scss']
 })
 export class CreateTestFormComponent {
+  question: string;
+  matching: boolean;
+  answersQuantity: number;
+  answers: string[];
+  answersTableTitle: string[];
+  answersLetters: string[];
+  answersNumbers: string[];
+
   getNumbersRange(): number[] {
-    return Array(answersQuantity).fill().map((x, i) => i + 1);
+    return range(1, this.answersQuantity + 1);
   }
 
   onSubmit() {
