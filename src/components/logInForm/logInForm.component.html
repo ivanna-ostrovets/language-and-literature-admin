@@ -1,21 +1,21 @@
 <div *ngIf="showError">
-  Неправильний логін або пароль!
+  РќРµРїСЂР°РІРёР»СЊРЅРёР№ Р»РѕРіС–РЅ Р°Р±Рѕ РїР°СЂРѕР»СЊ!
 </div>
 
 <form novalidate (ngSubmit)="onSubmit()" #loginform="ngForm">
   <div class="">
-    <label for="login">Логін</label>
+    <label for="login">Р›РѕРіС–РЅ</label>
     <input type="text" class="" id="login"
            required
            [(ngModel)]="inputLogin" name="inputLogin">
   </div>
 
   <div class="">
-    <label for="password">Пароль</label>
-    <input type="text" class="" id="password"
+    <label for="password">РџР°СЂРѕР»СЊ</label>
+    <input type="password" class="" id="password"
            required
            [(ngModel)]="inputPassword" name="inputPassword">
   </div>
 
-  <button type="submit" class="" [disabled]="!loginform.form.valid">Увійти</button>
+  <button type="submit" class="" [disabled]="!loginform.form.valid">РЈРІС–Р№С‚Рё</button>
 </form>

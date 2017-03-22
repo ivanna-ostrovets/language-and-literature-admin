@@ -1,6 +1,6 @@
 <form novalidate (ngSubmit)="onSubmit()" #createtestform="ngForm">
   <div class="">
-    <label for="question">Завдання</label>
+    <label for="question">Р—Р°РІРґР°РЅРЅСЏ</label>
     <textarea class=""
               id="question"
               required
@@ -10,7 +10,7 @@
   </div>
 
   <div class="">
-    <label for="image">Додати зображення</label>
+    <label for="image">Р”РѕРґР°С‚Рё Р·РѕР±СЂР°Р¶РµРЅРЅСЏ</label>
     <input type="image"
            class=""
            id="image"
@@ -19,7 +19,7 @@
   </div>
 
   <div class="">
-    <label for="image">Завдання на відповідність</label>
+    <label for="image">Р—Р°РІРґР°РЅРЅСЏ РЅР° РІС–РґРїРѕРІС–РґРЅС–СЃС‚СЊ</label>
     <input type="checkbox"
            class=""
            id="matching"
@@ -28,7 +28,7 @@
   </div>
 
   <div class="" *ngIf="!matching">
-    <label for="answersQuantity">Виберіть кількість відповідей</label>
+    <label for="answersQuantity">Р’РёР±РµСЂС–С‚СЊ РєС–Р»СЊРєС–СЃС‚СЊ РІС–РґРїРѕРІС–РґРµР№</label>
     <input type="number"
            class=""
            id="answersQuantity"
@@ -86,5 +86,5 @@
     </tbody>
   </table>
 
-  <button type="submit" class="" [disabled]="!createtestform.form.valid">Створити тест</button>
+  <button type="submit" class="" [disabled]="!createtestform.form.valid">РЎС‚РІРѕСЂРёС‚Рё С‚РµСЃС‚</button>
 </form>
