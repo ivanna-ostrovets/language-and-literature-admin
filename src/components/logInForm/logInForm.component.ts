@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'llta-log-in-form',
@@ -16,12 +17,12 @@ export class LogInFormComponent {
   showError: boolean = false;
 
   constructor(
-    private location: Location
+      private router: Router,
   ) {}
 
   onSubmit() {
     if (this.inputLogin == this.userLogin && this.inputPassword == this.password) {
-      this.location.go('/create-test');
+      return this.router.navigate(['/create-test']);
     } else {
       this.showError = true;
     }
