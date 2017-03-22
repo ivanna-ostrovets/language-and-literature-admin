@@ -10,7 +10,7 @@ const range = require('lodash.range');
 export class CreateTestFormComponent {
   question: string;
   matching: boolean;
-  answersQuantity: number;
+  answersQuantity: number = 0;
   answers: string[];
   answersTableTitle: string[];
   answersLetters: string[];
