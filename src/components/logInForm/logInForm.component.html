@@ -2,7 +2,7 @@
   Неправильний логін або пароль!
 </div>
 
-<form (ngSubmit)="onSubmit()" #loginform="ngForm">
+<form novalidate (ngSubmit)="onSubmit()" #loginform="ngForm">
   <div class="">
     <label for="login">Логін</label>
     <input type="text" class="" id="login"
