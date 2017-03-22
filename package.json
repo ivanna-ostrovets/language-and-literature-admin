@@ -10,7 +10,7 @@
   "scripts": {
     "postinstall": "npm run build",
     "start": "node server.js",
-    "debug": "webpack-dev-server --inline --progress --port 8080",
+    "debug": "webpack-dev-server --inline --progress --port 50080",
     "build": "rimraf dist && webpack --config config/webpack.prod.js --progress --profile --bail",
     "lint": "tslint 'src/**/*.ts' --force"
   },
@@ -43,6 +43,7 @@
     "file-loader": "^0.8.5",
     "html-loader": "^0.4.3",
     "html-webpack-plugin": "^2.15.0",
+    "jquery": "^3.2.1",
     "lodash.range": "^3.2.0",
     "material-design-icons": "^3.0.1",
     "materialize-css": "^0.98.1",
