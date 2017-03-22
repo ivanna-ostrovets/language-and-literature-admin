@@ -7,13 +7,13 @@ import { Location } from '@angular/common';
   styleUrls: ['./logInForm.component.scss']
 })
 export class LogInFormComponent {
-  userLogin : string = "admin";
-  password : string = "password";
+  userLogin: string = "admin";
+  password: string = "password";
 
-  inputLogin : string;
-  inputPassword : string;
+  inputLogin: string;
+  inputPassword: string;
 
-  showError : boolean = false;
+  showError: boolean = false;
 
   constructor(
     private location: Location
