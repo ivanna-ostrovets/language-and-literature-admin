@@ -3,7 +3,7 @@ import { enableProdMode } from '@angular/core';
 
 import { AppModule } from './app/app.module';
 
-import './styles/main.scss';
+import 'css/main.scss';
 
 if (process.env.ENV === 'production') {
   enableProdMode();
