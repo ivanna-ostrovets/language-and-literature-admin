@@ -39,12 +39,12 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        exclude: helpers.root('src', 'components'),
+        exclude: [helpers.root('src', 'app'), helpers.root('src', 'components')],
         loader: ExtractTextPlugin.extract('style', 'css!sass')
       },
       {
         test: /\.scss$/,
-        include: helpers.root('src', 'components'),
+        include: [helpers.root('src', 'app'), helpers.root('src', 'components')],
         loaders: ['raw', 'sass']
       }
     ]
