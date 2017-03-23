@@ -9,17 +9,22 @@ const range = require('lodash.range');
 })
 export class AppComponent {
   question: string;
+  addImage: boolean;
   matching: boolean;
-  answersQuantity: number = 0;
-  answers: string[];
-  answersTableTitle: string[];
-  answersLetters: string[];
-  answersNumbers: string[];
+  answersQuantity: number;
+  answers: string[] = [];
+  answersTableTitle: string[] = [];
+  answersLetters: string[] = [];
+  answersNumbers: string[] = [];
 
   getNumbersRange(): number[] {
-    return range(1, this.answersQuantity + 1);
+    return range(0, this.answersQuantity);
   }
 
   onSubmit() {
+    console.log(
+      this.question,
+      this.answers
+    );
   }
 }

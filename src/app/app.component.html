@@ -1,33 +1,53 @@
 <form novalidate (ngSubmit)="onSubmit()" #createtestform="ngForm">
-  <div class="">
-    <label for="question">Завдання</label>
-    <textarea class=""
+  <div class="row input-field">
+    <textarea class="materialize-textarea"
               id="question"
               required
               [(ngModel)]="question"
               name="question">
     </textarea>
+    <label for="question">Завдання</label>
   </div>
 
-  <div class="">
-    <label for="image">Додати зображення</label>
-    <input type="image"
-           class=""
-           id="image"
-           [(ngModel)]="image"
-           name="image">
+  <div class="row">
+    <div class="switch">
+      <label>
+        Додати зображення
+        <input type="checkbox"
+               [(ngModel)]="addImage"
+               name="addImage">
+        <span class="lever"></span>
+      </label>
+    </div>
+
+    <div class="file-field input-field" *ngIf="addImage">
+      <div class="btn">
+        <span>Додати зображення</span>
+        <input type="file"
+               id="image"
+               [(ngModel)]="image"
+               name="image"
+               accept="image/*">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+      </div>
+    </div>
   </div>
 
-  <div class="">
-    <label for="image">Завдання на відповідність</label>
-    <input type="checkbox"
-           class=""
-           id="matching"
-           [(ngModel)]="matching"
-           name="matching">
+  <div class="row input-field">
+    <div class="switch">
+      <label>
+        Завдання на відповідність
+        <input type="checkbox"
+               [(ngModel)]="matching"
+               name="matching">
+        <span class="lever"></span>
+      </label>
+    </div>
   </div>
 
-  <div class="" *ngIf="!matching">
+  <div class="row input-field">
     <label for="answersQuantity">Виберіть кількість відповідей</label>
     <input type="number"
            class=""
@@ -35,52 +55,57 @@
            required
            [(ngModel)]="answersQuantity"
            name="answersQuantity"
-           min="1">
+           min="0">
   </div>
 
-  <div *ngIf="!matching">
-    <textarea class=""
+  <div *ngIf="!matching" class="row">
+    <textarea class="materialize-textarea"
               required
               *ngFor="let number of getNumbersRange()"
-              [(ngModel)]="answers[number - 1]"
-              name="answers{{ number - 1 }}">
+              [(ngModel)]="answers[number]"
+              name="answer_{{ number }}">
     </textarea>
   </div>
 
-  <table class="" *ngIf="matching">
+  <table class="row" *ngIf="matching">
     <thead>
     <tr>
-      <th>
+      <th class="input-field">
         <input type="text"
                class=""
                required
                [(ngModel)]="answersTableTitle[0]"
-               name="answersTableTitle0">
+               name="answersTableTitle0"
+               id="answersTableTitle0">
+        <label for="answersTableTitle0">Заголовок</label>
       </th>
-      <th>
+      <th class="input-field">
         <input type="text"
                class=""
                required
                [(ngModel)]="answersTableTitle[1]"
-               name="answersTableTitle1">
+               name="answersTableTitle1"
+               id="answersTableTitle1">
+        <label for="answersTableTitle1">Заголовок</label>
       </th>
     </tr>
     </thead>
 
     <tbody>
-    <tr *ngFor="let number of getNumberRange(answersQuantity)">
+    <tr *ngFor="let number of getNumbersRange()">
       <td>
         <input type="text"
                class=""
                required
-               [(ngModel)]="answersLetters[number - 1]"
-               name="answersLetters{{ number - 1 }}">
-
+               [(ngModel)]="answersLetters[number]"
+               name="answersLetters{{ number }}">
+      </td>
+      <td>
         <input type="text"
                class=""
                required
-               [(ngModel)]="answersNumbers[number - 1]"
-               name="answersNumbers{{ number - 1 }}">
+               [(ngModel)]="answersNumbers[number]"
+               name="answersNumbers{{ number }}">
       </td>
     </tr>
     </tbody>
