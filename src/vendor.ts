@@ -12,3 +12,4 @@ import 'materialize-css/bin/materialize.css';
 import 'materialize-css';
 
 import 'lodash.range';
+import 'jquery';
