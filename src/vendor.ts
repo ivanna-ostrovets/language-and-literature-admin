@@ -7,9 +7,9 @@ import '@angular/router';
 
 import 'rxjs';
 
+import 'jquery';
 import 'material-design-icons/iconfont/material-icons.css';
 import 'materialize-css/bin/materialize.css';
 import 'materialize-css';
 
 import 'lodash.range';
-import 'jquery';
