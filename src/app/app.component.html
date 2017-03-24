@@ -1,4 +1,4 @@
-<form novalidate (ngSubmit)="onSubmit()" #createtestform="ngForm">
+<form novalidate (ngSubmit)="onSubmit()" #createtestform="ngForm" class="create-test-form">
   <div class="row input-field">
     <textarea class="materialize-textarea"
               id="question"
@@ -21,7 +21,7 @@
     </div>
 
     <div class="file-field input-field" *ngIf="addImage">
-      <div class="btn">
+      <div class="btn waves-effect light-blue">
         <span>Додати зображення</span>
         <input type="file"
                id="image"
@@ -111,5 +111,11 @@
     </tbody>
   </table>
 
-  <button type="submit" class="" [disabled]="!createtestform.form.valid">Створити тест</button>
+  <div class="row">
+    <button type="submit"
+            class="btn waves-effect light-blue center-align"
+            [disabled]="!createtestform.form.valid">
+      Створити тест
+    </button>
+  </div>
 </form>
