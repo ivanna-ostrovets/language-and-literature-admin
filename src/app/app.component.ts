@@ -5,7 +5,7 @@ const range = require('lodash.range');
 @Component({
   selector: 'llta-app',
   templateUrl: './app.component.html',
-  //styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   question: string;
