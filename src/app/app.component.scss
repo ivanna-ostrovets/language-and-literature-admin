@@ -3,28 +3,49 @@
 .create-test-form {
   margin: 30px 0;
 
+  .materialize-textarea {
+    margin: 0;
+  }
+
+  .switch {
+    margin-bottom: 50px;
+  }
+
+  .file-field {
+    margin-top: 50px;
+  }
+
+  .answers-quantity {
+    margin-top: 50px;
+    margin-bottom: 0;
+  }
+
   .input-field label {
     color: $text-color;
   }
 
   .input-field input[type=text]:focus + label
   .input-field textarea:focus + label {
-    color: $accent-color;
+    color: $accent-color !important;
   }
 
   .input-field input[type=text]:focus,
   .input-field textarea:focus {
-    border-bottom: 1px solid $accent-color;
-    box-shadow: 0 1px 0 0 $accent-color;
+    border-bottom: 1px solid $accent-color !important;
+    box-shadow: 0 1px 0 0 $accent-color !important;
   }
 
   .switch label input[type=checkbox]:checked + .lever,
   .switch label input[type=checkbox]:checked + .lever:after{
-    background-color: #E040FB;
+    background-color: #E040FB !important;
   }
 
   input[type=checkbox]:checked:not(:disabled) ~ .lever:active::after,
   input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::after {
-    box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4), 0 0 0 15px rgba(222, 63, 250, 0.1);
+    box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4), 0 0 0 15px rgba(222, 63, 250, 0.1) !important;
+  }
+
+  .answers-table thead {
+    border: none !important;
   }
 }

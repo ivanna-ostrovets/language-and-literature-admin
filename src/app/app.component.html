@@ -9,7 +9,7 @@
     <label for="question">Завдання</label>
   </div>
 
-  <div class="row">
+  <div class="row input-field">
     <div class="switch">
       <label>
         Додати зображення
@@ -19,19 +19,19 @@
         <span class="lever"></span>
       </label>
     </div>
+  </div>
 
-    <div class="file-field input-field" *ngIf="addImage">
-      <div class="btn waves-effect light-blue">
-        <span>Додати зображення</span>
-        <input type="file"
-               id="image"
-               [(ngModel)]="image"
-               name="image"
-               accept="image/*">
-      </div>
-      <div class="file-path-wrapper">
-        <input class="file-path validate" type="text">
-      </div>
+  <div class="row file-field input-field" *ngIf="addImage">
+    <div class="btn waves-effect light-blue">
+      <span>Додати зображення</span>
+      <input type="file"
+             id="image"
+             [(ngModel)]="image"
+             name="image"
+             accept="image/*">
+    </div>
+    <div class="file-path-wrapper">
+      <input class="file-path validate" type="text">
     </div>
   </div>
 
@@ -47,7 +47,7 @@
     </div>
   </div>
 
-  <div class="row input-field">
+  <div class="row input-field answers-quantity">
     <label for="answersQuantity">Виберіть кількість відповідей</label>
     <input type="number"
            class=""
@@ -67,14 +67,14 @@
     </textarea>
   </div>
 
-  <table class="row" *ngIf="matching">
+  <table class="row answers-table" *ngIf="matching">
     <thead>
     <tr>
       <th class="input-field">
         <input type="text"
                class=""
                required
-               [(ngModel)]="answersTableTitle[0]"
+               [(ngModel)]="answersTableTitles[0]"
                name="answersTableTitle0"
                id="answersTableTitle0">
         <label for="answersTableTitle0">Заголовок</label>
@@ -83,7 +83,7 @@
         <input type="text"
                class=""
                required
-               [(ngModel)]="answersTableTitle[1]"
+               [(ngModel)]="answersTableTitles[1]"
                name="answersTableTitle1"
                id="answersTableTitle1">
         <label for="answersTableTitle1">Заголовок</label>
@@ -97,23 +97,23 @@
         <input type="text"
                class=""
                required
-               [(ngModel)]="answersLetters[number]"
-               name="answersLetters{{ number }}">
+               [(ngModel)]="answersNumbers[number]"
+               name="answersNumbers{{ number }}">
       </td>
       <td>
         <input type="text"
                class=""
                required
-               [(ngModel)]="answersNumbers[number]"
-               name="answersNumbers{{ number }}">
+               [(ngModel)]="answersLetters[number]"
+               name="answersLetters{{ number }}">
       </td>
     </tr>
     </tbody>
   </table>
 
-  <div class="row">
+  <div class="row center-align">
     <button type="submit"
-            class="btn waves-effect light-blue center-align"
+            class="btn waves-effect light-blue"
             [disabled]="!createtestform.form.valid">
       Створити тест
     </button>

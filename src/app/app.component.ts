@@ -13,7 +13,7 @@ export class AppComponent {
   matching: boolean;
   answersQuantity: number;
   answers: string[] = [];
-  answersTableTitle: string[] = [];
+  answersTableTitles: string[] = [];
   answersLetters: string[] = [];
   answersNumbers: string[] = [];
 
@@ -22,9 +22,12 @@ export class AppComponent {
   }
 
   onSubmit() {
-    console.log(
-      this.question,
-      this.answers
-    );
+    //console.log(
+    //  this.question,
+    //  this.answers,
+    //  this.answersTableTitles,
+    //  this.answersLetters,
+    //  this.answersNumbers,
+    //);
   }
 }
