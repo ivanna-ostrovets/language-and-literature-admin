@@ -15,10 +15,7 @@ module.exports = webpackMerge(commonConfig, {
   },
 
   plugins: [
-    new ExtractTextPlugin('[name].css'),
-    new webpack.ProvidePlugin({
-      'window.jQuery': 'jquery' // Hack for materialize-css
-    })
+    new ExtractTextPlugin('[name].css')
   ],
 
   devServer: {

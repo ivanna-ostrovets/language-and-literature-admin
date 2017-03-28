@@ -9,8 +9,7 @@ import 'rxjs';
 
 import 'jquery';
 import 'material-design-icons/iconfont/material-icons.css';
-import 'materialize-css/bin/materialize.css';
-import 'materialize-css';
-import "angular2-materialize";
+import 'materialize-css/dist/css/materialize.css';
+import 'materialize-css/dist/js/materialize';
 
 import 'lodash.range';

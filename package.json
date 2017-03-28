@@ -8,11 +8,11 @@
   },
   "main": "server.js",
   "scripts": {
-    "postinstall": "npm run build",
     "start": "node server.js",
     "debug": "webpack-dev-server --inline --progress --port 50080",
     "build": "rimraf dist && webpack --config config/webpack.prod.js --progress --profile --bail",
-    "lint": "tslint 'src/**/*.ts' --force"
+    "lint": "tslint 'src/**/*.ts' --force",
+    "watch": "webpack -w"
   },
   "repository": {
     "type": "git",
