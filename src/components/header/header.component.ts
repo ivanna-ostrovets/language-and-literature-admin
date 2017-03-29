@@ -1,5 +1,6 @@
 import { Component, EventEmitter } from '@angular/core';
-import { MaterializeAction } from 'angular2-materialize';
+
+declare const $: any;
 
 @Component({
   selector: 'llta-header',
@@ -10,13 +11,11 @@ export class HeaderComponent {
   subject: string;
   category: string;
 
-  modalActions = new EventEmitter<string|MaterializeAction>();
   openModal() {
-    this.modalActions.emit({action:"modal",params:['open']});
+    $('.modal').modal();
+    $('#modal1').modal('open');
   }
-  closeModal() {
-    this.modalActions.emit({action:"modal",params:['close']});
-  }
+
   onSubmit() {
 
   }
