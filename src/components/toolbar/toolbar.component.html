@@ -1,11 +1,11 @@
-<md-toolbar color="primary">
-  <a href="#!/" class="left">
+<md-toolbar color="primary" class="llta-toolbar">
+  <a md-button class="llta-button" routerLink=".">
+    <md-icon>check</md-icon>
     <span>М &amp; Л | admin</span>
-    <i class="material-icons">&#xE5CA;</i>
   </a>
 
-  <a class="example-fill-remaining-space"
-     (click)="openDialog()">
-    Додати категорію
-  </a>
+  <a md-button class="llta-button" routerLink="create-test">Додати тест</a>
+  <a md-button class="llta-button" routerLink="create-category">Додати категорію</a>
+  <a md-button class="llta-button" routerLink="tests">Відкрити список тестів</a>
+  <a md-button class="llta-button" routerLink="categories">Відкрити список категорій</a>
 </md-toolbar>

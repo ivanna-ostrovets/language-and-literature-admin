@@ -5,8 +5,19 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  margin: 0;
 }
 
 main {
   flex: 1 0 auto;
+}
+
+.center-align {
+  text-align: center;
+}
+
+.llta-button {
+  width: 100%;
+  height: 100%;
+  vertical-align: middle;
 }

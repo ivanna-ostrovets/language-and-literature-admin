@@ -1,0 +1,14 @@
+.app-name {
+  font-size: 7.5vw;
+}
+
+.welcome-page-menu, .welcome-page-menu a {
+  width: 200px;
+  margin: 0 auto;
+}
+
+.welcome-page-menu {
+  md-list-item {
+    padding: 0 !important;
+  }
+}
