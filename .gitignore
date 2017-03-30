@@ -19,8 +19,11 @@ jspm_packages
 .node_repl_history
 
 # Builded app directory
+html
 dist
 
 # IDE directories
 .vscode
 .idea
+
+package.json
