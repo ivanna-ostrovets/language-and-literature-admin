@@ -5,10 +5,10 @@ const path = require('path');
 const HOST = process.env.HOST || '0.0.0.0';
 const PORT = process.env.PORT || 50080;
 
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, 'html/')));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/index.html'));
+  res.sendFile(path.join(__dirname, 'html//index.html'));
 });
 
 app.listen(PORT, HOST, () => {

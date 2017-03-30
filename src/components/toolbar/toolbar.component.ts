@@ -9,7 +9,7 @@ import { MdDialog, MdDialogRef } from '@angular/material';
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss']
 })
-export class HeaderComponent {
+export class ToolbarComponent {
   subject: string;
   category: string;
 
