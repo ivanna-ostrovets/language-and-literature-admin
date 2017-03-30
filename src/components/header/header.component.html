@@ -1,58 +1,11 @@
-<header>
-  <div class="navbar-fixed">
-    <nav>
-      <div class="nav-wrapper">
-        <a href="#!/" class="brand-logo left">
-          <span>М &amp; Л | admin</span>
-          <i class="material-icons">&#xE5CA;</i>
-        </a>
+<md-toolbar color="primary">
+  <a href="#!/" class="left">
+    <span>М &amp; Л | admin</span>
+    <i class="material-icons">&#xE5CA;</i>
+  </a>
 
-        <a class="modal-trigger waves-effect right"
-           (click)="openModal()">
-          Додати категорію
-        </a>
-      </div>
-    </nav>
-  </div>
-</header>
-
-<div id="modal1" class="modal modal-fixed-footer">
-  <div class="modal-content">
-    <h4>Додати категорію</h4>
-
-    <form novalidate (ngSubmit)="onSubmit()" #createcategoryform="ngForm" class="create-category-form">
-      <div class="row input-field">
-        <select required
-                id="subject"
-                name="subject"
-                [(ngModel)]="subject">
-          <option value="" disabled selected>-- Предмет --</option>
-          <option value="language">Українська мова</option>
-          <option value="literature">Українська література</option>
-        </select>
-        <label for="subject">Оберіть предмет</label>
-      </div>
-
-      <div class="row input-field">
-        <input type="text"
-               id="category"
-               name="category"
-               [(ngModel)]="category"
-               [disabled]="!subject" />
-        <label for="category">Введіть назву нової категорії</label>
-      </div>
-
-      <div class="row">
-        <button type="submit"
-                class="btn waves-effect light-blue"
-                [disabled]="!createcategoryform.form.valid">
-          Створити
-        </button>
-      </div>
-    </form>
-  </div>
-
-  <div class="modal-footer">
-    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Закрити</a>
-  </div>
-</div>
+  <a class="modal-trigger waves-effect right"
+     (click)="openDialog()">
+    Додати категорію
+  </a>
+</md-toolbar>

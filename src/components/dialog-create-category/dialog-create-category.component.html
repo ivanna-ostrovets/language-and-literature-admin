@@ -1,0 +1,27 @@
+<h1 md-dialog-title>Додати категорію</h1>
+<div md-dialog-content>
+  <form novalidate (ngSubmit)="onSubmit()" #createcategoryform="ngForm" class="create-category-form">
+    <select required
+            id="subject"
+            name="subject"
+            [(ngModel)]="subject">
+      <option value="" disabled selected>-- Предмет --</option>
+      <option value="language">Українська мова</option>
+      <option value="literature">Українська література</option>
+    </select>
+    <label for="subject">Оберіть предмет</label>
+
+
+    <input type="text"
+           id="category"
+           name="category"
+           [(ngModel)]="category"
+           [disabled]="!subject"/>
+    <label for="category">Введіть назву нової категорії</label>
+
+  </form>
+</div>
+<div md-dialog-actions>
+  <button md-button (click)="dialogRef.close('Option 1')">Закрити</button>
+  <button md-button (click)="dialogRef.close('Option 2')">Створити</button>
+</div>

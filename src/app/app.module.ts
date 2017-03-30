@@ -8,11 +8,14 @@ import { AppComponent } from './app.component';
 import { FooterComponent } from '../components/footer/footer.component';
 import { HeaderComponent } from '../components/header/header.component';
 
+import { MaterialModule } from '@angular/material';
+
 @NgModule({
   imports: [
     BrowserModule,
     HttpModule,
-    FormsModule
+    FormsModule,
+    MaterialModule.forRoot()
   ],
   declarations: [
     AppComponent,
