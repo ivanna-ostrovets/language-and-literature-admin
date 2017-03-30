@@ -1,23 +1,24 @@
 @import "../../css/variables";
+@import "../../css/theme";
 
-.navbar-fixed {
-  nav {
-    background-color: $primary-color;
-
-    .nav-wrapper {
-      .brand-logo {
-        padding-left: 8px !important;
-
-        i.material-icons {
-          font-size: 2.5rem;
-          margin-right: 8px;
-        }
-      }
-
-      .modal-trigger {
-        padding-left: 15px;
-        padding-right: 15px;
-      }
-    }
-  }
-}
+//.navbar-fixed {
+//  nav {
+//    background-color: $primary-color;
+//
+//    .nav-wrapper {
+//      .brand-logo {
+//        padding-left: 8px !important;
+//
+//        i.material-icons {
+//          font-size: 2.5rem;
+//          margin-right: 8px;
+//        }
+//      }
+//
+//      .modal-trigger {
+//        padding-left: 15px;
+//        padding-right: 15px;
+//      }
+//    }
+//  }
+//}

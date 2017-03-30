@@ -15,7 +15,7 @@ import { MaterialModule } from '@angular/material';
     BrowserModule,
     HttpModule,
     FormsModule,
-    MaterialModule.forRoot()
+    MaterialModule
   ],
   declarations: [
     AppComponent,
