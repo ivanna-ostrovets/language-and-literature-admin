@@ -5,8 +5,8 @@ import '@angular/common';
 import '@angular/http';
 import '@angular/router';
 
-import '@angular/material';
 import 'material-design-icons/iconfont/material-icons.css';
+import '@angular/material';
 
 import 'rxjs';
 
