@@ -9,27 +9,24 @@ const range = require('lodash.range');
 export class TestFormComponent {
   tasksQuantity: number;
   currentTab: number = 0;
-  question: string[] = [];
-  addImage: boolean[] = [];
-  matching: boolean[] = [];
-  answersQuantity: number[] = [];
-  answers: string[] = [];
-  answersTableTitles: string[] = [];
-  answersLetters: string[] = [];
-  answersNumbers: string[] = [];
-
-  //before(tab: number): void {
-  //  this.currentTab--;
-  //  $('ul.tabs').tabs('select_tab', 'tab${currentTab}');
-  //};
-  //
-  //next(tab: number): void {
-  //  this.currentTab++;
-  //  $('ul.tabs').tabs('select_tab', 'tab${currentTab}');
-  //};
+  questions: string[] = [];
+  addImages: boolean[] = [];
+  images: any[] = [];
+  matchings: boolean[] = [];
+  answersQuantities: number[] = [];
+  answers: string[][] = [[]];
+  answersTableTitles: string[][] = [[]];
+  answersLetters: string[][] = [[]];
+  answersNumbers: string[][] = [[]];
 
   getNumbersRange(number: number): number[] {
     return range(0, number);
+  }
+
+  onChange(event: any, i: number): void {
+    let files = event.srcElement.files;
+    this.images[i] = files[0];
+    console.log(files[0]);
   }
 
   //ngOnInit() {
@@ -52,13 +49,12 @@ export class TestFormComponent {
   //  });
   //}
 
+  clickOnElement(elementSelector: string): void {
+    (<HTMLElement>document.querySelector(elementSelector)).click();
+  }
+
   onSubmit() {
-    //console.log(
-    //  this.question,
-    //  this.answers,
-    //  this.answersTableTitles,
-    //  this.answersLetters,
-    //  this.answersNumbers,
-    //);
+    console.log("d");
+    console.log(this.images);
   }
 }

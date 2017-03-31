@@ -1,94 +1,87 @@
-<md-input-container class="tasks-quantity">
+<md-input-container class="block">
   <input mdInput
          required
          type="number"
          name="tasksQuantity"
          placeholder="Виберіть кількість запитань в тесті"
-         min="0"
+         min="1"
          [(ngModel)]="tasksQuantity">
 </md-input-container>
 
-<div class="center-align" *ngIf="tasksQuantity > 0">
-  <button md-raised-button
-          [ngClass]="{ 'disabled': currentTab == 0 }"
-          (click)="before(currentTab - 1)">
-    <md-icon>navigate_before</md-icon>
-  </button>
-
-  <md-tab-group>
-    <md-tab *ngFor="let number of getNumbersRange(tasksQuantity); let i=index"
-            label="{{ i + 1 }}"
-            id="tab{{ i }}"
-            (click)="currentTab = i"
-            [ngClass]="{'active' : currentTab == i}">
-      <form novalidate
-            (ngSubmit)="onSubmit()"
-            #createtestform="ngForm"
-            class="create-test-form">
-
-        <md-input-container>
+<div *ngIf="tasksQuantity > 0">
+  <form novalidate
+        (ngSubmit)="onSubmit()"
+        #createtestform="ngForm"
+        class="create-test-form">
+    <md-tab-group>
+      <md-tab *ngFor="let number of getNumbersRange(tasksQuantity); let i=index"
+              label="{{ i + 1 }}"
+              id="tab{{ i }}"
+              (click)="currentTab = i"
+              [ngClass]="{'active' : currentTab == i}">
+        <md-input-container class="block">
           <textarea mdInput
                     required
                     name="question{{ i }}"
                     placeholder="Завдання"
-                    [(ngModel)]="question[i]">
+                    [(ngModel)]="questions[i]">
           </textarea>
         </md-input-container>
 
-        <md-slide-toggle name="addImage{{ i }}"
-                         [(ngModel)]="addImage[i]">
+        <md-slide-toggle class="block"
+                         name="addImage{{ i }}"
+                         [(ngModel)]="addImages[i]">
           Додати зображення
         </md-slide-toggle>
 
-        <button md-raised-button>
-          <label for="file-input">Select</label>
+        <input type="file"
+               hidden
+               id="image{{ i }}"
+               (change)="onChange($event, i)"
+               accept="image/*">
+        <button md-raised-button
+                *ngIf="addImages[i]"
+                (click)="clickOnElement('#image' + i)">
+          Додати зображення
         </button>
-        <input id="file-input" type="file">
+        <md-input-container *ngIf="addImages[i] && images[i]?.name">
+          <input mdInput
+                 disabled
+                 [value]="images[i]?.name">
+        </md-input-container>
 
-        <div class="row file-field input-field" *ngIf="addImage[i]">
-          <div class="btn waves-effect light-blue">
-            <span>Додати зображення</span>
-            <input type="file"
-                   id="image{{ i }}"
-                   [(ngModel)]="image[i]"
-                   name="image{{ i }}"
-                   accept="image/*">
-          </div>
-          <div class="file-path-wrapper">
-            <input class="file-path validate" type="text">
-          </div>
-        </div>
-
-        <md-slide-toggle name="matching{{ i }}"
-                         [(ngModel)]="matching[i]">
+        <md-slide-toggle class="block"
+                         name="matching{{ i }}"
+                         [(ngModel)]="matchings[i]">
           Завдання на відповідність
         </md-slide-toggle>
 
-        <md-input-container>
+        <md-input-container class="block">
           <input mdInput
                  required
                  type="number"
                  name="answersQuantity{{ i }}"
                  placeholder="Виберіть кількість відповідей"
-                 min="0"
-                 [(ngModel)]="answersQuantity[i]">
+                 min="1"
+                 [(ngModel)]="answersQuantities[i]">
         </md-input-container>
 
-        <md-input-container *ngIf="!matching[i]">
-          <textarea mdInput
-                    required
-                    *ngFor="let number of getNumbersRange(answersQuantity[i])"
-                    name="answer_{{ number }}_{{ i }}"
-                    placeholder="Завдання"
-                    [(ngModel)]="answers[i][number]">
-          </textarea>
-        </md-input-container>
+        <div *ngIf="!matchings[i]">
+          <md-input-container class="block"
+                              *ngFor="let number of getNumbersRange(answersQuantities[i])">
+            <textarea mdInput
+                      required
+                      name="answer_{{ number }}_{{ i }}"
+                      [(ngModel)]="answers[i][number]">
+            </textarea>
+          </md-input-container>
+        </div>
 
-        <table class="answers-table" *ngIf="matching[i]">
+        <table class="answers-table" *ngIf="matchings[i]">
           <thead>
             <tr>
               <th>
-                <md-input-container>
+                <md-input-container class="block">
                   <input mdInput
                          required
                          name="answersTableTitle0_{{ i }}"
@@ -97,7 +90,7 @@
                 </md-input-container>
               </th>
               <th>
-                <md-input-container>
+                <md-input-container class="block">
                   <input mdInput
                          required
                          name="answersTableTitle1_{{ i }}"
@@ -109,9 +102,9 @@
           </thead>
 
           <tbody>
-            <tr *ngFor="let number of getNumbersRange(answersQuantity[i])">
+            <tr *ngFor="let number of getNumbersRange(answersQuantities[i])">
               <td>
-                <md-input-container>
+                <md-input-container class="block">
                   <input mdInput
                          required
                          name="answersNumbers{{ number }}_{{ i }}"
@@ -119,7 +112,7 @@
                 </md-input-container>
               </td>
               <td>
-                <md-input-container>
+                <md-input-container class="block">
                   <input mdInput
                          required
                          name="answersLetters{{ number }}_{{ i }}"
@@ -129,19 +122,13 @@
             </tr>
           </tbody>
         </table>
+      </md-tab>
+    </md-tab-group>
 
-        <button md-raised-button
-                class="center-align"
-                [disabled]="!createtestform.form.valid">
-          Створити тест
-        </button>
-      </form>
-    </md-tab>
-  </md-tab-group>
-
-  <button md-raised-button
-          [ngClass]="{ 'disabled': currentTab == tasksQuantity - 1 }"
-          (click)="next(currentTab + 1)">
-    <md-icon>navigate_next</md-icon>
-  </button>
+    <button md-raised-button
+            class="center-align"
+            [disabled]="!createtestform.form.valid">
+      Створити тест
+    </button>
+  </form>
 </div>
