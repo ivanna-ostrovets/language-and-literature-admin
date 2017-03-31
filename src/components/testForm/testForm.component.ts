@@ -18,10 +18,6 @@ export class TestFormComponent {
   answersLetters: string[] = [];
   answersNumbers: string[] = [];
 
-  //initTabs() {
-  //  $('ul.tabs').tabs();
-  //}
-  //
   //before(tab: number): void {
   //  this.currentTab--;
   //  $('ul.tabs').tabs('select_tab', 'tab${currentTab}');

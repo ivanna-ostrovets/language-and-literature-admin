@@ -1,167 +1,147 @@
-<div class="tasks-quantity">
-  <div class="row input-field">
-    <label for="tasksQuantity">Виберіть кількість запитань в тесті</label>
-    <input type="number"
-           class=""
-           id="tasksQuantity"
-           required
-           [(ngModel)]="tasksQuantity"
-           name="tasksQuantity"
-           min="0"
-           (click)="initTabs()">
-  </div>
-</div>
+<md-input-container class="tasks-quantity">
+  <input mdInput
+         required
+         type="number"
+         name="tasksQuantity"
+         placeholder="Р’РёР±РµСЂС–С‚СЊ РєС–Р»СЊРєС–СЃС‚СЊ Р·Р°РїРёС‚Р°РЅСЊ РІ С‚РµСЃС‚С–"
+         min="0"
+         [(ngModel)]="tasksQuantity">
+</md-input-container>
 
-<div class="questions-tabs center-align" *ngIf="tasksQuantity > 0">
-  <button class="navigation btn-floating btn-large waves-effect waves-circle light-blue"
+<div class="center-align" *ngIf="tasksQuantity > 0">
+  <button md-raised-button
           [ngClass]="{ 'disabled': currentTab == 0 }"
           (click)="before(currentTab - 1)">
-    <i class="material-icons">navigate_before</i>
+    <md-icon>navigate_before</md-icon>
   </button>
 
-  <div class="tabs-wrapper">
-    <ul class="tabs">
-      <li class="tab" *ngFor="let number of getNumbersRange(tasksQuantity); let i=index">
-        <a (click)="currentTab = i"
-           [ngClass]="{'active' : currentTab == i}"
-           id="tab{{ i }}">
-          {{ i + 1 }}
-        </a>
-      </li>
-    </ul>
-  </div>
+  <md-tab-group>
+    <md-tab *ngFor="let number of getNumbersRange(tasksQuantity); let i=index"
+            label="{{ i + 1 }}"
+            id="tab{{ i }}"
+            (click)="currentTab = i"
+            [ngClass]="{'active' : currentTab == i}">
+      <form novalidate
+            (ngSubmit)="onSubmit()"
+            #createtestform="ngForm"
+            class="create-test-form">
 
-  <button class="navigation btn-floating btn-large waves-effect waves-circle light-blue"
+        <md-input-container>
+          <textarea mdInput
+                    required
+                    name="question{{ i }}"
+                    placeholder="Р—Р°РІРґР°РЅРЅСЏ"
+                    [(ngModel)]="question[i]">
+          </textarea>
+        </md-input-container>
+
+        <md-slide-toggle name="addImage{{ i }}"
+                         [(ngModel)]="addImage[i]">
+          Р”РѕРґР°С‚Рё Р·РѕР±СЂР°Р¶РµРЅРЅСЏ
+        </md-slide-toggle>
+
+        <button md-raised-button>
+          <label for="file-input">Select</label>
+        </button>
+        <input id="file-input" type="file">
+
+        <div class="row file-field input-field" *ngIf="addImage[i]">
+          <div class="btn waves-effect light-blue">
+            <span>Р”РѕРґР°С‚Рё Р·РѕР±СЂР°Р¶РµРЅРЅСЏ</span>
+            <input type="file"
+                   id="image{{ i }}"
+                   [(ngModel)]="image[i]"
+                   name="image{{ i }}"
+                   accept="image/*">
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
+          </div>
+        </div>
+
+        <md-slide-toggle name="matching{{ i }}"
+                         [(ngModel)]="matching[i]">
+          Р—Р°РІРґР°РЅРЅСЏ РЅР° РІС–РґРїРѕРІС–РґРЅС–СЃС‚СЊ
+        </md-slide-toggle>
+
+        <md-input-container>
+          <input mdInput
+                 required
+                 type="number"
+                 name="answersQuantity{{ i }}"
+                 placeholder="Р’РёР±РµСЂС–С‚СЊ РєС–Р»СЊРєС–СЃС‚СЊ РІС–РґРїРѕРІС–РґРµР№"
+                 min="0"
+                 [(ngModel)]="answersQuantity[i]">
+        </md-input-container>
+
+        <md-input-container *ngIf="!matching[i]">
+          <textarea mdInput
+                    required
+                    *ngFor="let number of getNumbersRange(answersQuantity[i])"
+                    name="answer_{{ number }}_{{ i }}"
+                    placeholder="Р—Р°РІРґР°РЅРЅСЏ"
+                    [(ngModel)]="answers[i][number]">
+          </textarea>
+        </md-input-container>
+
+        <table class="answers-table" *ngIf="matching[i]">
+          <thead>
+            <tr>
+              <th>
+                <md-input-container>
+                  <input mdInput
+                         required
+                         name="answersTableTitle0_{{ i }}"
+                         placeholder="Р—Р°РіРѕР»РѕРІРѕРє"
+                         [(ngModel)]="answersTableTitles[i][0]">
+                </md-input-container>
+              </th>
+              <th>
+                <md-input-container>
+                  <input mdInput
+                         required
+                         name="answersTableTitle1_{{ i }}"
+                         placeholder="Р—Р°РіРѕР»РѕРІРѕРє"
+                         [(ngModel)]="answersTableTitles[i][1]">
+                </md-input-container>
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let number of getNumbersRange(answersQuantity[i])">
+              <td>
+                <md-input-container>
+                  <input mdInput
+                         required
+                         name="answersNumbers{{ number }}_{{ i }}"
+                         [(ngModel)]="answersNumbers[i][number]">
+                </md-input-container>
+              </td>
+              <td>
+                <md-input-container>
+                  <input mdInput
+                         required
+                         name="answersLetters{{ number }}_{{ i }}"
+                         [(ngModel)]="answersLetters[i][number]">
+                </md-input-container>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <button md-raised-button
+                class="center-align"
+                [disabled]="!createtestform.form.valid">
+          РЎС‚РІРѕСЂРёС‚Рё С‚РµСЃС‚
+        </button>
+      </form>
+    </md-tab>
+  </md-tab-group>
+
+  <button md-raised-button
           [ngClass]="{ 'disabled': currentTab == tasksQuantity - 1 }"
           (click)="next(currentTab + 1)">
-    <i class="material-icons">navigate_next</i>
+    <md-icon>navigate_next</md-icon>
   </button>
 </div>
-
-<form novalidate (ngSubmit)="onSubmit()"
-      #createtestform="ngForm"
-      class="create-test-form"
-      *ngIf="tasksQuantity > 0">
-  <div *ngFor="let number of getNumbersRange(tasksQuantity); let i=index"
-       [hidden]="currentTab != i">
-    <div class="row input-field">
-    <textarea class="materialize-textarea"
-              id="question{{ i }}"
-              required
-              [(ngModel)]="question[i]"
-              name="question{{ i }}">
-    </textarea>
-      <label for="question">Завдання</label>
-    </div>
-
-    <div class="row input-field">
-      <div class="switch">
-        <label>
-          Додати зображення
-          <input type="checkbox"
-                 [(ngModel)]="addImage[i]"
-                 name="addImage{{ i }}">
-          <span class="lever"></span>
-        </label>
-      </div>
-    </div>
-
-    <div class="row file-field input-field" *ngIf="addImage[i]">
-      <div class="btn waves-effect light-blue">
-        <span>Додати зображення</span>
-        <input type="file"
-               id="image{{ i }}"
-               [(ngModel)]="image[i]"
-               name="image{{ i }}"
-               accept="image/*">
-      </div>
-      <div class="file-path-wrapper">
-        <input class="file-path validate" type="text">
-      </div>
-    </div>
-
-    <div class="row input-field">
-      <div class="switch">
-        <label>
-          Завдання на відповідність
-          <input type="checkbox"
-                 [(ngModel)]="matching[i]"
-                 name="matching{{ i }}">
-          <span class="lever"></span>
-        </label>
-      </div>
-    </div>
-
-    <div class="row input-field answers-quantity">
-      <label for="answersQuantity">Виберіть кількість відповідей</label>
-      <input type="number"
-             class=""
-             id="answersQuantity{{ i }}"
-             required
-             [(ngModel)]="answersQuantity[i]"
-             name="answersQuantity{{ i }}"
-             min="0">
-    </div>
-
-    <div *ngIf="!matching[i]" class="row">
-    <textarea class="materialize-textarea"
-              required
-              *ngFor="let number of getNumbersRange(answersQuantity[i])"
-              [(ngModel)]="answers[i][number]"
-              name="answer_{{ number }}_{{ i }}">
-    </textarea>
-    </div>
-
-    <table class="row answers-table" *ngIf="matching[i]">
-      <thead>
-      <tr>
-        <th class="input-field">
-          <input type="text"
-                 class=""
-                 required
-                 [(ngModel)]="answersTableTitles[i][0]"
-                 name="answersTableTitle0_{{ i }}"
-                 id="answersTableTitle0_{{ i }}">
-          <label for="answersTableTitle0">Заголовок</label>
-        </th>
-        <th class="input-field">
-          <input type="text"
-                 class=""
-                 required
-                 [(ngModel)]="answersTableTitles[i][1]"
-                 name="answersTableTitle1_{{ i }}"
-                 id="answersTableTitle1_{{ i }}">
-          <label for="answersTableTitle1">Заголовок</label>
-        </th>
-      </tr>
-      </thead>
-
-      <tbody>
-      <tr *ngFor="let number of getNumbersRange(answersQuantity[i])">
-        <td>
-          <input type="text"
-                 class=""
-                 required
-                 [(ngModel)]="answersNumbers[i][number]"
-                 name="answersNumbers{{ number }}_{{ i }}">
-        </td>
-        <td>
-          <input type="text"
-                 class=""
-                 required
-                 [(ngModel)]="answersLetters[i][number]"
-                 name="answersLetters{{ number }}_{{ i }}">
-        </td>
-      </tr>
-      </tbody>
-    </table>
-
-    <div class="row center-align">
-      <button type="submit"
-              class="btn waves-effect light-blue"
-              [disabled]="!createtestform.form.valid">
-        Створити тест
-      </button>
-    </div>
-  </div>
-</form>
