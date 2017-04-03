@@ -1,18 +1,19 @@
-<md-input-container class="block margin-bottom">
-  <input mdInput
-         required
-         type="number"
-         name="tasksQuantity"
-         placeholder="Виберіть кількість запитань в тесті"
-         min="1"
-         [(ngModel)]="tasksQuantity">
-</md-input-container>
+<form novalidate
+      (ngSubmit)="onSubmit()"
+      #createtestform="ngForm"
+      class="create-test-form">
 
-<div *ngIf="tasksQuantity > 0">
-  <form novalidate
-        (ngSubmit)="onSubmit()"
-        #createtestform="ngForm"
-        class="create-test-form">
+  <md-input-container class="block margin-bottom">
+    <input mdInput
+           required
+           type="number"
+           name="tasksQuantity"
+           placeholder="Виберіть кількість запитань в тесті"
+           min="1"
+           [(ngModel)]="tasksQuantity">
+  </md-input-container>
+
+  <div *ngIf="tasksQuantity > 0">
     <md-tab-group>
       <md-tab *ngFor="let number of getNumbersRange(tasksQuantity); let i=index"
               label="{{ i + 1 }}"
@@ -129,10 +130,16 @@
       </md-tab>
     </md-tab-group>
 
-    <button md-raised-button
-            class="form-button"
-            [disabled]="!createtestform.form.valid">
-      Створити тест
-    </button>
-  </form>
-</div>
+    <div class="block center-align">
+      <button md-raised-button
+              [disabled]="!createtestform.form.valid">
+        Створити тест
+      </button>
+
+      <button md-raised-button
+              type="reset">
+        Очистити форму
+      </button>
+    </div>
+  </div>
+</form>
