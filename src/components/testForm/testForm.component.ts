@@ -9,6 +9,12 @@ const range = require('lodash.range');
 })
 export class TestFormComponent {
   tasksQuantity: number;
+  subjects: { value: string, viewValue: string }[] = [
+  ];
+  categories: { value: string, viewValue: string }[] = [
+  ];
+  subject: string;
+  category: string;
   currentTab: number = 0;
   questions: string[] = [];
   addImages: boolean[] = [];
@@ -57,6 +63,8 @@ export class TestFormComponent {
   onSubmit(): {} {
     let test: { _id: string, questions: {}[] } = {
       _id: 'id',
+      subject: this.subject,
+      category: this.category,
       questions: []
     };
     let temp:any;
