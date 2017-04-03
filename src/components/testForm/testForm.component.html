@@ -1,4 +1,4 @@
-<md-input-container class="block">
+<md-input-container class="block margin-bottom">
   <input mdInput
          required
          type="number"
@@ -19,7 +19,7 @@
               id="tab{{ i }}"
               (click)="currentTab = i"
               [ngClass]="{'active' : currentTab == i}">
-        <md-input-container class="block">
+        <md-input-container class="block margin-bottom question-title">
           <textarea mdInput
                     required
                     name="question{{ i }}"
@@ -28,35 +28,38 @@
           </textarea>
         </md-input-container>
 
-        <md-slide-toggle class="block"
-                         name="addImage{{ i }}"
-                         [(ngModel)]="addImages[i]">
-          Додати зображення
-        </md-slide-toggle>
+        <div class="slider-margin-bottom">
+          <md-slide-toggle class="block"
+                           name="addImage{{ i }}"
+                           [(ngModel)]="addImages[i]">
+            Додати зображення
+          </md-slide-toggle>
 
-        <input type="file"
-               hidden
-               id="image{{ i }}"
-               (change)="onChange($event, i)"
-               accept="image/*">
-        <button md-raised-button
-                *ngIf="addImages[i]"
-                (click)="clickOnElement('#image' + i)">
-          Додати зображення
-        </button>
-        <md-input-container *ngIf="addImages[i] && images[i]?.name">
-          <input mdInput
-                 disabled
-                 [value]="images[i]?.name">
-        </md-input-container>
+          <input type="file"
+                 hidden
+                 id="image{{ i }}"
+                 (change)="onChange($event, i)"
+                 accept="image/*">
+          <button md-raised-button
+                  *ngIf="addImages[i]"
+                  (click)="clickOnElement('#image' + i)">
+            Додати зображення
+          </button>
+          <md-input-container class="margin-bottom"
+                              *ngIf="addImages[i] && images[i]?.name">
+            <input mdInput
+                   disabled
+                   [value]="images[i]?.name">
+          </md-input-container>
+        </div>
 
-        <md-slide-toggle class="block"
+        <md-slide-toggle class="block slider-margin-bottom"
                          name="matching{{ i }}"
                          [(ngModel)]="matchings[i]">
           Завдання на відповідність
         </md-slide-toggle>
 
-        <md-input-container class="block">
+        <md-input-container class="block margin-bottom">
           <input mdInput
                  required
                  type="number"
@@ -66,7 +69,7 @@
                  [(ngModel)]="answersQuantities[i]">
         </md-input-container>
 
-        <div *ngIf="!matchings[i]">
+        <div *ngIf="!matchings[i]" class="margin-bottom">
           <md-input-container class="block"
                               *ngFor="let number of getNumbersRange(answersQuantities[i])">
             <textarea mdInput
@@ -77,7 +80,8 @@
           </md-input-container>
         </div>
 
-        <table class="answers-table" *ngIf="matchings[i]">
+        <table class="answers-table margin-bottom"
+               *ngIf="matchings[i]">
           <thead>
             <tr>
               <th>
@@ -126,7 +130,7 @@
     </md-tab-group>
 
     <button md-raised-button
-            class="center-align"
+            class="form-button"
             [disabled]="!createtestform.form.valid">
       Створити тест
     </button>

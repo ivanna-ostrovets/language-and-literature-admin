@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 const range = require('lodash.range');
 
 @Component({
   templateUrl: './testForm.component.html',
-  styleUrls: ['./testForm.component.scss']
+  styleUrls: ['./testForm.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class TestFormComponent {
   tasksQuantity: number;
