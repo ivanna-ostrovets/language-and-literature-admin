@@ -54,8 +54,43 @@ export class TestFormComponent {
     (<HTMLElement>document.querySelector(elementSelector)).click();
   }
 
-  onSubmit() {
-    console.log("d");
-    console.log(this.images);
+  onSubmit(): {} {
+    let test: { _id: string, questions: {}[] } = {
+      _id: 'id',
+      questions: []
+    };
+    let temp:any;
+
+    for (let index of this.getNumbersRange(this.tasksQuantity)) {
+      temp = {};
+
+      temp.question = this.questions[index];
+
+      if (this.images[index]) {
+        temp.img = this.images[index].name;
+      }
+
+      if (this.matchings) {
+        temp.table_titles = [];
+        for (let title of this.answersTableTitles[index]) {
+          temp.table_titles.push({
+            title
+          });
+        }
+
+        temp.table = [];
+      } else {
+        temp.answers = [];
+        for (let idx of this.getNumbersRange(this.answersQuantities[index])) {
+          temp.answers.push({
+            text: this.answers[index][idx]
+          });
+        }
+      }
+
+      test.questions.push(temp);
+    }
+
+    return test;
   }
 }
