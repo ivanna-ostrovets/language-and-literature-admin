@@ -96,9 +96,27 @@
             <textarea mdInput
                       required
                       name="answer_{{ number }}_{{ i }}"
+                      placeholder="Відповідь {{ number + 1 }}"
                       [(ngModel)]="answers[i][number]">
             </textarea>
           </md-input-container>
+        </div>
+
+        <div *ngIf="!matchings[i]" class="margin-bottom">
+          <p *ngIf="answersQuantities[i]"
+             class="label">
+            Правильна відповідь
+          </p>
+          <md-radio-group required
+                          name="rightAnswer"
+                          class="answers-radio"
+                          *ngFor="let number of getNumbersRange(answersQuantities[i])"
+                          [(ngModel)]="correctAnswers[i][0]">
+            <md-radio-button value="number"
+                             class="block">
+              {{ number + 1 }}
+            </md-radio-button>
+          </md-radio-group>
         </div>
 
         <table class="answers-table margin-bottom"
@@ -133,6 +151,7 @@
                   <input mdInput
                          required
                          name="answersNumbers{{ number }}_{{ i }}"
+                         placeholder="Варіант {{ getNumber(number, 0, false) }}"
                          [(ngModel)]="answersNumbers[i][number]">
                 </md-input-container>
               </td>
@@ -141,12 +160,45 @@
                   <input mdInput
                          required
                          name="answersLetters{{ number }}_{{ i }}"
+                         placeholder="Варіант {{ getNumber(number, 1, false) }}"
                          [(ngModel)]="answersLetters[i][number]">
                 </md-input-container>
               </td>
             </tr>
           </tbody>
         </table>
+
+        <div class="margin-bottom" *ngIf="matchings[i] && answersQuantities[i]">
+          <p>
+            Правильні відповіді
+          </p>
+
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th *ngFor="let number of getNumbersRange(answersQuantities[i])">
+                  {{ getNumber(number, 1, false) }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let number of getNumbersRange(answersNumbers[i].length)">
+                <td>{{ number + 1 }}</td>
+
+                <md-radio-group required
+                                name="complex_{{ number }}"
+                                *ngFor="let num of getNumbersRange(answersQuantities[i])"
+                                [(ngModel)]="correctAnswers[i][num]">
+                  <td>
+                    <md-radio-button [value]="num + 1">
+                    </md-radio-button>
+                  </td>
+                </md-radio-group>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </md-tab>
     </md-tab-group>
 

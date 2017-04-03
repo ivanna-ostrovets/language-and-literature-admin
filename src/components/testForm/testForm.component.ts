@@ -22,6 +22,7 @@ export class TestFormComponent {
   matchings: boolean[] = [];
   answersQuantities: number[] = [];
   answers: string[][] = [[]];
+  correctAnswers: string[][] = [[]];
   answersTableTitles: string[][] = [[]];
   answersLetters: string[][] = [[]];
   answersNumbers: string[][] = [[]];
@@ -58,6 +59,19 @@ export class TestFormComponent {
 
   clickOnElement(elementSelector: string): void {
     (<HTMLElement>document.querySelector(elementSelector)).click();
+  }
+
+  getNumber(parentIndex: number, index: number, dots: any = true): string {
+    if (dots) {
+      dots = index == 0 ? "." : ")";
+    } else {
+      dots = "";
+    }
+
+    return index == 0
+      ? parentIndex + 1 + dots
+      : "АБВГДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ"[parentIndex] + dots
+      ;
   }
 
   onSubmit(): {} {
