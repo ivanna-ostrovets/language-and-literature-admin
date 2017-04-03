@@ -14,7 +14,16 @@ export class CategoryFormComponent {
   subject: string;
   category: string;
 
-  onSubmit() {
+  onSubmit(): {} {
+    if (this.subject != undefined) {
+      return {
+        subject: this.subject,
+        category: this.category
+      };
+    }
 
+    return {
+      subject: this.category
+    };
   }
 }
