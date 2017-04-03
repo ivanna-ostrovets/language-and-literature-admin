@@ -1,30 +1,36 @@
-<form novalidate (ngSubmit)="onSubmit()" #createcategoryform="ngForm" class="create-category-form">
-  <div class="row input-field">
-    <select required
-            id="subject"
-            name="subject"
-            [(ngModel)]="subject">
-      <option value="" disabled selected>-- Предмет --</option>
-      <option value="language">Українська мова</option>
-      <option value="literature">Українська література</option>
-    </select>
-    <label for="subject">Оберіть предмет</label>
-  </div>
+п»ї<p class="block margin-bottom">Р—Р°Р»РёС€С‚Рµ РїРѕР»Рµ "РћР±РµСЂС–С‚СЊ РїСЂРµРґРјРµС‚" РїРѕСЂРѕР¶РЅС–Рј РґР»СЏ РґРѕРґР°РІР°РЅРЅСЏ РЅРѕРІРѕРіРѕ РїСЂРµРґРјРµС‚Сѓ.</p>
 
-  <div class="row input-field">
-    <input type="text"
-           id="category"
+<form novalidate
+      (ngSubmit)="onSubmit()"
+      #createcategoryform="ngForm"
+      class="create-category-form">
+  <md-select name="subject"
+             class="block margin-bottom"
+             placeholder="РћР±РµСЂС–С‚СЊ РїСЂРµРґРјРµС‚"
+             [(ngModel)]="subject">
+    <md-option *ngFor="let subject of subjects" [value]="subject.value">
+      {{ subject.viewValue }}
+    </md-option>
+  </md-select>
+
+  <md-input-container class="block margin-bottom">
+    <input mdInput
+           required
            name="category"
-           [(ngModel)]="category"
-           [disabled]="!subject" />
-    <label for="category">Введіть назву нової категорії</label>
-  </div>
+           placeholder="Р’РІРµРґС–С‚СЊ РЅР°Р·РІСѓ РЅРѕРІРѕС— РєР°С‚РµРіРѕСЂС–С— (РїСЂРµРґРјРµС‚Сѓ)"
+           min="1"
+           [(ngModel)]="category">
+  </md-input-container>
 
-  <div class="row">
-    <button type="submit"
-            class="btn waves-effect light-blue"
+  <div class="block center-align">
+    <button md-raised-button
             [disabled]="!createcategoryform.form.valid">
-      Створити
+      РЎС‚РІРѕСЂРёС‚Рё РєР°С‚РµРіРѕСЂС–СЋ
+    </button>
+
+    <button md-raised-button
+            type="reset">
+      РћС‡РёСЃС‚РёС‚Рё С„РѕСЂРјСѓ
     </button>
   </div>
 </form>
