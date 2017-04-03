@@ -61,7 +61,7 @@ export class TestFormComponent {
   }
 
   onSubmit(): {} {
-    let test: { _id: string, questions: {}[] } = {
+    let test: { _id: string, subject: string, category: string, questions: {}[] } = {
       _id: 'id',
       subject: this.subject,
       category: this.category,
