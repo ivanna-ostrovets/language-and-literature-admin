@@ -17,12 +17,34 @@ main {
   text-align: center !important;
 }
 
+.right {
+  float: right;
+}
+
+.link {
+  text-decoration: none;
+}
+
 .llta-button {
   width: 100%;
   height: 100%;
   vertical-align: middle;
+  padding: 0 !important;
 }
 
 .block {
   display: block !important;
+}
+
+.margin-bottom {
+  margin-bottom: 30px !important;
+}
+
+.slider-margin-bottom {
+  margin-bottom: 40px !important;
+}
+
+.form-button {
+  display: block !important;
+  margin: auto !important;
 }
