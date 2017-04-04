@@ -59,7 +59,7 @@
           <input type="file"
                  hidden
                  id="image{{ i }}"
-                 (change)="onChange($event, i)"
+                 (change)="uploadImage($event, i)"
                  accept="image/*">
           <button md-raised-button
                   *ngIf="addImages[i]"
@@ -87,6 +87,7 @@
                  name="answersQuantity{{ i }}"
                  placeholder="Виберіть кількість відповідей"
                  min="1"
+                 (input)="setArraysDimensions(i)"
                  [(ngModel)]="answersQuantities[i]">
         </md-input-container>
 

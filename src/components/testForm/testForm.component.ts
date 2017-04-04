@@ -21,20 +21,36 @@ export class TestFormComponent {
   images: any[] = [];
   matchings: boolean[] = [];
   answersQuantities: number[] = [];
-  answers: string[][] = [[]];
-  correctAnswers: string[][] = [[]];
-  answersTableTitles: string[][] = [[]];
-  answersLetters: string[][] = [[]];
-  answersNumbers: string[][] = [[]];
+  answers: string[][] = [];
+  correctAnswers: string[][] = [];
+  answersTableTitles: string[][] = [];
+  answersLetters: string[][] = [];
+  answersNumbers: string[][] = [];
+
+  setArraysDimensions(index: number): void {
+    while (this.answers.length > this.answersQuantities[index]) {
+      this.answers.pop();
+      this.correctAnswers.pop();
+      this.answersTableTitles.pop();
+      this.answersLetters.pop();
+      this.answersNumbers.pop();
+    }
+    while (this.answers.length < this.answersQuantities[index]) {
+      this.answers.push([]);
+      this.correctAnswers.push([]);
+      this.answersTableTitles.push([]);
+      this.answersLetters.push([]);
+      this.answersNumbers.push([]);
+    }
+  }
 
   getNumbersRange(number: number): number[] {
     return range(0, number);
   }
 
-  onChange(event: any, i: number): void {
+  uploadImage(event: any, i: number): void {
     let files = event.srcElement.files;
     this.images[i] = files[0];
-    console.log(files[0]);
   }
 
   //ngOnInit() {
