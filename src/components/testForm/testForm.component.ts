@@ -9,10 +9,8 @@ const range = require('lodash.range');
 })
 export class TestFormComponent {
   tasksQuantity: number;
-  subjects: { value: string, viewValue: string }[] = [
-  ];
-  categories: { value: string, viewValue: string }[] = [
-  ];
+  subjects: { value: string, viewValue: string }[] = [];
+  categories: { value: string, viewValue: string }[] = [];
   subject: string;
   category: string;
   currentTab: number = 0;
@@ -52,26 +50,6 @@ export class TestFormComponent {
     let files = event.srcElement.files;
     this.images[i] = files[0];
   }
-
-  //ngOnInit() {
-  //  $(document).on("keydown", function(event) {
-  //    if (tasksQuantity > 1) {
-  //      if ((event.keyCode || event.which) == 37) {
-  //        if (currentTab > 0) {
-  //          before(currentTab - 1);
-  //          return false;
-  //        }
-  //      }
-  //
-  //      if ((event.keyCode || event.which) == 39) {
-  //        if (currentTab < 11) {
-  //          next(currentTab + 1);
-  //          return false;
-  //        }
-  //      }
-  //    }
-  //  });
-  //}
 
   clickOnElement(elementSelector: string): void {
     (<HTMLElement>document.querySelector(elementSelector)).click();
