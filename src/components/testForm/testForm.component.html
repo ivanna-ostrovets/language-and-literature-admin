@@ -150,7 +150,6 @@
               <td>
                 <md-input-container class="block">
                   <input mdInput
-                         required
                          name="answersNumbers{{ number }}_{{ i }}"
                          placeholder="Варіант {{ getNumber(number, 0, false) }}"
                          [(ngModel)]="answersNumbers[i][number]">
@@ -159,7 +158,6 @@
               <td>
                 <md-input-container class="block">
                   <input mdInput
-                         required
                          name="answersLetters{{ number }}_{{ i }}"
                          placeholder="Варіант {{ getNumber(number, 1, false) }}"
                          [(ngModel)]="answersLetters[i][number]">
@@ -170,8 +168,8 @@
         </table>
 
         <div class="margin-bottom" *ngIf="matchings[i]
-                                          && answersLetters[i].length > answersQuantities[i] - 2
-                                          && answersNumbers[i].length > answersQuantities[i] - 2">
+                                          && answersLetters[i]?.length > answersQuantities[i] - 2
+                                          && answersNumbers[i]?.length > answersQuantities[i] - 2">
           <p>
             Правильні відповіді
           </p>
