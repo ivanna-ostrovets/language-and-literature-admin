@@ -110,18 +110,17 @@
           </p>
           <md-radio-group required
                           name="rightAnswer"
-                          class="answers-radio"
                           *ngFor="let number of getNumbersRange(answersQuantities[i])"
                           [(ngModel)]="correctAnswers[i][0]">
             <md-radio-button [value]="number"
-                             class="block">
+                             class="block answers-radio">
               {{ number + 1 }}
             </md-radio-button>
           </md-radio-group>
         </div>
 
         <table class="answers-table margin-bottom"
-               *ngIf="matchings[i]">
+               *ngIf="matchings[i] && answersQuantities[i]">
           <thead>
             <tr>
               <th>
@@ -174,7 +173,7 @@
             Правильні відповіді
           </p>
 
-          <table>
+          <table class="inputs-answers-table">
             <thead>
               <tr>
                 <th></th>
@@ -185,17 +184,16 @@
             </thead>
             <tbody>
               <tr *ngFor="let number of getNumbersRange(answersNumbers[i].length)">
-                <td>{{ number + 1 }}</td>
+                <td class="number-label bold">{{ number + 1 }}</td>
 
-                <md-radio-group required
-                                name="complex_{{ number }}"
-                                [(ngModel)]="correctAnswers[i][number]">
-                  <td>
-                    <md-radio-button *ngFor="let num of getNumbersRange(answersLetters[i].length)"
-                                     [value]="num + 1">
+                <td *ngFor="let num of getNumbersRange(answersLetters[i].length)">
+                  <md-radio-group required
+                                  name="complex_{{ number }}"
+                                  [(ngModel)]="correctAnswers[i][number]">
+                    <md-radio-button [value]="num + 1">
                     </md-radio-button>
-                  </td>
-                </md-radio-group>
+                  </md-radio-group>
+                </td>
               </tr>
             </tbody>
           </table>

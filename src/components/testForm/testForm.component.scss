@@ -10,9 +10,31 @@
 }
 
 .answers-radio {
-  padding-left: 15px;
+  margin-left: 15px;
+  margin-top: 10px;
 }
 
 .label {
   margin: 0;
+}
+
+.inputs-answers-table {
+  border: 1px solid $table-border-color;
+  border-collapse: collapse;
+
+  td, th {
+    padding: 5px;
+    border: 1px solid $table-border-color;
+  }
+
+  td:not(:first-of-type) {
+    padding-left: 13px;
+  }
+
+  min-width: 150px;
+  width: 150px;
+
+  .number-label {
+    padding: 0 13px;
+  }
 }
