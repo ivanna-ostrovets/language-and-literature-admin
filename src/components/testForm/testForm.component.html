@@ -8,7 +8,7 @@
            required
            type="number"
            name="tasksQuantity"
-           placeholder="Виберіть кількість запитань в тесті"
+           placeholder="Вкажіть кількість запитань в тесті"
            min="1"
            [(ngModel)]="tasksQuantity">
   </md-input-container>
@@ -85,7 +85,7 @@
                  required
                  type="number"
                  name="answersQuantity{{ i }}"
-                 placeholder="Виберіть кількість відповідей"
+                 placeholder="Вкажіть кількість відповідей"
                  min="1"
                  (input)="setArraysDimensions(i)"
                  [(ngModel)]="answersQuantities[i]">
