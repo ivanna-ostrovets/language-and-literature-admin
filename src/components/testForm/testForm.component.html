@@ -119,6 +119,32 @@
           </md-radio-group>
         </div>
 
+        <div *ngIf="matchings[i]">
+          <md-input-container class="block margin-bottom">
+            <input mdInput
+                   required
+                   type="number"
+                   name="numbersQuantity{{ i }}"
+                   placeholder="Кількість відповідей (1 - x)"
+                   min="1"
+                   [max]="answersQuantities[i]"
+                   [value]="answersQuantities[i]"
+                   [(ngModel)]="numbersQuantities[i]">
+          </md-input-container>
+
+          <md-input-container class="block margin-bottom">
+            <input mdInput
+                   required
+                   type="number"
+                   name="lettersQuantity{{ i }}"
+                   placeholder="Кількість відповідей (A - Я)"
+                   min="1"
+                   [max]="answersQuantities[i]"
+                   [value]="answersQuantities[i]"
+                   [(ngModel)]="lettersQuantities[i]">
+          </md-input-container>
+        </div>
+
         <table class="answers-table margin-bottom"
                *ngIf="matchings[i] && answersQuantities[i]">
           <thead>
@@ -151,6 +177,7 @@
                   <input mdInput
                          name="answersNumbers{{ number }}_{{ i }}"
                          placeholder="Варіант {{ getNumber(number, 0, false) }}"
+                         [disabled]="numbersQuantities[i] < number + 1"
                          [(ngModel)]="answersNumbers[i][number]">
                 </md-input-container>
               </td>
@@ -159,6 +186,7 @@
                   <input mdInput
                          name="answersLetters{{ number }}_{{ i }}"
                          placeholder="Варіант {{ getNumber(number, 1, false) }}"
+                         [disabled]="lettersQuantities[i] < number + 1"
                          [(ngModel)]="answersLetters[i][number]">
                 </md-input-container>
               </td>
@@ -166,9 +194,7 @@
           </tbody>
         </table>
 
-        <div class="margin-bottom" *ngIf="matchings[i]
-                                          && answersLetters[i]?.length > answersQuantities[i] - 2
-                                          && answersNumbers[i]?.length > answersQuantities[i] - 2">
+        <div class="margin-bottom" *ngIf="matchings[i]">
           <p>
             Правильні відповіді
           </p>
@@ -177,16 +203,16 @@
             <thead>
               <tr>
                 <th></th>
-                <th *ngFor="let number of getNumbersRange(answersLetters[i].length)">
+                <th *ngFor="let number of getNumbersRange(lettersQuantities[i])">
                   {{ getNumber(number, 1, false) }}
                 </th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let number of getNumbersRange(answersNumbers[i].length)">
+              <tr *ngFor="let number of getNumbersRange(numbersQuantities[i])">
                 <td class="number-label bold">{{ number + 1 }}</td>
 
-                <td *ngFor="let num of getNumbersRange(answersLetters[i].length)">
+                <td *ngFor="let num of getNumbersRange(lettersQuantities[i])">
                   <md-radio-group required
                                   name="complex_{{ number }}"
                                   [(ngModel)]="correctAnswers[i][number]">

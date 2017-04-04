@@ -13,12 +13,13 @@ export class TestFormComponent {
   categories: { value: string, viewValue: string }[] = [];
   subject: string;
   category: string;
-  currentTab: number = 0;
   questions: string[] = [];
   addImages: boolean[] = [];
   images: any[] = [];
   matchings: boolean[] = [];
   answersQuantities: number[] = [];
+  numbersQuantities: number[] = [];
+  lettersQuantities: number[] = [];
   answers: string[][] = [];
   correctAnswers: number[][] = [];
   answersTableTitles: string[][] = [];
