@@ -111,8 +111,8 @@
                           name="rightAnswer"
                           class="answers-radio"
                           *ngFor="let number of getNumbersRange(answersQuantities[i])"
-                          [(ngModel)]="correctAnswers[i][0]">
-            <md-radio-button value="number"
+                          [(ngModel)]="correctAnswers[i]">
+            <md-radio-button [value]="number"
                              class="block">
               {{ number + 1 }}
             </md-radio-button>
