@@ -22,7 +22,7 @@ export class TestFormComponent {
   matchings: boolean[] = [];
   answersQuantities: number[] = [];
   answers: string[][] = [];
-  correctAnswers: string[][] = [];
+  correctAnswers: number[][] = [];
   answersTableTitles: string[][] = [];
   answersLetters: string[][] = [];
   answersNumbers: string[][] = [];
@@ -90,14 +90,15 @@ export class TestFormComponent {
       ;
   }
 
-  onSubmit(): {} {
-    let test: { _id: string, subject: string, category: string, questions: {}[] } = {
+  onSubmit(): void {
+    let test: any = {
       _id: 'id',
       subject: this.subject,
       category: this.category,
       questions: []
     };
-    let temp:any;
+    let temp: any;
+    let current: string[] = [];
 
     for (let index of this.getNumbersRange(this.tasksQuantity)) {
       temp = {};
@@ -108,7 +109,7 @@ export class TestFormComponent {
         temp.img = this.images[index].name;
       }
 
-      if (this.matchings) {
+      if (this.matchings[index]) {
         temp.table_titles = [];
         for (let title of this.answersTableTitles[index]) {
           temp.table_titles.push({
@@ -117,12 +118,41 @@ export class TestFormComponent {
         }
 
         temp.table = [];
+        for (let idx of this.getNumbersRange(this.answersQuantities[index])) {
+          if (this.answersNumbers[index][idx]) {
+            current[0] = this.answersNumbers[index][idx];
+          } else {
+            current[0] = '';
+          }
+
+          if (this.answersLetters[index][idx]) {
+            current[1] = this.answersLetters[index][idx];
+          } else {
+            current[1] = '';
+          }
+
+          temp.table[idx].push([
+            {
+              column: current[0]
+            },
+            {
+              column: current[1]
+            }
+          ])
+        }
       } else {
         temp.answers = [];
         for (let idx of this.getNumbersRange(this.answersQuantities[index])) {
-          temp.answers.push({
-            text: this.answers[index][idx]
-          });
+          if (this.correctAnswers[index][0] == idx) {
+            temp.answers.push({
+              text: this.answers[index][idx],
+              correct: true
+            });
+          } else {
+            temp.answers.push({
+              text: this.answers[index][idx]
+            });
+          }
         }
       }
 
