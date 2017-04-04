@@ -168,7 +168,9 @@
           </tbody>
         </table>
 
-        <div class="margin-bottom" *ngIf="matchings[i] && answersQuantities[i]">
+        <div class="margin-bottom" *ngIf="matchings[i]
+                                          && answersLetters[i].length > answersQuantities[i] - 2
+                                          && answersNumbers[i].length > answersQuantities[i] - 2">
           <p>
             Правильні відповіді
           </p>
@@ -177,7 +179,7 @@
             <thead>
               <tr>
                 <th></th>
-                <th *ngFor="let number of getNumbersRange(answersQuantities[i])">
+                <th *ngFor="let number of getNumbersRange(answersLetters[i].length)">
                   {{ getNumber(number, 1, false) }}
                 </th>
               </tr>
@@ -188,10 +190,10 @@
 
                 <md-radio-group required
                                 name="complex_{{ number }}"
-                                *ngFor="let num of getNumbersRange(answersQuantities[i])"
-                                [(ngModel)]="correctAnswers[i][num]">
+                                [(ngModel)]="correctAnswers[i][number]">
                   <td>
-                    <md-radio-button [value]="num + 1">
+                    <md-radio-button *ngFor="let num of getNumbersRange(answersLetters[i].length)"
+                                     [value]="num + 1">
                     </md-radio-button>
                   </td>
                 </md-radio-group>
