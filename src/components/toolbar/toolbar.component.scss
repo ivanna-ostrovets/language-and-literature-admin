@@ -3,16 +3,28 @@
 
 .llta-toolbar {
   box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+  padding: 0 !important;
 }
 
 .fill-remaining-space {
   flex: 1 1 auto;
 }
 
+.toolbar-button,
+.toolbar-app-name {
+  height: 100%;
+}
+
 .toolbar-button {
   font-size: 16px;
+  padding-top: 12px;
 }
 
 .toolbar-app-name {
   font-size: 20px;
+  padding-top: 10px;
+}
+
+.active {
+  background-color: darken(mat-color($primary-color), 11%);
 }
