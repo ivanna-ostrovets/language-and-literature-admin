@@ -8,23 +8,23 @@ const range = require('lodash.range');
   encapsulation: ViewEncapsulation.None
 })
 export class TestFormComponent {
-  tasksQuantity: number;
-  subjects: { value: string, viewValue: string }[] = [];
-  categories: { value: string, viewValue: string }[] = [];
-  subject: string;
-  category: string;
-  questions: string[] = [];
   addImages: boolean[] = [];
-  images: any[] = [];
-  matchings: boolean[] = [];
-  answersQuantities: number[] = [];
-  numbersQuantities: number[] = [];
-  lettersQuantities: number[] = [];
   answers: string[][] = [];
-  correctAnswers: number[][] = [];
-  answersTableTitles: string[][] = [];
   answersLetters: string[][] = [];
   answersNumbers: string[][] = [];
+  answersQuantities: number[] = [];
+  answersTableTitles: string[][] = [];
+  categories: { value: string, viewValue: string }[] = [];
+  category: string;
+  correctAnswers: number[][] = [];
+  images: any[] = [];
+  lettersQuantities: number[] = [];
+  matchings: boolean[] = [];
+  numbersQuantities: number[] = [];
+  questions: string[] = [];
+  subject: string;
+  subjects: { value: string, viewValue: string }[] = [];
+  tasksQuantity: number;
 
   setArraysDimensions(index: number): void {
     while (this.answers.length > this.answersQuantities[index]) {
@@ -43,8 +43,8 @@ export class TestFormComponent {
     }
   }
 
-  getNumbersRange(number: number): number[] {
-    return range(0, number);
+  getNumbersRange(num: number): number[] {
+    return range(0, num);
   }
 
   uploadImage(event: any, i: number): void {
@@ -58,14 +58,14 @@ export class TestFormComponent {
 
   getNumber(parentIndex: number, index: number, dots: any = true): string {
     if (dots) {
-      dots = index == 0 ? "." : ")";
+      dots = index === 0 ? '.' : ')';
     } else {
-      dots = "";
+      dots = '';
     }
 
-    return index == 0
+    return index === 0
       ? parentIndex + 1 + dots
-      : "АБВГДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ"[parentIndex] + dots
+      : 'АБВГДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ'[parentIndex] + dots
       ;
   }
 
@@ -117,12 +117,12 @@ export class TestFormComponent {
             {
               column: current[1]
             }
-          ])
+          ]);
         }
       } else {
         temp.answers = [];
         for (let idx of this.getNumbersRange(this.answersQuantities[index])) {
-          if (this.correctAnswers[index][0] == idx) {
+          if (this.correctAnswers[index][0] === idx) {
             temp.answers.push({
               text: this.answers[index][idx],
               correct: true

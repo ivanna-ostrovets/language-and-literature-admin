@@ -37,9 +37,7 @@
     <md-tab-group>
       <md-tab *ngFor="let number of getNumbersRange(tasksQuantity); let i=index"
               label="{{ i + 1 }}"
-              id="tab{{ i }}"
-              (click)="currentTab = i"
-              [ngClass]="{'active' : currentTab == i}">
+              id="tab{{ i }}">
         <md-input-container class="block margin-bottom question-title">
           <textarea mdInput
                     required

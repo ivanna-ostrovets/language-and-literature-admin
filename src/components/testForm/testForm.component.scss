@@ -18,13 +18,18 @@
   margin: 0;
 }
 
-.inputs-answers-table {
+.inputs-answers-table,
+td,
+th {
   border: 1px solid $table-border-color;
+}
+
+.inputs-answers-table {
   border-collapse: collapse;
 
-  td, th {
+  td,
+  th {
     padding: 5px;
-    border: 1px solid $table-border-color;
   }
 
   td:not(:first-of-type) {
