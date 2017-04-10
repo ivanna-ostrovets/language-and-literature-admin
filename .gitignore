@@ -24,5 +24,3 @@ dist
 # IDE directories
 .vscode
 .idea
-
-package.json
