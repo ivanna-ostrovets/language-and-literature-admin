@@ -10,38 +10,43 @@
 
   <a md-button
      class="toolbar-button"
-     [routerLink]="[ '/create-test' ]"
-     routerLinkActive="active">
-    Додати тест
+     [mdMenuTriggerFor]="add">
+    Додати
+    <md-icon>arrow_drop_down</md-icon>
   </a>
+  <md-menu #add="mdMenu">
+    <button md-menu-item
+            routerLink="create-test">
+      Тест
+    </button>
+    <button md-menu-item
+            routerLink="create-category">
+      Категорію
+    </button>
+    <button md-menu-item
+            routerLink="create-subject">
+      Предмет
+    </button>
+  </md-menu>
+
   <a md-button
      class="toolbar-button"
-     [routerLink]="[ '/create-category' ]"
-     routerLinkActive="active">
-    Додати категорію
+     [mdMenuTriggerFor]="view">
+    Переглянути
+    <md-icon>arrow_drop_down</md-icon>
   </a>
-  <a md-button
-     class="toolbar-button"
-     [routerLink]="[ '/create-subject' ]"
-     routerLinkActive="active">
-    Додати предмет
-  </a>
-  <a md-button
-     class="toolbar-button"
-     [routerLink]="[ '/tests' ]"
-     routerLinkActive="active">
-    Cписок тестів
-  </a>
-  <a md-button
-     class="toolbar-button"
-     [routerLink]="[ '/categories' ]"
-     routerLinkActive="active">
-    Cписок категорій
-  </a>
-  <a md-button
-     class="toolbar-button"
-     [routerLink]="[ '/subjects' ]"
-     routerLinkActive="active">
-    Cписок предметів
-  </a>
+  <md-menu #view="mdMenu">
+    <button md-menu-item
+            routerLink="tests">
+      Cписок тестів
+    </button>
+    <button md-menu-item
+            routerLink="categories">
+      Cписок категорій
+    </button>
+    <button md-menu-item
+            routerLink="subjects">
+      Cписок предметів
+    </button>
+  </md-menu>
 </md-toolbar>

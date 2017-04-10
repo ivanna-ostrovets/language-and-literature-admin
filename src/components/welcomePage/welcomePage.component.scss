@@ -3,11 +3,23 @@
   color: rgba(0, 0, 0, 0.709804);
 }
 
-.welcome-page-menu, .welcome-page-menu a {
-  width: 200px;
+.welcome-page-menu {
+  width: 350px;
   margin: 0 auto;
 }
 
 .mat-list-item-content {
   padding: 0 !important;
+}
+
+.left-column {
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.right-padding {
+  padding-right: 20px;
+}
+
+.left-padding {
+  padding-left: 20px;
 }

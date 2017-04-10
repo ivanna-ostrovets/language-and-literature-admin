@@ -1,39 +1,39 @@
 <div class="center-align">
   <h1 class="app-name">М &amp; Л | admin</h1>
 
-  <md-list class="welcome-page-menu">
-    <md-list-item class="center-align">
-      <a md-button class="llta-button" routerLink="create-test">Додати тест</a>
-    </md-list-item>
+  <md-grid-list cols="2"
+                rowHeight="150px"
+                class="welcome-page-menu">
+    <md-grid-tile class="left-column">
+      <md-list class="welcome-page-menu right-padding">
+        <md-list-item class="right">
+          <a md-button class="llta-button" routerLink="create-test">Додати тест</a>
+        </md-list-item>
 
-    <md-divider></md-divider>
+        <md-list-item class="right">
+          <a md-button class="llta-button" routerLink="create-category">Додати категорію</a>
+        </md-list-item>
 
-    <md-list-item>
-      <a md-button class="llta-button" routerLink="create-category">Додати категорію</a>
-    </md-list-item>
+        <md-list-item class="right">
+          <a md-button class="llta-button" routerLink="create-subject">Додати предмет</a>
+        </md-list-item>
+      </md-list>
+    </md-grid-tile>
 
-    <md-divider></md-divider>
+    <md-grid-tile>
+      <md-list class="welcome-page-menu left-padding">
+        <md-list-item class="left">
+          <a md-button class="llta-button" routerLink="tests">Cписок тестів</a>
+        </md-list-item>
 
-    <md-list-item>
-      <a md-button class="llta-button" routerLink="create-subject">Додати предмет</a>
-    </md-list-item>
+        <md-list-item class="left">
+          <a md-button class="llta-button" routerLink="categories">Cписок категорій</a>
+        </md-list-item>
 
-    <md-divider></md-divider>
-
-    <md-list-item>
-      <a md-button class="llta-button" routerLink="tests">Cписок тестів</a>
-    </md-list-item>
-
-    <md-divider></md-divider>
-
-    <md-list-item>
-      <a md-button class="llta-button" routerLink="categories">Cписок категорій</a>
-    </md-list-item>
-
-    <md-divider></md-divider>
-
-    <md-list-item>
-      <a md-button class="llta-button" routerLink="subjects">Cписок предметів</a>
-    </md-list-item>
-  </md-list>
+        <md-list-item class="left">
+          <a md-button class="llta-button" routerLink="subjects">Cписок предметів</a>
+        </md-list-item>
+      </md-list>
+    </md-grid-tile>
+  </md-grid-list>
 </div>
