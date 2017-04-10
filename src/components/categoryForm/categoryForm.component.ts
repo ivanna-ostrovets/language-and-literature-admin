@@ -14,15 +14,9 @@ export class CategoryFormComponent {
   ];
 
   onSubmit(): {} {
-    if (this.subject !== undefined) {
-      return {
-          subject: this.subject,
-        category: this.category
-      };
-    }
-
     return {
-      subject: this.category
+      subject: this.subject,
+      category: this.category
     };
   }
 }

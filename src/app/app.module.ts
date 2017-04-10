@@ -12,6 +12,8 @@ import { CategoriesListComponent } from '../components/categoriesList/categories
 import { CategoryFormComponent } from '../components/categoryForm/categoryForm.component';
 import { FooterComponent } from '../components/footer/footer.component';
 import { PageNotFoundComponent } from '../components/pageNotFound/pageNotFound.component';
+import { SubjectFormComponent } from '../components/subjectForm/subjectForm.component';
+import { SubjectsListComponent } from '../components/subjectsList/subjectsList.component';
 import { TestFormComponent } from '../components/testForm/testForm.component';
 import { TestsListComponent } from '../components/testsList/testsList.component';
 import { ToolbarComponent } from '../components/toolbar/toolbar.component';
@@ -33,6 +35,8 @@ import { appRoutes } from './app.routes';
     CategoryFormComponent,
     FooterComponent,
     PageNotFoundComponent,
+    SubjectFormComponent,
+    SubjectsListComponent,
     TestFormComponent,
     TestsListComponent,
     ToolbarComponent,

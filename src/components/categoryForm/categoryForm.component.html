@@ -1,10 +1,9 @@
-﻿<p class="block margin-bottom">Залиште поле "Оберіть предмет" порожнім для додавання нового предмету.</p>
-
-<form novalidate
+﻿<form novalidate
       (ngSubmit)="onSubmit()"
       #createcategoryform="ngForm"
       class="create-category-form">
   <md-select name="subject"
+             required
              class="block margin-bottom"
              placeholder="Оберіть предмет"
              [(ngModel)]="subject">
@@ -17,7 +16,7 @@
     <input mdInput
            required
            name="category"
-           placeholder="Введіть назву нової категорії (предмету)"
+           placeholder="Введіть назву нової категорії"
            min="1"
            [(ngModel)]="category">
   </md-input-container>
