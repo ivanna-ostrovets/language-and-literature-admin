@@ -1,0 +1,24 @@
+<form novalidate
+      #createsubjectform="ngForm">
+  <md-input-container class="block margin-bottom">
+    <input mdInput
+           required
+           name="subject"
+           placeholder="Введіть назву нового предмету"
+           min="1"
+           [(ngModel)]="subject">
+  </md-input-container>
+
+  <div class="block center-align">
+    <button md-raised-button
+            [disabled]="!createsubjectform.form.valid"
+            (click)="onSubmit(); createsubjectform.reset();">
+      Створити предмет
+    </button>
+
+    <button md-raised-button
+            type="reset">
+      Очистити форму
+    </button>
+  </div>
+</form>

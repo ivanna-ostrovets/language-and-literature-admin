@@ -6,4 +6,12 @@ import { Component, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None
 })
 export class SubjectFormComponent {
+  subject: string;
+
+  onSubmit(): void {
+    let subject = {
+      id: 'subject_',
+      subject: this.subject
+    };
+  }
 }
