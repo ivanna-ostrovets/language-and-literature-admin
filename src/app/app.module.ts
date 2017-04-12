@@ -19,6 +19,9 @@ import { TestsListComponent } from '../components/testsList/testsList.component'
 import { ToolbarComponent } from '../components/toolbar/toolbar.component';
 import { WelcomePageComponent } from '../components/welcomePage/welcomePage.component';
 
+import { CategoryService } from '../services/category.service';
+import { SubjectService } from '../services/subject.service';
+
 import { appRoutes } from './app.routes';
 
 @NgModule({
@@ -41,6 +44,10 @@ import { appRoutes } from './app.routes';
     TestsListComponent,
     ToolbarComponent,
     WelcomePageComponent,
+  ],
+  providers: [
+    CategoryService,
+    SubjectService
   ],
   bootstrap: [
     AppComponent,
