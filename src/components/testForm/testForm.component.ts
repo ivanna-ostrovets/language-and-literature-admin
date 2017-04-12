@@ -1,5 +1,12 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
+import { Test } from '../../models/test';
+import { Question } from '../../models/question';
+import { Category } from '../../models/category';
+
+import { CategoryService } from '../../services/category.service';
+import { TestService } from '../../services/test.service';
+
 const range = require('lodash.range');
 
 @Component({
@@ -8,6 +15,13 @@ const range = require('lodash.range');
   encapsulation: ViewEncapsulation.None
 })
 export class TestFormComponent {
+  constructor(
+    private categoryService: CategoryService,
+    private testService: TestService
+  ) {}
+
+  test: Test = new Test();
+
   addImages: boolean[] = [];
   answers: string[][] = [];
   answersLetters: string[][] = [];
@@ -69,9 +83,9 @@ export class TestFormComponent {
       ;
   }
 
-  onSubmit(): void {
+  submit(): void {
     let test: any = {
-      _id: 'id',
+      id: 'id',
       subject: this.subject,
       category: this.category,
       questions: []

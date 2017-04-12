@@ -1,7 +1,6 @@
 <form novalidate
-      (ngSubmit)="onSubmit()"
       #createtestform="ngForm"
-      class="create-test-form">
+      (ngSubmit)="submit(); createtestform.reset()">
 
   <md-input-container class="block margin-bottom">
     <input mdInput
