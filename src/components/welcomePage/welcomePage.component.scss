@@ -1,6 +1,9 @@
+@import "../../styles/variables";
+@import "../../styles/theme";
+
 .app-name {
   font-size: 7.5vw;
-  color: rgba(0, 0, 0, 0.709804);
+  color: $header-color;
 }
 
 .welcome-page-menu {
