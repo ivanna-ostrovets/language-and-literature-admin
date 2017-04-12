@@ -22,11 +22,8 @@ export class CategoryFormComponent {
     {id: 'language', name: 'Українська мова'},
     {id: 'literature', name: 'Українська література'}
   ];
-  active: boolean = true;
 
   submit() {
     this.category = new Category();
-    this.active = false;
-    setTimeout(() => this.active = true, 0);
   }
 }

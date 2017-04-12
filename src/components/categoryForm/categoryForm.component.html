@@ -1,7 +1,6 @@
 ﻿<form novalidate
-      (ngSubmit)="submit()"
       #createcategoryform="ngForm"
-      *ngIf="active">
+      (ngSubmit)="submit(); createcategoryform.reset()">
 
   <md-select name="subject"
              required
