@@ -10,11 +10,17 @@ import { SubjectService } from '../../services/subject.service';
   encapsulation: ViewEncapsulation.None
 })
 export class SubjectFormComponent {
-  constructor(private subjectService: SubjectService) {}
-
   subject: Subject = new Subject();
 
+  constructor(private subjectService: SubjectService) {
+  }
+
   submit() {
-    this.subject = new Subject();
+    this.subjectService.create(this.subject)
+      .then(() => {
+        // TODO: Show toast
+
+        this.subject = new Subject();
+      });
   }
 }

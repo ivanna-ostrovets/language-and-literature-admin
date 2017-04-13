@@ -1,9 +1,11 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
+import { Subject } from '../../models/subject';
+import { Category } from '../../models/category';
 import { Test } from '../../models/test';
 import { Question } from '../../models/question';
-import { Category } from '../../models/category';
 
+import { SubjectService } from '../../services/subject.service';
 import { CategoryService } from '../../services/category.service';
 import { TestService } from '../../services/test.service';
 
@@ -14,13 +16,15 @@ const range = require('lodash.range');
   styleUrls: ['./testForm.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class TestFormComponent {
-  constructor(
-    private categoryService: CategoryService,
-    private testService: TestService
-  ) {}
-
+export class TestFormComponent implements OnInit {
   test: Test = new Test();
+
+  subjects: Subject[] = [];
+  categories: Category[] = [];
+  private _allCategories: Category[];
+
+  subject: string;
+  category: string;
 
   addImages: boolean[] = [];
   answers: string[][] = [];
@@ -28,17 +32,37 @@ export class TestFormComponent {
   answersNumbers: string[][] = [];
   answersQuantities: number[] = [];
   answersTableTitles: string[][] = [];
-  categories: { value: string, viewValue: string }[] = [];
-  category: string;
   correctAnswers: number[][] = [];
   images: any[] = [];
   lettersQuantities: number[] = [];
   matchings: boolean[] = [];
   numbersQuantities: number[] = [];
   questions: string[] = [];
-  subject: string;
-  subjects: { value: string, viewValue: string }[] = [];
-  tasksQuantity: number;
+  tasksQuantity: number = 1;
+
+  constructor(
+    private subjectService: SubjectService,
+    private categoryService: CategoryService,
+    private testService: TestService
+  ) {
+  }
+
+  ngOnInit() {
+    this.subjectService.getAll()
+      .then(subjects => {
+        this.subjects = subjects;
+      });
+
+    this.categoryService.getAll()
+      .then(categories => {
+        this._allCategories = categories;
+      });
+  }
+
+  onSubjectChange(subjectId: string) {
+    // TODO: Refetch categories. Since I'm lazy, I'll just fetch all and filter them for now.
+    this.categories = this._allCategories.filter(category => category.subject === subjectId);
+  }
 
   setArraysDimensions(index: number): void {
     while (this.answers.length > this.answersQuantities[index]) {
@@ -152,6 +176,11 @@ export class TestFormComponent {
       test.questions.push(temp);
     }
 
-    return test;
+    this.testService.create(test)
+      .then(() => {
+        // TODO: Show toast
+
+        // TODO: Clear form
+      });
   }
 }

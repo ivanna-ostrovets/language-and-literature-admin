@@ -1,6 +1,6 @@
 <form novalidate
       #createtestform="ngForm"
-      (ngSubmit)="submit(); createtestform.reset()">
+      (ngSubmit)="submit()">
 
   <md-input-container class="block margin-bottom">
     <input mdInput
@@ -17,9 +17,10 @@
                name="subject"
                class="block margin-bottom"
                placeholder="Оберіть предмет"
-               [(ngModel)]="subject">
-      <md-option *ngFor="let subject of subjects" [value]="subject.value">
-        {{ subject.viewValue }}
+               [(ngModel)]="subject"
+               (ngModelChange)="onSubjectChange($event)">
+      <md-option *ngFor="let subject of subjects" [value]="subject._id">
+        {{ subject.name }}
       </md-option>
     </md-select>
 
@@ -28,8 +29,8 @@
                class="block margin-bottom"
                placeholder="Оберіть категорію"
                [(ngModel)]="category">
-      <md-option *ngFor="let category of categories" [value]="category.value">
-        {{ category.viewValue }}
+      <md-option *ngFor="let category of categories" [value]="category._id">
+        {{ category.name }}
       </md-option>
     </md-select>
 

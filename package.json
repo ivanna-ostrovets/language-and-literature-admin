@@ -12,7 +12,7 @@
     "debug": "webpack-dev-server --inline --progress --port 8080",
     "build": "rimraf dist && webpack --config config/webpack.prod.js --progress --profile --bail",
     "lint": "tslint 'src/**/*.ts' --force",
-    "watch": "webpack -w"
+    "watch": "rimraf dist && webpack -w"
   },
   "repository": {
     "type": "git",
