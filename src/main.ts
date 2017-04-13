@@ -5,8 +5,12 @@ import { AppModule } from './app/app.module';
 
 import './styles/main.scss';
 
+const PouchDB = require('pouchdb');
+
 if (process.env.ENV === 'production') {
   enableProdMode();
+} else {
+  PouchDB.debug.enable('*');
 }
 
 platformBrowserDynamic().bootstrapModule(AppModule);
