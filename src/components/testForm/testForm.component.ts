@@ -109,7 +109,6 @@ export class TestFormComponent implements OnInit {
 
   submit(): void {
     let test: any = {
-      id: 'id',
       subject: this.subject,
       category: this.category,
       questions: []
