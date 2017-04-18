@@ -5,7 +5,7 @@ import { Resource } from './abstract/resource.abstract';
 
 @Injectable()
 export class CategoryService extends Resource<Category> {
-  protected dbUrl: string = 'http://localhost:5984/categories';
+  protected dbUrl: string = 'categories';
 
   constructor() {
     super();

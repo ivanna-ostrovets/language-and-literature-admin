@@ -3,11 +3,13 @@ const PouchDB = require('pouchdb');
 import { DatabaseDocument } from '../../models/databaseDocument';
 
 export abstract class Resource<T extends DatabaseDocument> {
+  // If you don't have CouchDB installed locally, change baseUrl value to empty string.
+  private baseUrl: string = 'http://localhost:5984';
+  private db: any;
+
   protected abstract dbUrl: string;
 
   public lastId: number;
-
-  private db: any;
 
   constructor() {
   }
@@ -45,7 +47,7 @@ export abstract class Resource<T extends DatabaseDocument> {
   }
 
   protected init() {
-    this.db = new PouchDB(this.dbUrl);
+    this.db = new PouchDB(this.baseUrl + this.dbUrl);
 
     this.db.info()
       .then(result => {

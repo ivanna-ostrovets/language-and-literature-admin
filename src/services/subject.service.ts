@@ -5,7 +5,7 @@ import { Resource } from './abstract/resource.abstract';
 
 @Injectable()
 export class SubjectService extends Resource<Subject> {
-  protected dbUrl = 'http://localhost:5984/subjects';
+  protected dbUrl: string = 'subjects';
 
   constructor() {
     super();
