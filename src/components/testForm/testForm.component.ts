@@ -122,7 +122,7 @@ export class TestFormComponent implements OnInit, OnDestroy {
       ;
   }
 
-  submit(): void {
+  submit(form: any) {
     let test: any = {
       subject: this.subject,
       category: this.category,
@@ -192,12 +192,8 @@ export class TestFormComponent implements OnInit, OnDestroy {
 
     this.testService.create(test)
       .then(() => {
-        // TODO: Show toast
-
-        // TODO: Clear form
-
         this.id = '';
-
+        form.reset();
         this.submitService.openSnackBar('Тест додано!');
       });
   }

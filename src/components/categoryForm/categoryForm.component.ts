@@ -42,13 +42,12 @@ export class CategoryFormComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
-  submit() {
+  submit(form: any) {
     this.categoryService.create(this.category)
       .then(() => {
-        // TODO: Show toast
-
         this.category = new Category();
         this.id = '';
+        form.reset();
         this.submitService.openSnackBar('Категорію додано!');
       });
   }

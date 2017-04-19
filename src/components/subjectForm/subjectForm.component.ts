@@ -34,13 +34,12 @@ export class SubjectFormComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
-  submit() {
+  submit(form: any) {
     this.subjectService.create(this.subject)
       .then(() => {
-        // TODO: Show toast
-
         this.subject = new Subject();
         this.id = '';
+        form.reset();
         this.submitService.openSnackBar('Предмет додано!');
       });
   }
