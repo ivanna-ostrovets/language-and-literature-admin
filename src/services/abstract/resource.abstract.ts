@@ -4,7 +4,7 @@ import { DatabaseDocument } from '../../models/databaseDocument';
 
 export abstract class Resource<T extends DatabaseDocument> {
   // If you don't have CouchDB installed locally, change baseUrl value to empty string.
-  private baseUrl: string = 'http://localhost:5984';
+  private baseUrl: string = '';
   private db: any;
 
   protected abstract dbUrl: string;

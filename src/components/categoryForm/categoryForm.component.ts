@@ -6,6 +6,7 @@ import { Subject } from '../../models/subject';
 
 import { CategoryService } from '../../services/category.service';
 import { SubjectService } from '../../services/subject.service';
+import { SubmitService } from '../../services/submit.service';
 
 @Component({
   templateUrl: './categoryForm.component.html',
@@ -22,6 +23,7 @@ export class CategoryFormComponent implements OnInit, OnDestroy {
   constructor(
     private categoryService: CategoryService,
     private subjectService: SubjectService,
+    private submitService: SubmitService,
     private route: ActivatedRoute
   ) {
   }
@@ -47,6 +49,7 @@ export class CategoryFormComponent implements OnInit, OnDestroy {
 
         this.category = new Category();
         this.id = '';
+        this.submitService.openSnackBar('Категорію додано!');
       });
   }
 }

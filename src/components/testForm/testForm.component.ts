@@ -9,6 +9,7 @@ import { Question } from '../../models/question';
 import { SubjectService } from '../../services/subject.service';
 import { CategoryService } from '../../services/category.service';
 import { TestService } from '../../services/test.service';
+import { SubmitService } from '../../services/submit.service';
 
 const range = require('lodash.range');
 
@@ -48,6 +49,7 @@ export class TestFormComponent implements OnInit, OnDestroy {
     private subjectService: SubjectService,
     private categoryService: CategoryService,
     private testService: TestService,
+    private submitService: SubmitService,
     private route: ActivatedRoute
   ) {
   }
@@ -195,6 +197,8 @@ export class TestFormComponent implements OnInit, OnDestroy {
         // TODO: Clear form
 
         this.id = '';
+
+        this.submitService.openSnackBar('Тест додано!');
       });
   }
 }
