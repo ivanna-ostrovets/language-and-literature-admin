@@ -8,6 +8,7 @@ import '@angular/router';
 import 'hammerjs';
 import 'material-design-icons/iconfont/material-icons.css';
 import '@angular/material';
+import '@angular/flex-layout';
 
 import 'rxjs';
 

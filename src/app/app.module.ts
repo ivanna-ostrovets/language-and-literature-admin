@@ -4,6 +4,7 @@ import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { FlexLayoutModule } from "@angular/flex-layout";
 import { MaterialModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -28,6 +29,7 @@ import { appRoutes } from './app.routes';
 @NgModule({
   imports: [
     BrowserModule,
+    FlexLayoutModule,
     FormsModule,
     HttpModule,
     MaterialModule,
