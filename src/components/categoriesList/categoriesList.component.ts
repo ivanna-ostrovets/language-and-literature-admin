@@ -1,33 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-
-import { Category } from '../../models/category';
-import { Subject } from '../../models/subject';
-
-import { CategoryService } from '../../services/category.service';
-import { SubjectService } from '../../services/subject.service';
+import { Component } from '@angular/core';
 
 @Component({
   templateUrl: './categoriesList.component.html',
   styleUrls: ['./categoriesList.component.scss']
 })
-export class CategoriesListComponent implements OnInit {
-  categories: Category[] = [];
-  subjects: Subject[] = [];
-  subject: Subject = new Subject();
+export class CategoriesListComponent {
 
-  constructor(
-    private categoryService: CategoryService,
-    private subjectService: SubjectService
-  ) {
-  }
-
-  ngOnInit() {
-    this.subjectService.getAll().then(subjects => {
-      this.subjects = subjects;
-    });
-  }
-
-  delete(categoryId: string) {
-
-  }
 }
