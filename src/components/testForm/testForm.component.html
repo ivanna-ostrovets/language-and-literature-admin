@@ -1,12 +1,5 @@
-<h1 class="page-title"
-    *ngIf="id">
-  Редагувати тест
-</h1>
-
-<h1 class="page-title"
-    *ngIf="!id">
-  Додати тест
-</h1>
+<h1 *ngIf="id">Редагувати тест</h1>
+<h1 *ngIf="!id">Додати тест</h1>
 
 <form novalidate
       #createtestform="ngForm"
