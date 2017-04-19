@@ -1,4 +1,5 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { Subject } from '../../models/subject';
 
@@ -9,10 +10,26 @@ import { SubjectService } from '../../services/subject.service';
   styleUrls: ['./subjectForm.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class SubjectFormComponent {
+export class SubjectFormComponent implements OnInit, OnDestroy {
+  id: string;
+  private sub: any;
+
   subject: Subject = new Subject();
 
-  constructor(private subjectService: SubjectService) {
+  constructor(
+    private subjectService: SubjectService,
+    private route: ActivatedRoute
+  ) {
+  }
+
+  ngOnInit() {
+    this.sub = this.route.params.subscribe(params => {
+      this.id = params['id'];
+    });
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
   submit() {
@@ -21,6 +38,7 @@ export class SubjectFormComponent {
         // TODO: Show toast
 
         this.subject = new Subject();
+        this.id = '';
       });
   }
 }

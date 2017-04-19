@@ -1,6 +1,17 @@
+<h1 class="page-title"
+    *ngIf="id">
+  Редагувати тест
+</h1>
+
+<h1 class="page-title"
+    *ngIf="!id">
+  Додати тест
+</h1>
+
 <form novalidate
       #createtestform="ngForm"
-      (ngSubmit)="submit()">
+      (ngSubmit)="submit()"
+      class="margin-top">
 
   <md-input-container class="block margin-bottom">
     <input mdInput

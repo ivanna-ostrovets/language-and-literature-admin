@@ -1,6 +1,17 @@
-﻿<form novalidate
+﻿<h1 class="page-title"
+    *ngIf="id">
+  Редагувати категорію
+</h1>
+
+<h1 class="page-title"
+    *ngIf="!id">
+  Додати категорію
+</h1>
+
+<form novalidate
       #createcategoryform="ngForm"
-      (ngSubmit)="submit()">
+      (ngSubmit)="submit()"
+      class="margin-top">
 
   <md-select name="subject"
              required

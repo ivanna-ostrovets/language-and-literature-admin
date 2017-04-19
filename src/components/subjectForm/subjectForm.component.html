@@ -1,6 +1,17 @@
+<h1 class="page-title"
+    *ngIf="id">
+  Редагувати предмет
+</h1>
+
+<h1 class="page-title"
+    *ngIf="!id">
+  Додати предмет
+</h1>
+
 <form novalidate
       #createsubjectform="ngForm"
-      (ngSubmit)="submit()">
+      (ngSubmit)="submit()"
+      class="margin-top">
 
   <md-input-container class="block margin-bottom">
     <input mdInput

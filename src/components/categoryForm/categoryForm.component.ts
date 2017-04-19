@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { Category } from '../../models/category';
 import { Subject } from '../../models/subject';
@@ -11,17 +12,17 @@ import { SubjectService } from '../../services/subject.service';
   styleUrls: ['./categoryForm.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class CategoryFormComponent implements OnInit {
+export class CategoryFormComponent implements OnInit, OnDestroy {
+  id: string;
+  private sub: any;
+
   category: Category = new Category();
   subjects: Subject[] = [];
-  // [
-  //   {id: 'language', name: 'Українська мова'},
-  //   {id: 'literature', name: 'Українська література'}
-  // ];
 
   constructor(
     private categoryService: CategoryService,
-    private subjectService: SubjectService
+    private subjectService: SubjectService,
+    private route: ActivatedRoute
   ) {
   }
 
@@ -29,6 +30,14 @@ export class CategoryFormComponent implements OnInit {
     this.subjectService.getAll().then(subjects => {
       this.subjects = subjects;
     });
+
+    this.sub = this.route.params.subscribe(params => {
+      this.id = params['id'];
+    });
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
   submit() {
@@ -37,6 +46,7 @@ export class CategoryFormComponent implements OnInit {
         // TODO: Show toast
 
         this.category = new Category();
+        this.id = '';
       });
   }
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { Subject } from '../../models/subject';
 import { Category } from '../../models/category';
@@ -16,7 +17,10 @@ const range = require('lodash.range');
   styleUrls: ['./testForm.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class TestFormComponent implements OnInit {
+export class TestFormComponent implements OnInit, OnDestroy {
+  id: string;
+  private sub: any;
+
   test: Test = new Test();
 
   subjects: Subject[] = [];
@@ -43,7 +47,8 @@ export class TestFormComponent implements OnInit {
   constructor(
     private subjectService: SubjectService,
     private categoryService: CategoryService,
-    private testService: TestService
+    private testService: TestService,
+    private route: ActivatedRoute
   ) {
   }
 
@@ -57,6 +62,14 @@ export class TestFormComponent implements OnInit {
       .then(categories => {
         this._allCategories = categories;
       });
+
+    this.sub = this.route.params.subscribe(params => {
+      this.id = params['id'];
+    });
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
   onSubjectChange(subjectId: string) {
@@ -180,6 +193,8 @@ export class TestFormComponent implements OnInit {
         // TODO: Show toast
 
         // TODO: Clear form
+
+        this.id = '';
       });
   }
 }
