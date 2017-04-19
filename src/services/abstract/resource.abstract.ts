@@ -2,6 +2,12 @@ const PouchDB = require('pouchdb');
 
 import { DatabaseDocument } from '../../models/databaseDocument';
 
+interface PouchResponse {
+  ok: boolean;
+  id: string;
+  rev: string;
+}
+
 export abstract class Resource<T extends DatabaseDocument> {
   // If you don't have CouchDB installed locally, change baseUrl value to empty string.
   private baseUrl: string = '';
@@ -23,27 +29,33 @@ export abstract class Resource<T extends DatabaseDocument> {
     });
   }
 
-  create(data: T): Promise<T[]> {
+  create(data: T): Promise<PouchResponse> {
     data._id = this.lastId.toString();
 
     return this.db.put(data)
-      .then(data => {
+      .then((response: PouchResponse) => {
         this.lastId++;
 
-        return data;
+        return response;
       });
   }
 
-  get() {
-    // TODO: Implement
+  get(id: string): Promise<T> {
+    return this.db.get(id);
   }
 
-  update() {
-    // TODO: Implement
+  update(id: string, body: T): Promise<PouchResponse> {
+    return this.db.get(id).then(doc => {
+      body._rev = doc._rev;
+
+      return this.db.put(body);
+    });
   }
 
-  remove() {
-    // TODO: Implement
+  remove(id: string): Promise<PouchResponse> {
+    return this.db.get(id).then(doc => {
+      return this.db.remove(doc);
+    });
   }
 
   protected init() {
