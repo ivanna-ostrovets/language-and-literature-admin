@@ -1,0 +1,19 @@
+<h1>Список предметів</h1>
+
+<md-list>
+  <md-list-item *ngFor="let subject of subjects" class="containerX">
+    <div fxFlex="30">{{ subject.name }}</div>
+
+    <button md-button
+            routerLink="{{ subject._id }}">
+      <md-icon class="gray-icon">mode_edit</md-icon>
+      <span>Редагувати</span>
+    </button>
+
+    <button md-button
+            (click)="delete(subject._id)">
+      <md-icon class="gray-icon">delete_forever</md-icon>
+      <span>Видалити</span>
+    </button>
+  </md-list-item>
+</md-list>
