@@ -4,7 +4,7 @@ const path = require('path');
 const argv = require('minimist')(process.argv.slice(2));
 
 const HOST = argv.host || process.env.HOST || '0.0.0.0';
-const PORT = argv.port || process.env.PORT || 8080;
+const PORT = argv.port || process.env.PORT || 50080;
 
 app.use(express.static(path.join(__dirname, 'dist')));
 
