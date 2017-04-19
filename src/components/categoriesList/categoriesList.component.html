@@ -1,0 +1,31 @@
+<h1>Список категорій</h1>
+
+<md-select name="subject"
+           required
+           class="block margin-bottom"
+           placeholder="Оберіть предмет"
+           [(ngModel)]="subject">
+
+  <md-option *ngFor="let subject of subjects" [value]="subject._id">
+    {{ subject.name }}
+  </md-option>
+
+</md-select>
+
+<md-list *ngIf="subject">
+  <md-list-item *ngFor="let category of categories" class="containerX">
+    <div fxFlex="30">{{ category.name }}</div>
+
+    <button md-button
+            routerLink="{{ category._id }}">
+      <md-icon class="gray-icon">mode_edit</md-icon>
+      <span>Редагувати</span>
+    </button>
+
+    <button md-button
+            (click)="delete(category._id)">
+      <md-icon class="gray-icon">delete_forever</md-icon>
+      <span>Видалити</span>
+    </button>
+  </md-list-item>
+</md-list>
