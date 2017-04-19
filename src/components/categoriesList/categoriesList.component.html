@@ -13,7 +13,7 @@
 </md-select>
 
 <md-list *ngIf="subject">
-  <md-list-item *ngFor="let category of categories" class="containerX">
+  <md-list-item *ngFor="let category of categories">
     <div fxFlex="30">{{ category.name }}</div>
 
     <button md-button
