@@ -16,9 +16,6 @@ const range = require('lodash.range');
   styleUrls: ['./categoriesList.component.scss']
 })
 export class CategoriesListComponent implements OnInit {
-  id: string;
-  private sub: any;
-
   categories: Category[] = [];
   subjects: Subject[] = [];
   subject: string;
@@ -54,8 +51,8 @@ export class CategoriesListComponent implements OnInit {
 
   confirmDelete(subjectId: string) {
     const dialogRef = this.dialogService.confirm({
-      title: 'Видалити предмет?',
-      message: 'Зауважте, що пов\'язані категорії та тести також будуть видалені!'
+      title: 'Видалити категорію?',
+      message: 'Зауважте, що пов\'язані тести також будуть видалені!'
     });
 
     dialogRef.afterClosed().subscribe(result => {
