@@ -1,0 +1,53 @@
+<h1>Список тестів</h1>
+
+<md-select name="subject"
+           required
+           class="block margin-bottom margin-top"
+           placeholder="Предмет"
+           [(ngModel)]="subject"
+           (ngModelChange)="onSubjectChange($event)">
+
+  <md-option *ngFor="let subject of subjects" [value]="subject._id">
+    {{ subject.name }}
+  </md-option>
+
+</md-select>
+
+<md-select *ngIf="subject"
+           required
+           name="category"
+           class="block margin-bottom"
+           placeholder="Категорія"
+           [(ngModel)]="category"
+           (ngModelChange)="onCategoryChange($event)">
+
+  <md-option *ngFor="let category of categories" [value]="category._id">
+    {{ category.name }}
+  </md-option>
+
+</md-select>
+
+<md-tab-group *ngIf="category">
+  <md-tab *ngFor="let number of getPagingRange(tests.length)"
+          [label]="number + 1">
+    <md-list>
+      <md-list-item *ngFor="let test of tests | slice: number * 7: number * 7 + 7; let i=index">
+
+        <div fxFlex="30">Тест {{ i + 1 }}</div>
+
+        <button md-button
+                [routerLink]="test._id">
+          <md-icon class="gray-icon">mode_edit</md-icon>
+          <span>Редагувати</span>
+        </button>
+
+        <button md-button
+                (click)="confirmDelete(test._id)">
+          <md-icon class="gray-icon">delete_forever</md-icon>
+          <span>Видалити</span>
+        </button>
+
+      </md-list-item>
+    </md-list>
+  </md-tab>
+</md-tab-group>
