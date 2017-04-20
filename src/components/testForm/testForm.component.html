@@ -11,7 +11,7 @@
            required
            type="number"
            name="tasksQuantity"
-           placeholder="Вкажіть кількість запитань в тесті"
+           placeholder="Кількість запитань в тесті"
            min="1"
            [(ngModel)]="tasksQuantity">
   </md-input-container>
@@ -20,7 +20,7 @@
     <md-select required
                name="subject"
                class="block margin-bottom"
-               placeholder="Оберіть предмет"
+               placeholder="Предмет"
                [(ngModel)]="subject"
                (ngModelChange)="onSubjectChange($event)">
       <md-option *ngFor="let subject of subjects" [value]="subject._id">
@@ -31,7 +31,7 @@
     <md-select required
                name="category"
                class="block margin-bottom"
-               placeholder="Оберіть категорію"
+               placeholder="Категорія"
                [(ngModel)]="category">
       <md-option *ngFor="let category of categories" [value]="category._id">
         {{ category.name }}
@@ -40,12 +40,11 @@
 
     <md-tab-group>
       <md-tab *ngFor="let number of getNumbersRange(tasksQuantity); let i=index"
-              label="{{ i + 1 }}"
-              id="tab{{ i }}">
+              [label]="i + 1">
         <md-input-container class="block margin-bottom question-title">
           <textarea mdInput
                     required
-                    name="question{{ i }}"
+                    [name]="'question' + i"
                     placeholder="Завдання"
                     [(ngModel)]="questions[i]">
           </textarea>
@@ -53,14 +52,14 @@
 
         <div class="slider-margin-bottom">
           <md-slide-toggle class="block"
-                           name="addImage{{ i }}"
+                           [name]="'addImage' + i"
                            [(ngModel)]="addImages[i]">
             Додати зображення
           </md-slide-toggle>
 
           <input type="file"
                  hidden
-                 id="image{{ i }}"
+                 [id]="'image' + i"
                  (change)="uploadImage($event, i)"
                  accept="image/*">
           <button md-raised-button
@@ -77,7 +76,7 @@
         </div>
 
         <md-slide-toggle class="block slider-margin-bottom"
-                         name="matching{{ i }}"
+                         [name]="'matching' + i"
                          [(ngModel)]="matchings[i]">
           Завдання на відповідність
         </md-slide-toggle>
@@ -86,8 +85,8 @@
           <input mdInput
                  required
                  type="number"
-                 name="answersQuantity{{ i }}"
-                 placeholder="Вкажіть кількість відповідей"
+                 [name]="'answersQuantity' + i"
+                 placeholder="Кількість відповідей"
                  min="1"
                  (input)="setArraysDimensions(i)"
                  [(ngModel)]="answersQuantities[i]">
@@ -98,8 +97,8 @@
                               *ngFor="let number of getNumbersRange(answersQuantities[i])">
             <textarea mdInput
                       required
-                      name="answer_{{ number }}_{{ i }}"
-                      placeholder="Відповідь {{ number + 1 }}"
+                      [name]="'answer_' + number + '_' + i"
+                      [placeholder]="'Відповідь ' + (number + 1)"
                       [(ngModel)]="answers[i][number]">
             </textarea>
           </md-input-container>
@@ -126,7 +125,7 @@
             <input mdInput
                    required
                    type="number"
-                   name="numbersQuantity{{ i }}"
+                   [name]="'numbersQuantity' + i"
                    placeholder="Кількість відповідей (1 - x)"
                    min="1"
                    [max]="answersQuantities[i]"
@@ -138,7 +137,7 @@
             <input mdInput
                    required
                    type="number"
-                   name="lettersQuantity{{ i }}"
+                   [name]="'lettersQuantity' + i"
                    placeholder="Кількість відповідей (A - Я)"
                    min="1"
                    [max]="answersQuantities[i]"
@@ -155,7 +154,7 @@
                 <md-input-container class="block">
                   <input mdInput
                          required
-                         name="answersTableTitle0_{{ i }}"
+                         [name]="'answersTableTitle0_' + i"
                          placeholder="Заголовок"
                          [(ngModel)]="answersTableTitles[i][0]">
                 </md-input-container>
@@ -164,7 +163,7 @@
                 <md-input-container class="block">
                   <input mdInput
                          required
-                         name="answersTableTitle1_{{ i }}"
+                         [name]="'answersTableTitle1_' + i"
                          placeholder="Заголовок"
                          [(ngModel)]="answersTableTitles[i][1]">
                 </md-input-container>
@@ -177,8 +176,8 @@
               <td>
                 <md-input-container class="block">
                   <input mdInput
-                         name="answersNumbers{{ number }}_{{ i }}"
-                         placeholder="Варіант {{ getNumber(number, 0, false) }}"
+                         [name]="'answersNumbers' + number + '_' + i"
+                         [placeholder]="'Варіант ' + getNumber(number, 0, false)"
                          [disabled]="numbersQuantities[i] < number + 1"
                          [(ngModel)]="answersNumbers[i][number]">
                 </md-input-container>
@@ -186,8 +185,8 @@
               <td>
                 <md-input-container class="block">
                   <input mdInput
-                         name="answersLetters{{ number }}_{{ i }}"
-                         placeholder="Варіант {{ getNumber(number, 1, false) }}"
+                         [name]="'answersLetters' + number + '_' + i"
+                         [placeholder]="'Варіант ' + getNumber(number, 1, false)"
                          [disabled]="lettersQuantities[i] < number + 1"
                          [(ngModel)]="answersLetters[i][number]">
                 </md-input-container>
@@ -197,9 +196,7 @@
         </table>
 
         <div class="margin-bottom" *ngIf="matchings[i]">
-          <p>
-            Правильні відповіді
-          </p>
+          <p>Правильні відповіді</p>
 
           <table class="inputs-answers-table">
             <thead>
@@ -216,7 +213,7 @@
 
                 <td *ngFor="let num of getNumbersRange(lettersQuantities[i])">
                   <md-radio-group required
-                                  name="complex_{{ number }}"
+                                  [name]="'complex_' + number"
                                   [(ngModel)]="correctAnswers[i][number]">
                     <md-radio-button [value]="num + 1">
                     </md-radio-button>
@@ -238,7 +235,7 @@
 
       <button md-raised-button
               [disabled]="!createtestform.form.valid">
-        Створити тест
+        Створити
       </button>
     </div>
   </div>

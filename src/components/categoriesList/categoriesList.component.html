@@ -18,10 +18,11 @@
           [label]="number + 1">
     <md-list>
       <md-list-item *ngFor="let category of categories | slice: number * 7: number * 7 + 7">
+
         <div fxFlex="30">{{ category.name }}</div>
 
         <button md-button
-                routerLink="{{ category._id }}">
+                [routerLink]="category._id">
           <md-icon class="gray-icon">mode_edit</md-icon>
           <span>Редагувати</span>
         </button>
@@ -31,6 +32,7 @@
           <md-icon class="gray-icon">delete_forever</md-icon>
           <span>Видалити</span>
         </button>
+
       </md-list-item>
     </md-list>
   </md-tab>
