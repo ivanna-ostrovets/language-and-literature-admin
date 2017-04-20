@@ -46,7 +46,7 @@ export class TestFormComponent implements OnInit, OnDestroy {
   matchings: boolean[] = [];
   numbersQuantities: number[] = [];
   tasks: string[] = [];
-  tasksQuantity: number = 0;
+  tasksQuantity: number;
 
   constructor(
     private subjectService: SubjectService,
