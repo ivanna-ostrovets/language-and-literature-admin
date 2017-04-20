@@ -4,6 +4,8 @@ import { Subject } from '../../models/subject';
 
 import { SubjectService } from '../../services/subject.service';
 
+import { MdSnackBar } from '@angular/material';
+
 @Component({
   templateUrl: './subjectsList.component.html',
   styleUrls: ['./subjectsList.component.scss']
@@ -11,7 +13,10 @@ import { SubjectService } from '../../services/subject.service';
 export class SubjectsListComponent implements OnInit {
   subjects: Subject[] = [];
 
-  constructor(private subjectService: SubjectService) {
+  constructor(
+    private subjectService: SubjectService,
+    public snackBar: MdSnackBar
+  ) {
   }
 
   ngOnInit() {
@@ -24,6 +29,10 @@ export class SubjectsListComponent implements OnInit {
     return this.subjectService.remove(subjectId)
       .then(() => {
         this.subjects = this.subjects.filter(subject => subject._id !== subjectId);
+
+        this.snackBar.open('Предмет видалено!', '', {
+          duration: 3000,
+        });
       });
   }
 }
