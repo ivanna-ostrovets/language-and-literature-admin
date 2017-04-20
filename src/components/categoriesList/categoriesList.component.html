@@ -3,8 +3,9 @@
 <md-select name="subject"
            required
            class="block margin-bottom"
-           placeholder="Оберіть предмет"
-           [(ngModel)]="subject">
+           placeholder="Предмет"
+           [(ngModel)]="subject"
+           (ngModelChange)="onSubjectChange($event)">
 
   <md-option *ngFor="let subject of subjects" [value]="subject._id">
     {{ subject.name }}
