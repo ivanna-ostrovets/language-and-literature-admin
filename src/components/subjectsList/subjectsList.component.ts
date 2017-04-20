@@ -30,7 +30,7 @@ export class SubjectsListComponent implements OnInit {
       .then(() => {
         this.subjects = this.subjects.filter(subject => subject._id !== subjectId);
 
-        this.snackBar.open('Предмет видалено!', '', {
+        this.snackBar.open('Предмет видалено!', 'OK', {
           duration: 3000,
         });
       });
