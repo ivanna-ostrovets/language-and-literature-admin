@@ -20,6 +20,12 @@
       Очистити форму
     </button>
 
+    <button type="button"
+            md-raised-button
+            (click)="cancel()">
+      Назад
+    </button>
+
     <button md-raised-button [disabled]="!createsubjectform.form.valid">
       <span *ngIf="id">Оновити</span>
       <span *ngIf="!id">Додати</span>

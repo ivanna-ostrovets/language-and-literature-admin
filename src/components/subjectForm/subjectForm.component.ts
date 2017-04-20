@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 
 import { Subject } from '../../models/subject';
@@ -21,6 +22,7 @@ export class SubjectFormComponent implements OnInit, OnDestroy {
   constructor(
     private subjectService: SubjectService,
     private route: ActivatedRoute,
+    private location: Location,
     public snackBar: MdSnackBar
   ) {
   }
@@ -41,6 +43,10 @@ export class SubjectFormComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
+  cancel() {
+    this.location.back();
+  }
+
   submit(form: any) {
     if (this.id) {
       return this.subjectService.update(this.id, this.subject)
@@ -48,6 +54,8 @@ export class SubjectFormComponent implements OnInit, OnDestroy {
           this.snackBar.open('Предмет оновлено!', 'OK', {
             duration: 3000,
           });
+
+          this.cancel();
         });
     }
 

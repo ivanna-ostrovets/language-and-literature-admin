@@ -32,6 +32,12 @@
       Очистити форму
     </button>
 
+    <button type="button"
+            md-raised-button
+            (click)="cancel()">
+      Назад
+    </button>
+
     <button md-raised-button [disabled]="!createcategoryform.form.valid">
       Створити категорію
     </button>

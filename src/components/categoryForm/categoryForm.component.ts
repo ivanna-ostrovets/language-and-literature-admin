@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 
 import { Category } from '../../models/category';
@@ -25,6 +26,7 @@ export class CategoryFormComponent implements OnInit, OnDestroy {
     private categoryService: CategoryService,
     private subjectService: SubjectService,
     private route: ActivatedRoute,
+    private location: Location,
     public snackBar: MdSnackBar
   ) {
   }
@@ -41,6 +43,10 @@ export class CategoryFormComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+  }
+
+  cancel() {
+    this.location.back();
   }
 
   submit(form: any) {

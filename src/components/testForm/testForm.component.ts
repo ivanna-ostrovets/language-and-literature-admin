@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 
 import { Subject } from '../../models/subject';
@@ -51,6 +52,7 @@ export class TestFormComponent implements OnInit, OnDestroy {
     private categoryService: CategoryService,
     private testService: TestService,
     private route: ActivatedRoute,
+    private location: Location,
     public snackBar: MdSnackBar
   ) {
   }
@@ -121,6 +123,10 @@ export class TestFormComponent implements OnInit, OnDestroy {
       ? parentIndex + 1 + dots
       : 'АБВГДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ'[parentIndex] + dots
       ;
+  }
+
+  cancel() {
+    this.location.back();
   }
 
   submit(form: any) {
