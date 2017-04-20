@@ -195,7 +195,7 @@ export class TestFormComponent implements OnInit, OnDestroy {
       .then(() => {
         this.id = '';
 
-        this.snackBar.open('Тест додано!', '', {
+        this.snackBar.open('Тест додано!', 'OK', {
           duration: 3000,
         });
 

@@ -49,7 +49,7 @@ export class CategoryFormComponent implements OnInit, OnDestroy {
         this.category = new Category();
         this.id = '';
 
-        this.snackBar.open('Категорію додано!', '', {
+        this.snackBar.open('Категорію додано!', 'OK', {
           duration: 3000,
         });
 

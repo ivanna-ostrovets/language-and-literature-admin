@@ -41,7 +41,7 @@ export class SubjectFormComponent implements OnInit, OnDestroy {
         this.subject = new Subject();
         this.id = '';
 
-        this.snackBar.open('Предмет додано!', '', {
+        this.snackBar.open('Предмет додано!', 'OK', {
           duration: 3000,
         });
 
