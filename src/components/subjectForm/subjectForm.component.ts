@@ -4,7 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject } from '../../models/subject';
 
 import { SubjectService } from '../../services/subject.service';
-import { SubmitService } from '../../services/submit.service';
+
+import { MdSnackBar } from '@angular/material';
 
 @Component({
   templateUrl: './subjectForm.component.html',
@@ -19,8 +20,8 @@ export class SubjectFormComponent implements OnInit, OnDestroy {
 
   constructor(
     private subjectService: SubjectService,
-    private submitService: SubmitService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public snackBar: MdSnackBar
   ) {
   }
 
@@ -39,8 +40,12 @@ export class SubjectFormComponent implements OnInit, OnDestroy {
       .then(() => {
         this.subject = new Subject();
         this.id = '';
+
+        this.snackBar.open('Предмет додано!', '', {
+          duration: 3000,
+        });
+
         form.reset();
-        this.submitService.openSnackBar('Предмет додано!');
       });
   }
 }

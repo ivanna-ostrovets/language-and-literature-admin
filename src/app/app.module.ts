@@ -23,7 +23,6 @@ import { WelcomePageComponent } from '../components/welcomePage/welcomePage.comp
 import { CategoryService } from '../services/category.service';
 import { SubjectService } from '../services/subject.service';
 import { TestService } from '../services/test.service';
-import { SubmitService } from '../services/submit.service';
 
 import { appRoutes } from './app.routes';
 
@@ -52,8 +51,7 @@ import { appRoutes } from './app.routes';
   providers: [
     CategoryService,
     SubjectService,
-    TestService,
-    SubmitService
+    TestService
   ],
   bootstrap: [
     AppComponent,

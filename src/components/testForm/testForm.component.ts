@@ -9,7 +9,8 @@ import { Question } from '../../models/question';
 import { SubjectService } from '../../services/subject.service';
 import { CategoryService } from '../../services/category.service';
 import { TestService } from '../../services/test.service';
-import { SubmitService } from '../../services/submit.service';
+
+import { MdSnackBar } from '@angular/material';
 
 const range = require('lodash.range');
 
@@ -49,8 +50,8 @@ export class TestFormComponent implements OnInit, OnDestroy {
     private subjectService: SubjectService,
     private categoryService: CategoryService,
     private testService: TestService,
-    private submitService: SubmitService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public snackBar: MdSnackBar
   ) {
   }
 
@@ -193,8 +194,12 @@ export class TestFormComponent implements OnInit, OnDestroy {
     this.testService.create(test)
       .then(() => {
         this.id = '';
+
+        this.snackBar.open('Тест додано!', '', {
+          duration: 3000,
+        });
+
         form.reset();
-        this.submitService.openSnackBar('Тест додано!');
       });
   }
 }
