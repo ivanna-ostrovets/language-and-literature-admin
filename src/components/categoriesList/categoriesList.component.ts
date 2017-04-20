@@ -8,6 +8,8 @@ import { SubjectService } from '../../services/subject.service';
 
 import { MdSnackBar } from '@angular/material';
 
+const range = require('lodash.range');
+
 @Component({
   templateUrl: './categoriesList.component.html',
   styleUrls: ['./categoriesList.component.scss']
@@ -18,7 +20,7 @@ export class CategoriesListComponent implements OnInit {
 
   categories: Category[] = [];
   subjects: Subject[] = [];
-  subject: Subject = new Subject();
+  subject: string;
   private _allCategories: Category[];
 
   constructor(
@@ -38,6 +40,10 @@ export class CategoriesListComponent implements OnInit {
       .then(categories => {
         this._allCategories = categories;
       });
+  }
+
+  getPagingRange(num: number): number[] {
+    return range(0, Math.ceil(num / 7));
   }
 
   onSubjectChange(subjectId: string) {
