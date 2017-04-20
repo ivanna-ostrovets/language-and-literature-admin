@@ -25,6 +25,7 @@ export class TestFormComponent implements OnInit, OnDestroy {
   private sub: any;
 
   test: Test = new Test();
+  questions: Question = new Question();
 
   subjects: Subject[] = [];
   categories: Category[] = [];
@@ -44,7 +45,7 @@ export class TestFormComponent implements OnInit, OnDestroy {
   lettersQuantities: number[] = [];
   matchings: boolean[] = [];
   numbersQuantities: number[] = [];
-  questions: string[] = [];
+  tasks: string[] = [];
   tasksQuantity: number = 1;
 
   constructor(
@@ -197,7 +198,18 @@ export class TestFormComponent implements OnInit, OnDestroy {
       test.questions.push(temp);
     }
 
-    this.testService.create(test)
+    if (this.id) {
+      return this.testService.update(this.id, this.test)
+        .then(() => {
+          this.snackBar.open('Тест оновлено!', 'OK', {
+            duration: 3000,
+          });
+
+          this.cancel();
+        });
+    }
+
+    return this.testService.create(test)
       .then(() => {
         this.id = '';
 
