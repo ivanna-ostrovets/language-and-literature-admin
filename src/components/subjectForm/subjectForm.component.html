@@ -10,7 +10,7 @@
     <input mdInput
            required
            name="subject"
-           placeholder="Введіть назву нового предмету"
+           placeholder="Назва предмету"
            min="1"
            [(ngModel)]="subject.name">
   </md-input-container>
@@ -21,7 +21,8 @@
     </button>
 
     <button md-raised-button [disabled]="!createsubjectform.form.valid">
-      Створити предмет
+      <span *ngIf="id">Оновити</span>
+      <span *ngIf="!id">Додати</span>
     </button>
   </div>
 

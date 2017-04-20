@@ -29,6 +29,12 @@ export class SubjectFormComponent implements OnInit, OnDestroy {
     this.sub = this.route.params.subscribe(params => {
       this.id = params['id'];
     });
+
+    if (this.id) {
+      this.subjectService.get(this.id).then(subject => {
+        this.subject = subject;
+      });
+    }
   }
 
   ngOnDestroy() {
@@ -36,7 +42,16 @@ export class SubjectFormComponent implements OnInit, OnDestroy {
   }
 
   submit(form: any) {
-    this.subjectService.create(this.subject)
+    if (this.id) {
+      return this.subjectService.update(this.id, this.subject)
+        .then(() => {
+          this.snackBar.open('Предмет оновлено!', 'OK', {
+            duration: 3000,
+          });
+        });
+    }
+
+    return this.subjectService.create(this.subject)
       .then(() => {
         this.subject = new Subject();
         this.id = '';
