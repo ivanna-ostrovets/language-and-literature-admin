@@ -5,6 +5,7 @@ import { Subject } from '../../models/subject';
 
 import { CategoryService } from '../../services/category.service';
 import { SubjectService } from '../../services/subject.service';
+import { DialogService } from '../../services/dialog.service';
 
 import { MdSnackBar } from '@angular/material';
 
@@ -26,6 +27,7 @@ export class CategoriesListComponent implements OnInit {
   constructor(
     private categoryService: CategoryService,
     private subjectService: SubjectService,
+    private dialogService: DialogService,
     public snackBar: MdSnackBar
   ) {
   }
@@ -48,6 +50,19 @@ export class CategoriesListComponent implements OnInit {
 
   onSubjectChange(subjectId: string) {
     this.categories = this._allCategories.filter(category => category.subject === subjectId);
+  }
+
+  confirmDelete(subjectId: string) {
+    const dialogRef = this.dialogService.confirm({
+      title: 'Видалити предмет?',
+      message: 'Зауважте, що пов\'язані категорії та тести також будуть видалені!'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.delete(subjectId);
+      }
+    });
   }
 
   delete(categoryId: string) {

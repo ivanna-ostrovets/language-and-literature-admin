@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subject } from '../../models/subject';
 
 import { SubjectService } from '../../services/subject.service';
+import { DialogService } from '../../services/dialog.service';
 
 import { MdSnackBar } from '@angular/material';
 
@@ -17,6 +18,7 @@ export class SubjectsListComponent implements OnInit {
 
   constructor(
     private subjectService: SubjectService,
+    private dialogService: DialogService,
     public snackBar: MdSnackBar
   ) {
   }
@@ -29,6 +31,19 @@ export class SubjectsListComponent implements OnInit {
 
   getPagingRange(num: number): number[] {
     return range(0, Math.ceil(num / 7));
+  }
+
+  confirmDelete(subjectId: string) {
+    const dialogRef = this.dialogService.confirm({
+      title: 'Видалити предмет?',
+      message: 'Зауважте, що пов\'язані категорії та тести також будуть видалені!'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.delete(subjectId);
+      }
+    });
   }
 
   delete(subjectId: string) {
