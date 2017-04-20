@@ -39,6 +39,12 @@ export class CategoryFormComponent implements OnInit, OnDestroy {
     this.sub = this.route.params.subscribe(params => {
       this.id = params['id'];
     });
+
+    if (this.id) {
+      this.categoryService.get(this.id).then(category => {
+        this.category = category;
+      });
+    }
   }
 
   ngOnDestroy() {
@@ -50,7 +56,18 @@ export class CategoryFormComponent implements OnInit, OnDestroy {
   }
 
   submit(form: any) {
-    this.categoryService.create(this.category)
+    if (this.id) {
+      return this.categoryService.update(this.id, this.category)
+        .then(() => {
+          this.snackBar.open('Категорію оновлено!', 'OK', {
+            duration: 3000,
+          });
+
+          this.cancel();
+        });
+    }
+
+    return this.categoryService.create(this.category)
       .then(() => {
         this.category = new Category();
         this.id = '';

@@ -9,7 +9,7 @@
   <md-select name="subject"
              required
              class="block margin-bottom"
-             placeholder="Оберіть предмет"
+             placeholder="Предмет"
              [(ngModel)]="category.subject">
 
     <md-option *ngFor="let subject of subjects" [value]="subject._id">
@@ -22,7 +22,7 @@
     <input mdInput
            required
            name="category"
-           placeholder="Введіть назву нової категорії"
+           placeholder="Назва категорії"
            min="1"
            [(ngModel)]="category.name">
   </md-input-container>
@@ -35,7 +35,8 @@
     </button>
 
     <button md-raised-button [disabled]="!createcategoryform.form.valid">
-      Створити категорію
+      <span *ngIf="id">Оновити</span>
+      <span *ngIf="!id">Додати</span>
     </button>
   </div>
 
