@@ -14,6 +14,7 @@ import { TestService } from '../../services/test.service';
 import { MdSnackBar } from '@angular/material';
 
 const range = require('lodash.range');
+const cloneDeep = require('lodash.clonedeep');
 
 @Component({
   templateUrl: './testForm.component.html',
@@ -25,28 +26,12 @@ export class TestFormComponent implements OnInit, OnDestroy {
   private sub: any;
 
   test: Test = new Test();
+  testCopy: Test = new Test();
   questions: Question = new Question();
 
   subjects: Subject[] = [];
   categories: Category[] = [];
   private _allCategories: Category[];
-
-  subject: string;
-  category: string;
-
-  addImages: boolean[] = [];
-  answers: string[][] = [];
-  answersLetters: string[][] = [];
-  answersNumbers: string[][] = [];
-  answersQuantities: number[] = [];
-  answersTableTitles: string[][] = [];
-  correctAnswers: number[][] = [];
-  images: any[] = [];
-  lettersQuantities: number[] = [];
-  matchings: boolean[] = [];
-  numbersQuantities: number[] = [];
-  tasks: string[] = [];
-  tasksQuantity: number;
 
   constructor(
     private subjectService: SubjectService,
@@ -72,6 +57,13 @@ export class TestFormComponent implements OnInit, OnDestroy {
     this.sub = this.route.params.subscribe(params => {
       this.id = params['id'];
     });
+
+    if (this.id) {
+      this.testService.get(this.id).then(test => {
+        this.test = test;
+        this.testCopy = test;
+      });
+    }
   }
 
   ngOnDestroy() {
@@ -79,25 +71,26 @@ export class TestFormComponent implements OnInit, OnDestroy {
   }
 
   onSubjectChange(subjectId: string) {
-    // TODO: Refetch categories. Since I'm lazy, I'll just fetch all and filter them for now.
     this.categories = this._allCategories.filter(category => category.subject === subjectId);
   }
 
-  setArraysDimensions(index: number): void {
-    while (this.answers.length > this.answersQuantities[index]) {
-      this.answers.pop();
-      this.correctAnswers.pop();
-      this.answersTableTitles.pop();
-      this.answersLetters.pop();
-      this.answersNumbers.pop();
+  setArrayDimension(array: any[], index: number, element: any) {
+    while (array.length > index) {
+      array.pop();
     }
-    while (this.answers.length < this.answersQuantities[index]) {
-      this.answers.push([]);
-      this.correctAnswers.push([]);
-      this.answersTableTitles.push([]);
-      this.answersLetters.push([]);
-      this.answersNumbers.push([]);
+
+    while (array.length < index) {
+      array.push(element);
     }
+  }
+
+  onQuestionsQuantityChange(questionsQuantity: number) {
+    this.setArrayDimension(this.test.questions, questionsQuantity, new Question());
+  }
+
+  onAnswersQuantityChange(answersQuantity: number, index: number) {
+    this.setArrayDimension(this.test.questions[index].answers, answersQuantity, {});
+    this.setArrayDimension(this.test.questions[index].table, answersQuantity, []);
   }
 
   getNumbersRange(num: number): number[] {
@@ -106,7 +99,7 @@ export class TestFormComponent implements OnInit, OnDestroy {
 
   uploadImage(event: any, i: number): void {
     let files = event.srcElement.files;
-    this.images[i] = files[0];
+    // this.images[i] = files[0];
   }
 
   clickOnElement(elementSelector: string): void {
@@ -130,94 +123,32 @@ export class TestFormComponent implements OnInit, OnDestroy {
     this.location.back();
   }
 
+  undoChanges() {
+    this.test = cloneDeep(this.testCopy);
+  }
+
   submit(form: any) {
-    let test: any = {
-      subject: this.subject,
-      category: this.category,
-      questions: []
-    };
-    let temp: any;
-    let current: string[] = [];
-
-    for (let index of this.getNumbersRange(this.tasksQuantity)) {
-      temp = {};
-
-      temp.question = this.questions[index];
-
-      if (this.images[index]) {
-        temp.img = this.images[index].name;
-      }
-
-      if (this.matchings[index]) {
-        temp.table_titles = [];
-        for (let title of this.answersTableTitles[index]) {
-          temp.table_titles.push({
-            title
-          });
-        }
-
-        temp.table = [];
-        for (let idx of this.getNumbersRange(this.answersQuantities[index])) {
-          if (this.answersNumbers[index][idx]) {
-            current[0] = this.answersNumbers[index][idx];
-          } else {
-            current[0] = '';
-          }
-
-          if (this.answersLetters[index][idx]) {
-            current[1] = this.answersLetters[index][idx];
-          } else {
-            current[1] = '';
-          }
-
-          temp.table[idx].push([
-            {
-              column: current[0]
-            },
-            {
-              column: current[1]
-            }
-          ]);
-        }
-      } else {
-        temp.answers = [];
-        for (let idx of this.getNumbersRange(this.answersQuantities[index])) {
-          if (this.correctAnswers[index][0] === idx) {
-            temp.answers.push({
-              text: this.answers[index][idx],
-              correct: true
-            });
-          } else {
-            temp.answers.push({
-              text: this.answers[index][idx]
-            });
-          }
-        }
-      }
-
-      test.questions.push(temp);
-    }
-
-    if (this.id) {
-      return this.testService.update(this.id, this.test)
-        .then(() => {
-          this.snackBar.open('Тест оновлено!', 'OK', {
-            duration: 3000,
-          });
-
-          this.cancel();
-        });
-    }
-
-    return this.testService.create(test)
-      .then(() => {
-        this.id = '';
-
-        this.snackBar.open('Тест додано!', 'OK', {
-          duration: 3000,
-        });
-
-        form.reset();
-      });
+    console.log(this.test);
+    // if (this.id) {
+    //   return this.testService.update(this.id, this.test)
+    //     .then(() => {
+    //       this.snackBar.open('Тест оновлено!', 'OK', {
+    //         duration: 3000,
+    //       });
+    //
+    //       this.cancel();
+    //     });
+    // }
+    //
+    // return this.testService.create(this.test)
+    //   .then(() => {
+    //     this.id = '';
+    //
+    //     this.snackBar.open('Тест додано!', 'OK', {
+    //       duration: 3000,
+    //     });
+    //
+    //     form.reset();
+    //   });
   }
 }

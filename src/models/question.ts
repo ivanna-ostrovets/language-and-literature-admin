@@ -1,8 +1,10 @@
 export class Question {
-  id: string;
   question: string;
-  img: any;
-  table_titles: string[];
-  table: string[];
-  answers: string[];
+  img?: any;
+  matchingQuestion?: boolean;
+  numberedAnswersQuantity?: number;
+  letteredAnswersQuantity?: number;
+  tableTitles?: { title: string }[] = [];
+  table?: { column: string }[][] = [];
+  answers: { text: string, correct?: boolean | string }[] = [];
 }

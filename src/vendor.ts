@@ -13,5 +13,6 @@ import '@angular/flex-layout';
 import 'rxjs';
 
 import 'lodash.range';
+import 'lodash.clonedeep';
 
 require('pouchdb');
