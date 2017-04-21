@@ -62,8 +62,6 @@ import { appRoutes } from './app.routes';
   ],
   bootstrap: [
     AppComponent,
-    FooterComponent,
-    ToolbarComponent
   ]
 })
 export class AppModule {
