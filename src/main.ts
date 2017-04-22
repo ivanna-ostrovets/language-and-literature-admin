@@ -10,7 +10,8 @@ const PouchDB = require('pouchdb');
 if (process.env.ENV === 'production') {
   enableProdMode();
 } else {
-  PouchDB.debug.enable('*');
+  // PouchDB.debug.enable('*');
+  PouchDB.debug.disable();
 }
 
 platformBrowserDynamic().bootstrapModule(AppModule);
