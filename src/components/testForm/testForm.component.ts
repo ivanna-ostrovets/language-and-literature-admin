@@ -62,6 +62,7 @@ export class TestFormComponent implements OnInit, OnDestroy {
       this.testService.get(this.id).then(test => {
         this.test = test;
         this.testCopy = test;
+        this.onSubjectChange(test.subject);
       });
     }
   }
@@ -88,9 +89,9 @@ export class TestFormComponent implements OnInit, OnDestroy {
     this.setArrayDimension(this.test.questions, questionsQuantity, new Question());
   }
 
-  onAnswersQuantityChange(answersQuantity: number, index: number) {
-    this.setArrayDimension(this.test.questions[index].answers, answersQuantity, {});
-    this.setArrayDimension(this.test.questions[index].table, answersQuantity, []);
+  onAnswersQuantityChange(answersQuantity: number, question: Question) {
+    this.setArrayDimension(question.answers, answersQuantity, {});
+    this.setArrayDimension(question.table, answersQuantity, []);
   }
 
   getNumbersRange(num: number): number[] {
