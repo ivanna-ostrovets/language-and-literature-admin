@@ -41,12 +41,12 @@
 
   <div *ngIf="test.questions.length">
     <md-tab-group>
-      <md-tab *ngFor="let question of test.questions; let i=index"
-              [label]="i + 1">
+      <md-tab *ngFor="let question of test.questions; let questionIndex=index"
+              [label]="questionIndex + 1">
         <md-input-container class="block margin-bottom question-title">
           <textarea mdInput
                     required
-                    [name]="'task' + i"
+                    [name]="'task' + questionIndex"
                     placeholder="Завдання"
                     [(ngModel)]="question.question">
           </textarea>
@@ -55,26 +55,27 @@
         <div>
           <input type="file"
                  hidden
-                 [id]="'image' + i"
-                 (change)="uploadImage($event, i)"
+                 [id]="'image' + questionIndex"
+                 (change)="uploadImage($event, questionIndex)"
                  accept="image/*">
 
           <button md-raised-button
-                  (click)="clickOnElement('#image' + i)">
+                  (click)="clickOnElement('#image' + questionIndex)">
             Додати зображення
           </button>
 
           <md-input-container class="margin-bottom"
-                              *ngIf="test.questions[i].img?.name">
+                              *ngIf="test.questions[questionIndex].img?.name">
             <input mdInput
                    disabled
-                   [value]="test.questions[i].img?.name">
+                   [value]="test.questions[questionIndex].img?.name">
           </md-input-container>
         </div>
 
         <md-slide-toggle class="block slider-margin-bottom"
-                         [name]="'matching' + i"
-                         [(ngModel)]="question.matchingQuestion">
+                         [name]="'matching' + questionIndex"
+                         [(ngModel)]="question.matchingQuestion"
+                         (ngModelChange)="onMatchingQuestionSelected($event, question)">
           Завдання на відповідність
         </md-slide-toggle>
 
@@ -82,140 +83,23 @@
           <input mdInput
                  required
                  type="number"
-                 [name]="'answersQuantity' + i"
+                 [name]="'answersQuantity' + questionIndex"
                  placeholder="Кількість відповідей"
                  min="1"
                  [ngModel]="question.answers.length"
                  (ngModelChange)="onAnswersQuantityChange($event, question)">
         </md-input-container>
 
-        <div *ngIf="!question.matchingQuestion">
-          <md-input-container *ngFor="let answer of question.answers; let j=index;"
-                               class="block margin-bottom">
-            <textarea mdInput
-                      required
-                      [name]="'answer_' + j + '_' + i"
-                      [placeholder]="'Відповідь ' + (j + 1)"
-                      [(ngModel)]="answer.text">
-            </textarea>
-          </md-input-container>
+        <llta-simple-question *ngIf="!question.matchingQuestion"
+                              [question]="question"
+                              [questionIndex]="questionIndex">
 
-          <div *ngIf="question.answers.length" class="margin-bottom">
-            <p class="label">Правильна відповідь</p>
+        </llta-simple-question>
 
-            <md-checkbox *ngFor="let answer of question.answers; let j=index;"
-                         class="block"
-                         [name]="'rightAnswer' + i + '_' + j"
-                         [(ngModel)]="answer.correct">
-              {{ j + 1 }}
-            </md-checkbox>
-          </div>
-        </div>
-
-        <div *ngIf="question.matchingQuestion">
-          <md-input-container class="block margin-bottom">
-            <input mdInput
-                   required
-                   type="number"
-                   [name]="'numbersQuantity' + i"
-                   placeholder="Кількість відповідей (1 - x)"
-                   min="1"
-                   [max]="question.answers.length"
-                   [value]="question.answers.length"
-                   [(ngModel)]="question.numberedAnswersQuantity">
-          </md-input-container>
-
-          <md-input-container class="block margin-bottom">
-            <input mdInput
-                   required
-                   type="number"
-                   [name]="'lettersQuantity' + i"
-                   placeholder="Кількість відповідей (A - Я)"
-                   min="1"
-                   [max]="question.answers.length"
-                   [value]="question.answers.length"
-                   [(ngModel)]="question.letteredAnswersQuantity">
-          </md-input-container>
-
-          <table class="answers-table margin-bottom"
-                 *ngIf="question.answers.length">
-            <thead>
-            <tr>
-              <th>
-                <md-input-container class="block">
-                  <input mdInput
-                         required
-                         [name]="'answersTableTitle0_' + i"
-                         placeholder="Заголовок"
-                         [(ngModel)]="question.tableTitles[0].title">
-                </md-input-container>
-              </th>
-              <th>
-                <md-input-container class="block">
-                  <input mdInput
-                         required
-                         [name]="'answersTableTitle1_' + i"
-                         placeholder="Заголовок"
-                         [(ngModel)]="question.tableTitles[1].title">
-                </md-input-container>
-              </th>
-            </tr>
-            </thead>
-
-            <tbody>
-            <tr *ngFor="let number of getNumbersRange(test.questions[i].answers.length)">
-              <td>
-                <md-input-container class="block">
-                  <input mdInput
-                         [name]="'answersNumbers' + number + '_' + i"
-                         [placeholder]="'Варіант ' + getNumber(number, 0, false)"
-                         [disabled]="test.questions[i].numberedAnswersQuantity < number + 1"
-                         [(ngModel)]="test.questions[i].table[number][0].column">
-                </md-input-container>
-              </td>
-              <td>
-                <md-input-container class="block">
-                  <input mdInput
-                         [name]="'answersLetters' + number + '_' + i"
-                         [placeholder]="'Варіант ' + getNumber(number, 1, false)"
-                         [disabled]="test.questions[i].letteredAnswersQuantity < number + 1"
-                         [(ngModel)]="test.questions[i].table[number][1].column">
-                </md-input-container>
-              </td>
-            </tr>
-            </tbody>
-          </table>
-
-          <div class="margin-bottom">
-            <p>Правильні відповіді</p>
-
-            <table class="inputs-answers-table">
-              <thead>
-              <tr>
-                <th></th>
-                <th *ngFor="let number of getNumbersRange(test.questions[i].letteredAnswersQuantity)">
-                  {{ getNumber(number, 1, false) }}
-                </th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr *ngFor="let number of getNumbersRange(test.questions[i].numberedAnswersQuantity)">
-                <td class="number-label bold">{{ number + 1 }}</td>
-
-                <td *ngFor="let num of getNumbersRange(test.questions[i].letteredAnswersQuantity)"
-                    [(ngModel)]="test.questions[i].answers[number].text">
-                  <md-radio-group required
-                                  [name]="'complex_' + number"
-                                  [(ngModel)]="test.questions[i].answers[number].correct">
-                    <md-radio-button [value]="num + 1">
-                    </md-radio-button>
-                  </md-radio-group>
-                </td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+        <llta-matching-question *ngIf="question.matchingQuestion"
+                                [question]="question"
+                                [questionIndex]="questionIndex">
+        </llta-matching-question>
       </md-tab>
     </md-tab-group>
 

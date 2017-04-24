@@ -20,6 +20,8 @@ import { TestsListComponent } from '../components/testsList/testsList.component'
 import { ToolbarComponent } from '../components/toolbar/toolbar.component';
 import { WelcomePageComponent } from '../components/welcomePage/welcomePage.component';
 import { ConfirmDialogComponent } from '../services/dialog.service';
+import { SimpleQuestionComponent } from '../components/testForm/simpleQuestion/simpleQuestion.component';
+import { MatchingQuestionComponent } from '../components/testForm/matchingQuestion/matchingQuestion.component';
 
 import { CategoryService } from '../services/category.service';
 import { SubjectService } from '../services/subject.service';
@@ -49,7 +51,9 @@ import { appRoutes } from './app.routes';
     TestsListComponent,
     ToolbarComponent,
     WelcomePageComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    SimpleQuestionComponent,
+    MatchingQuestionComponent
   ],
   entryComponents: [
     ConfirmDialogComponent

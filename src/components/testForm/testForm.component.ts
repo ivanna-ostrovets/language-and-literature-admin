@@ -13,7 +13,6 @@ import { TestService } from '../../services/test.service';
 
 import { MdSnackBar } from '@angular/material';
 
-const range = require('lodash.range');
 const cloneDeep = require('lodash.clonedeep');
 
 @Component({
@@ -91,33 +90,32 @@ export class TestFormComponent implements OnInit, OnDestroy {
 
   onAnswersQuantityChange(answersQuantity: number, question: Question) {
     this.setArrayDimension(question.answers, answersQuantity, {});
-    this.setArrayDimension(question.table, answersQuantity, []);
   }
 
-  getNumbersRange(num: number): number[] {
-    return range(0, num);
+  onMatchingQuestionSelected(selected: boolean, question: Question) {
+    const length = question.answers.length;
+
+    if (length) {
+      question.numberedAnswersQuantity = length;
+      question.letteredAnswersQuantity = length;
+    }
+
+    question.answers = [];
+
+    if (selected) {
+      this.setArrayDimension(question.answers, length, '');
+    } else {
+      this.setArrayDimension(question.answers, length, {});
+    }
   }
 
   uploadImage(event: any, i: number): void {
     let files = event.srcElement.files;
-    // this.images[i] = files[0];
+    // this.images[questionIndex] = files[0];
   }
 
   clickOnElement(elementSelector: string): void {
     (<HTMLElement>document.querySelector(elementSelector)).click();
-  }
-
-  getNumber(parentIndex: number, index: number, dots: any = true): string {
-    if (dots) {
-      dots = index === 0 ? '.' : ')';
-    } else {
-      dots = '';
-    }
-
-    return index === 0
-      ? parentIndex + 1 + dots
-      : 'АБВГДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ'[parentIndex] + dots
-      ;
   }
 
   cancel() {

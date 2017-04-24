@@ -4,7 +4,10 @@ export class Question {
   matchingQuestion?: boolean;
   numberedAnswersQuantity?: number;
   letteredAnswersQuantity?: number;
-  tableTitles?: { title: string }[] = [];
-  table?: { column: string }[][] = [];
-  answers: { text: string, correct?: boolean | string }[] = [];
+  tableTitles?: { title1: string, title2: string } = {
+    title1: '',
+    title2: ''
+  };
+  table?: string[][] = [[], []];
+  answers: { text: string, correct?: boolean }[] | string[] = [];
 }

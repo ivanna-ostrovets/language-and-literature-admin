@@ -1,0 +1,20 @@
+<md-input-container *ngFor="let answer of question.answers; let j=index;"
+                    class="block margin-bottom">
+  <textarea mdInput
+            required
+            [name]="'answer_' + j + '_' + questionIndex"
+            [placeholder]="'Відповідь ' + (j + 1)"
+            [(ngModel)]="answer.text">
+  </textarea>
+</md-input-container>
+
+<div *ngIf="question.answers.length" class="margin-bottom">
+  <p class="label">Правильна відповідь</p>
+
+  <md-checkbox *ngFor="let answer of question.answers; let j=index;"
+               class="block"
+               [name]="'rightAnswer' + questionIndex + '_' + j"
+               [(ngModel)]="answer.correct">
+    {{ j + 1 }}
+  </md-checkbox>
+</div>
