@@ -1,5 +1,6 @@
-﻿<h1 *ngIf="id">Редагувати категорію</h1>
-<h1 *ngIf="!id">Додати категорію</h1>
+﻿<h1>
+  {{ id ? 'Редагувати категорію' : 'Додати категорію' }}
+</h1>
 
 <form novalidate
       #createcategoryform="ngForm"
@@ -35,8 +36,9 @@
     </button>
 
     <button md-raised-button [disabled]="!createcategoryform.form.valid">
-      <span *ngIf="id">Оновити</span>
-      <span *ngIf="!id">Додати</span>
+      <span>
+        {{ id ? 'Оновити' : 'Додати' }}
+      </span>
     </button>
   </div>
 

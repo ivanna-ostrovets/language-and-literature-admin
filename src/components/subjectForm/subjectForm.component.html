@@ -1,5 +1,6 @@
-<h1 *ngIf="id">Редагувати предмет</h1>
-<h1 *ngIf="!id">Додати предмет</h1>
+<h1>
+  {{ id ? 'Редагувати предмет' : 'Додати предмет' }}
+</h1>
 
 <form novalidate
       #createsubjectform="ngForm"
@@ -23,8 +24,9 @@
     </button>
 
     <button md-raised-button [disabled]="!createsubjectform.form.valid">
-      <span *ngIf="id">Оновити</span>
-      <span *ngIf="!id">Додати</span>
+      <span>
+        {{ id ? 'Оновити' : 'Додати' }}
+      </span>
     </button>
   </div>
 
