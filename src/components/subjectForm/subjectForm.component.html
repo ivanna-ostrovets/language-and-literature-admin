@@ -3,8 +3,8 @@
 </h1>
 
 <form novalidate
-      #createsubjectform="ngForm"
-      (ngSubmit)="submit(createsubjectform)"
+      #createSubjectForm="ngForm"
+      (ngSubmit)="submit(createSubjectForm)"
       class="margin-top">
 
   <md-input-container class="block margin-bottom">
@@ -23,7 +23,7 @@
       Назад
     </button>
 
-    <button md-raised-button [disabled]="!createsubjectform.form.valid">
+    <button md-raised-button [disabled]="!createSubjectForm.form.valid">
       <span>
         {{ id ? 'Оновити' : 'Додати' }}
       </span>
