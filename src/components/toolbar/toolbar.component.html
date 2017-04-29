@@ -1,51 +1,51 @@
-<md-toolbar color="primary" class="llta-toolbar">
+<md-toolbar color="primary" class="llta-toolbar mat-elevation-z3">
   <a md-button
      class="toolbar-app-name"
-     routerLink=".">
+     routerLink="/">
     <md-icon>check</md-icon>
     <span>М &amp; Л | admin</span>
   </a>
 
-  <span md-button class="toolbar-button fill-remaining-space"></span>
+  <span class="toolbar-button" fxFlex></span>
 
-  <a md-button
-     class="toolbar-button"
-     [mdMenuTriggerFor]="add">
+  <button md-button
+          class="toolbar-button"
+          [mdMenuTriggerFor]="add">
     Додати
     <md-icon>arrow_drop_down</md-icon>
-  </a>
+  </button>
   <md-menu #add="mdMenu">
     <button md-menu-item
-            routerLink="create-test">
+            routerLink="/create-test">
       Тест
     </button>
     <button md-menu-item
-            routerLink="create-category">
+            routerLink="/create-category">
       Категорію
     </button>
     <button md-menu-item
-            routerLink="create-subject">
+            routerLink="/create-subject">
       Предмет
     </button>
   </md-menu>
 
-  <a md-button
-     class="toolbar-button"
-     [mdMenuTriggerFor]="view">
+  <button md-button
+          class="toolbar-button"
+          [mdMenuTriggerFor]="view">
     Переглянути
     <md-icon>arrow_drop_down</md-icon>
-  </a>
+  </button>
   <md-menu #view="mdMenu">
     <button md-menu-item
-            routerLink="tests">
+            routerLink="/tests">
       Cписок тестів
     </button>
     <button md-menu-item
-            routerLink="categories">
+            routerLink="/categories">
       Cписок категорій
     </button>
     <button md-menu-item
-            routerLink="subjects">
+            routerLink="/subjects">
       Cписок предметів
     </button>
   </md-menu>

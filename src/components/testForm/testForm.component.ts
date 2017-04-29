@@ -93,20 +93,12 @@ export class TestFormComponent implements OnInit, OnDestroy {
   }
 
   onMatchingQuestionSelected(selected: boolean, question: Question) {
-    const length = question.answers.length;
-
-    if (length) {
-      question.numberedAnswersQuantity = length;
-      question.letteredAnswersQuantity = length;
+    if (selected) {
+      question.numberedAnswersQuantity = 0;
+      question.letteredAnswersQuantity = 0;
     }
 
     question.answers = [];
-
-    if (selected) {
-      this.setArrayDimension(question.answers, length, '');
-    } else {
-      this.setArrayDimension(question.answers, length, {});
-    }
   }
 
   uploadImage(event: any, i: number): void {

@@ -3,9 +3,9 @@
 @include mat-core();
 
 $primary-color: mat-palette($mat-light-blue);
-$accent-color:  mat-palette($mat-purple, A200, A100, A400);
+$accent-color: mat-palette($mat-purple, A200, A100, A400);
 
-$warn-color:    mat-palette($mat-red);
+$warn-color: mat-palette($mat-red);
 
 $app-theme: mat-light-theme($primary-color, $accent-color, $warn-color);
 

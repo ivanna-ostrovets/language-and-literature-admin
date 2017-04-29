@@ -3,6 +3,7 @@ import { enableProdMode } from '@angular/core';
 
 import { AppModule } from './app/app.module';
 
+import './styles/theme.scss';
 import './styles/main.scss';
 
 const PouchDB = require('pouchdb');

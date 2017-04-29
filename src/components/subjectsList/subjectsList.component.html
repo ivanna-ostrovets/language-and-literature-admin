@@ -1,6 +1,6 @@
 <h1>Список предметів</h1>
 
-<md-tab-group class="margin-top">
+<md-tab-group class="margin-top" *ngIf="subjects.length">
   <md-tab *ngFor="let number of getPagingRange(subjects.length)"
           [label]="number + 1">
     <md-list>

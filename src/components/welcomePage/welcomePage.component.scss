@@ -1,5 +1,4 @@
 @import "../../styles/variables";
-@import "../../styles/theme";
 
 .app-name {
   font-size: 7.5vw;
@@ -19,9 +18,17 @@
 }
 
 .right-padding {
-  padding-right: 20px;
+  .mat-list-item-content {
+    .mat-list-text {
+      margin-right: 20px;
+    }
+  }
 }
 
 .left-padding {
-  padding-left: 20px;
+  .mat-list-item-content {
+    .mat-list-text {
+      margin-left: 20px;
+    }
+  }
 }

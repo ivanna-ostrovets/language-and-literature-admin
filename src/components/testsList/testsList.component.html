@@ -27,7 +27,7 @@
 
 </md-select>
 
-<md-tab-group *ngIf="category">
+<md-tab-group *ngIf="category && tests.length">
   <md-tab *ngFor="let number of getPagingRange(tests.length)"
           [label]="number + 1">
     <md-list>

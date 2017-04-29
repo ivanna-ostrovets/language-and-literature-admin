@@ -5,59 +5,47 @@
                 rowHeight="150px"
                 class="welcome-page-menu">
     <md-grid-tile class="left-column">
-      <md-list class="welcome-page-menu right-padding">
-        <md-list-item class="right">
-          <a md-button
-             class="llta-button"
-             routerLink="create-test">
-            Додати тест
-          </a>
-        </md-list-item>
+      <md-nav-list class="welcome-page-menu">
+        <a md-list-item
+           class="right-padding"
+           routerLink="/create-test">
+          <h4 md-line>Додати тест</h4>
+        </a>
 
-        <md-list-item class="right">
-          <a md-button
-             class="llta-button"
-             routerLink="create-category">
-            Додати категорію
-          </a>
-        </md-list-item>
+        <a md-list-item
+           class="right-padding"
+           routerLink="/create-category">
+          <h4 md-line>Додати категорію</h4>
+        </a>
 
-        <md-list-item class="right">
-          <a md-button
-             class="llta-button"
-             routerLink="create-subject">
-            Додати предмет
-          </a>
-        </md-list-item>
-      </md-list>
+        <a md-list-item
+           class="right-padding"
+           routerLink="/create-subject">
+          <h4 md-line>Додати предмет</h4>
+        </a>
+      </md-nav-list>
     </md-grid-tile>
 
     <md-grid-tile>
-      <md-list class="welcome-page-menu left-padding">
-        <md-list-item class="left">
-          <a md-button
-             class="llta-button"
-             routerLink="tests">
-            Cписок тестів
-          </a>
-        </md-list-item>
+      <md-nav-list class="welcome-page-menu">
+        <a md-list-item
+           class="left-padding"
+           routerLink="/tests">
+          <h4 md-line>Cписок тестів</h4>
+        </a>
 
-        <md-list-item class="left">
-          <a md-button
-             class="llta-button"
-             routerLink="categories">
-            Cписок категорій
-          </a>
-        </md-list-item>
+        <a md-list-item
+           class="left-padding"
+           routerLink="/categories">
+          <h4 md-line>Cписок категорій</h4>
+        </a>
 
-        <md-list-item class="left">
-          <a md-button
-             class="llta-button"
-             routerLink="subjects">
-            Cписок предметів
-          </a>
-        </md-list-item>
-      </md-list>
+        <a md-list-item
+           class="left-padding"
+           routerLink="/subjects">
+          <h4 md-line>Cписок предметів</h4>
+        </a>
+      </md-nav-list>
     </md-grid-tile>
   </md-grid-list>
 </div>
