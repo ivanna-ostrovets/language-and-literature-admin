@@ -10,7 +10,7 @@ interface PouchResponse {
 
 export abstract class Resource<T extends DatabaseDocument> {
   // If you don't have CouchDB installed locally, change baseUrl value to empty string.
-  private baseUrl: string = '';
+  private baseUrl: string = ''; // https://couchdb-a243cf.smileupps.com/
   private db: any;
 
   protected abstract dbUrl: string;
