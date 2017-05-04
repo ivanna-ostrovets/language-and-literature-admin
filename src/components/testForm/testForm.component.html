@@ -75,7 +75,7 @@
         <md-slide-toggle class="block slider-margin-bottom"
                          [name]="'matching' + questionIndex"
                          [(ngModel)]="question.matchingQuestion"
-                         (ngModelChange)="onMatchingQuestionSelected($event, question)">
+                         (ngModelChange)="onMatchingQuestionSelected(question)">
           Завдання на відповідність
         </md-slide-toggle>
 
@@ -111,17 +111,14 @@
       </button>
 
       <button type="button"
-              *ngIf="id"
               md-raised-button
               (click)="undoChanges()">
-        Відмінити зміни
+        {{ id ? 'Відмінити зміни' : 'Очистити форму' }}
       </button>
 
       <button md-raised-button
               [disabled]="!createTestForm.form.valid">
-        <span>
           {{ id ? 'Оновити' : 'Додати' }}
-        </span>
       </button>
     </div>
   </div>

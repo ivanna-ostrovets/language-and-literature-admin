@@ -6,7 +6,6 @@
          placeholder="Кількість відповідей (1 - x)"
          min="1"
          [max]="question.answers.length"
-         [value]="question.answers.length"
          [(ngModel)]="question.numberedAnswersQuantity"
          (ngModelChange)="onPartialQuantityChange()">
 </md-input-container>
@@ -19,7 +18,6 @@
          placeholder="Кількість відповідей (A - Я)"
          min="1"
          [max]="question.answers.length"
-         [value]="question.answers.length"
          [(ngModel)]="question.letteredAnswersQuantity"
          (ngModelChange)="onPartialQuantityChange()">
 </md-input-container>
@@ -74,7 +72,7 @@
   </tbody>
 </table>
 
-<div class="margin-bottom">
+<div class="margin-bottom" *ngIf="question.answers.length > 0">
   <p>Правильні відповіді</p>
 
   <table class="inputs-answers-table">
@@ -88,24 +86,25 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let _ of question.answers; let j=index">
-        <td class="number-label bold"
-            [class.disabled]="question.numberedAnswersQuantity < j + 1">
-          {{ j + 1 }}
-        </td>
+      <md-radio-group required
+                      *ngFor="let _ of question.answers; let j=index"
+                      [name]="j"
+                      [disabled]="question.numberedAnswersQuantity < j + 1"
+                      [(ngModel)]="question.answers[j]">
+        <tr>
+          <td class="number-label bold"
+              [class.disabled]="question.numberedAnswersQuantity < j + 1">
+            {{ j + 1 }}
+          </td>
 
-        <td *ngFor="let _ of question.answers; let k=index">
-          <md-radio-group required
-                          [name]="'complex_' + j"
-                          [disabled]="question.numberedAnswersQuantity < j + 1"
-                          [(ngModel)]="question.answers[k]">
+          <td *ngFor="let _ of question.answers; let k=index">
             <md-radio-button [value]="k"
-                             [name]="'complex_' + j + '_' + k"
+                             [name]="j + '' + k"
                              [disabled]="question.letteredAnswersQuantity < k + 1">
             </md-radio-button>
-          </md-radio-group>
-        </td>
-      </tr>
+          </td>
+        </tr>
+      </md-radio-group>
     </tbody>
   </table>
 </div>

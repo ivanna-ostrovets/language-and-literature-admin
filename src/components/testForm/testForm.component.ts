@@ -90,14 +90,16 @@ export class TestFormComponent implements OnInit, OnDestroy {
 
   onAnswersQuantityChange(answersQuantity: number, question: Question) {
     this.setArrayDimension(question.answers, answersQuantity, {});
+
+    if (question.matchingQuestion) {
+      question.numberedAnswersQuantity = question.answers.length;
+      question.letteredAnswersQuantity = question.answers.length;
+    }
   }
 
-  onMatchingQuestionSelected(selected: boolean, question: Question) {
-    if (selected) {
-      question.numberedAnswersQuantity = 0;
-      question.letteredAnswersQuantity = 0;
-    }
-
+  onMatchingQuestionSelected(question: Question) {
+    question.numberedAnswersQuantity = null;
+    question.letteredAnswersQuantity = null;
     question.answers = [];
   }
 
