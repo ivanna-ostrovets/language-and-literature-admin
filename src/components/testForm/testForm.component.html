@@ -60,6 +60,7 @@
                  accept="image/*">
 
           <button md-raised-button
+                  class="margin-bottom"
                   (click)="clickOnElement('#image' + questionIndex)">
             Додати зображення
           </button>
@@ -72,12 +73,15 @@
           </md-input-container>
         </div>
 
-        <md-slide-toggle class="block slider-margin-bottom"
-                         [name]="'matching' + questionIndex"
-                         [(ngModel)]="question.matchingQuestion"
-                         (ngModelChange)="onMatchingQuestionSelected(question)">
-          Завдання на відповідність
-        </md-slide-toggle>
+        <md-nav-list class="block slider-margin-bottom">
+          <span>
+            Завдання на відповідність
+            <md-slide-toggle [name]="'matching' + questionIndex"
+                             [(ngModel)]="question.matchingQuestion"
+                             (ngModelChange)="onMatchingQuestionSelected(question)">
+            </md-slide-toggle>
+          </span>
+        </md-nav-list>
 
         <md-input-container class="block margin-bottom">
           <input mdInput

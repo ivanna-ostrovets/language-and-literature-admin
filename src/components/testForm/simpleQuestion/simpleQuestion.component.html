@@ -1,20 +1,22 @@
-<md-input-container *ngFor="let answer of question.answers; let j=index;"
-                    class="block margin-bottom">
-  <textarea mdInput
-            required
-            [name]="'answer_' + j + '_' + questionIndex"
-            [placeholder]="'Відповідь ' + (j + 1)"
-            [(ngModel)]="answer.text">
-  </textarea>
-</md-input-container>
+<div *ngIf="question.answers.length" class="hint">
+  <p>Для вибору правильної відповіді натисніть на прапорець зправа від поля введення.</p>
+</div>
 
-<div *ngIf="question.answers.length" class="margin-bottom">
-  <p class="label">Правильна відповідь</p>
-
-  <md-checkbox *ngFor="let answer of question.answers; let j=index;"
-               class="block"
+<div *ngFor="let answer of question.answers; let j=index;"
+     class="margin-bottom"
+     fxLayout="row"
+     fxLayoutAlign="space-between center">
+  <md-checkbox class="answer-checkbox"
                [name]="'rightAnswer' + questionIndex + '_' + j"
                [(ngModel)]="answer.correct">
-    {{ j + 1 }}
   </md-checkbox>
+
+  <md-input-container fxFlex>
+    <textarea mdInput
+              required
+              [name]="'answer_' + j + '_' + questionIndex"
+              [placeholder]="'Відповідь ' + (j + 1)"
+              [(ngModel)]="answer.text">
+    </textarea>
+  </md-input-container>
 </div>
