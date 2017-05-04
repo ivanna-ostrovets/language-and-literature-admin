@@ -11,46 +11,53 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['', '.ts', '.js'],
-    root: helpers.root('src')
+    extensions: ['.ts', '.js']
   },
 
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.ts$/,
         loaders: ['awesome-typescript-loader', 'angular2-template-loader']
       },
       {
         test: /\.html$/,
-        loader: 'html'
+        loader: 'html-loader'
       },
       {
         test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
-        loader: 'file?name=assets/[name].[hash].[ext]'
+        loader: 'file-loader?name=assets/[name].[hash].[ext]-loader'
       },
       {
         test: /\.json$/,
-        loader: 'file?name=mocks/[name].[ext]'
+        loader: 'file-loader?name=mocks/[name].[ext]-loader'
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style', 'css')
+        loader: ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: 'css-loader' })
       },
       {
         test: /\.scss$/,
         exclude: [helpers.root('src', 'app'), helpers.root('src', 'components')],
-        loader: ExtractTextPlugin.extract('style', 'css!sass')
+        loader: ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: 'css-loader!sass-loader' })
       },
       {
         test: /\.scss$/,
         include: [helpers.root('src', 'app'), helpers.root('src', 'components')],
-        loaders: ['raw', 'sass']
+        loaders: ['raw-loader', 'sass-loader']
       }
     ]
   },
 
   plugins: [
+    // Workaround for angular/angular#11580
+    new webpack.ContextReplacementPlugin(
+      // The (\\|\/) piece accounts for path separators in *nix and Windows
+      /angular(\\|\/)core(\\|\/)@angular/,
+      helpers.root('./src'), // location of your src
+      {} // a map of your routes
+    ),
+
     new webpack.optimize.CommonsChunkPlugin({
       name: ['app', 'vendor', 'polyfills']
     }),

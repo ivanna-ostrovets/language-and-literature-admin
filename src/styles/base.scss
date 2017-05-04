@@ -16,3 +16,7 @@ main {
   flex: 1 0 auto;
   padding: 30px 60px;
 }
+
+.mat-tab-body {
+  overflow-y: hidden !important;
+}
