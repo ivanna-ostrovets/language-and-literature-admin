@@ -14,6 +14,7 @@ import { TestService } from '../../services/test.service';
 import { MdSnackBar } from '@angular/material';
 
 const cloneDeep = require('lodash.clonedeep');
+const sortBy = require('lodash.sortby');
 
 @Component({
   templateUrl: './testForm.component.html',
@@ -45,7 +46,7 @@ export class TestFormComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subjectService.getAll()
       .then(subjects => {
-        this.subjects = subjects;
+        this.subjects = sortBy(subjects, ['name']);
       });
 
     this.categoryService.getAll()
@@ -71,7 +72,7 @@ export class TestFormComponent implements OnInit, OnDestroy {
   }
 
   onSubjectChange(subjectId: string) {
-    this.categories = this._allCategories.filter(category => category.subject === subjectId);
+    this.categories = sortBy(this._allCategories.filter(category => category.subject === subjectId), ['name']);
   }
 
   setArrayDimension(array: any[], index: number, element: any) {

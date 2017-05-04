@@ -8,6 +8,7 @@ import { DialogService } from '../../services/dialog.service';
 import { MdSnackBar } from '@angular/material';
 
 const range = require('lodash.range');
+const sortBy = require('lodash.sortby');
 
 @Component({
   templateUrl: './subjectsList.component.html',
@@ -25,7 +26,7 @@ export class SubjectsListComponent implements OnInit {
 
   ngOnInit() {
     this.subjectService.getAll().then(subjects => {
-      this.subjects = subjects;
+      this.subjects = sortBy(subjects, ['name']);
     });
   }
 

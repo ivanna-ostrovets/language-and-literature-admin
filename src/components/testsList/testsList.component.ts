@@ -12,6 +12,7 @@ import { DialogService } from '../../services/dialog.service';
 import { MdSnackBar } from '@angular/material';
 
 const range = require('lodash.range');
+const sortBy = require('lodash.sortby');
 
 @Component({
   templateUrl: './testsList.component.html',
@@ -43,7 +44,7 @@ export class TestsListComponent implements OnInit {
 
     this.subjectService.getAll()
       .then(subjects => {
-        this.subjects = subjects;
+        this.subjects = sortBy(subjects, ['name']);
       });
 
     this.categoryService.getAll()
@@ -57,7 +58,7 @@ export class TestsListComponent implements OnInit {
   }
 
   onSubjectChange(subjectId: string) {
-    this.categories = this._allCategories.filter(category => category.subject === subjectId);
+    this.categories = sortBy(this._allCategories.filter(category => category.subject === subjectId), ['name']);
   }
 
   onCategoryChange(categoryId: string) {
