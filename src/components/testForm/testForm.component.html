@@ -1,10 +1,11 @@
+<!-- TODO: Make create and edit two separate routes -->
 <h1>
   {{ id ? 'Редагувати тест' : 'Додати тест' }}
 </h1>
 
 <form novalidate
-      #createTestForm="ngForm"
-      (ngSubmit)="submit(createTestForm)"
+      #testForm="ngForm"
+      (ngSubmit)="submit()"
       class="margin-top">
 
   <md-select required
@@ -41,7 +42,7 @@
 
   <div *ngIf="test.questions.length">
     <md-tab-group>
-      <md-tab *ngFor="let question of test.questions; let questionIndex=index"
+      <md-tab *ngFor="let question of test.questions; let questionIndex = index"
               [label]="questionIndex + 1">
         <md-input-container class="block margin-bottom question-title">
           <textarea mdInput
@@ -57,12 +58,13 @@
                  hidden
                  [id]="'image' + questionIndex"
                  (change)="uploadImage($event, questionIndex)"
-                 accept="image/*">
+                 accept="image/*"
+                 #fileInput>
 
           <button md-raised-button
                   type="button"
                   class="margin-bottom"
-                  (click)="clickOnElement('#image' + questionIndex)">
+                  (click)="fileInput.click()">
             Додати зображення
           </button>
 
@@ -109,20 +111,23 @@
     </md-tab-group>
 
     <div class="block center-align">
-      <button type="button"
-              md-raised-button
-              (click)="cancel()">
+      <!-- TODO: Move back button above form -->
+      <!-- TODO: Make it independent component -->
+      <button md-raised-button
+              type="button"
+              (click)="goBack()">
         Назад
       </button>
 
-      <button type="button"
-              md-raised-button
-              (click)="undoChanges()">
+      <button md-raised-button
+              type="button"
+              (click)="copyOriginalTest()">
         {{ id ? 'Відмінити зміни' : 'Очистити форму' }}
       </button>
 
       <button md-raised-button
-              [disabled]="!createTestForm.form.valid">
+              type="submit"
+              [disabled]="!testForm.form.valid">
           {{ id ? 'Оновити' : 'Додати' }}
       </button>
     </div>

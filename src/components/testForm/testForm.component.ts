@@ -1,6 +1,8 @@
-import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Location } from '@angular/common';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { MdSnackBar } from '@angular/material';
 
 import { Subject } from '../../models/subject';
 import { Category } from '../../models/category';
@@ -11,26 +13,23 @@ import { SubjectService } from '../../services/subject.service';
 import { CategoryService } from '../../services/category.service';
 import { TestService } from '../../services/test.service';
 
-import { MdSnackBar } from '@angular/material';
-
-const cloneDeep = require('lodash.clonedeep');
-const sortBy = require('lodash.sortby');
+const cloneDeep = require('lodash.clonedeep'); // TODO: Use full lodash
 
 @Component({
   templateUrl: './testForm.component.html',
   styleUrls: ['./testForm.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None // TODO: Use /deep/ selector inside scss
 })
-export class TestFormComponent implements OnInit, OnDestroy {
-  id: string;
-  private sub: any;
+export class TestFormComponent implements OnInit {
+  @ViewChild('testForm') testForm: NgForm;
 
-  test: Test = new Test();
-  testCopy: Test = new Test();
+  id: string;
+
+  test: Test;
+  originalTest: Test;
 
   subjects: Subject[] = [];
   categories: Category[] = [];
-  private _allCategories: Category[];
 
   constructor(
     private subjectService: SubjectService,
@@ -45,56 +44,33 @@ export class TestFormComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subjectService.getAll()
       .then(subjects => {
-        this.subjects = sortBy(subjects, ['name']);
+        this.subjects = subjects;
       });
 
-    this.categoryService.getAll()
-      .then(categories => {
-        this._allCategories = categories;
-      });
-
-    this.sub = this.route.params.subscribe(params => {
+    this.route.params.subscribe(params => {
       this.id = params['id'];
+
+      if (this.id) {
+        this.testService.get(this.id).then(test => {
+          this.originalTest = test;
+          this.copyOriginalTest();
+          this.onSubjectChange(test.subject);
+        });
+      } else {
+        this.test = new Test();
+      }
     });
-
-    if (this.id) {
-      this.testService.get(this.id).then(test => {
-        this.test = test;
-        this.testCopy = test;
-        this.onSubjectChange(test.subject);
-      });
-    }
-  }
-
-  ngOnDestroy() {
-    this.sub.unsubscribe();
   }
 
   onSubjectChange(subjectId: string) {
-    this.categories = sortBy(this._allCategories.filter(category => category.subject === subjectId), ['name']);
+    this.categoryService.getAll(subjectId)
+      .then(categories => {
+        this.categories = categories;
+      });
   }
 
-  setArrayDimension(array: any[], index: number, element: any) {
-    while (array.length > index) {
-      array.pop();
-    }
-
-    while (array.length < index) {
-      array.push(element);
-    }
-  }
-
-  onQuestionsQuantityChange(questionsQuantity: number) {
-    this.setArrayDimension(this.test.questions, questionsQuantity, new Question());
-  }
-
-  onAnswersQuantityChange(answersQuantity: number, question: Question) {
-    this.setArrayDimension(question.answers, answersQuantity, {});
-
-    if (question.matchingQuestion) {
-      question.numberedAnswersQuantity = question.answers.length;
-      question.letteredAnswersQuantity = question.answers.length;
-    }
+  onQuestionsQuantityChange(quantity: number) {
+    this.resizeArray(this.test.questions, quantity, new Question());
   }
 
   onMatchingQuestionSelected(question: Question) {
@@ -117,19 +93,16 @@ export class TestFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  clickOnElement(elementSelector: string): void {
-    (<HTMLElement>document.querySelector(elementSelector)).click();
+  onAnswersQuantityChange(quantity: number, question: Question) {
+    this.resizeArray(question.answers, quantity, {});
+
+    if (question.matchingQuestion) {
+      question.numberedAnswersQuantity = question.answers.length;
+      question.letteredAnswersQuantity = question.answers.length;
+    }
   }
 
-  cancel() {
-    this.location.back();
-  }
-
-  undoChanges() {
-    this.test = cloneDeep(this.testCopy);
-  }
-
-  submit(form: any) {
+  submit() {
     console.log(this.test);
     // if (this.id) {
     //   return this.testService.update(this.id, this.test)
@@ -138,7 +111,7 @@ export class TestFormComponent implements OnInit, OnDestroy {
     //         duration: 3000,
     //       });
     //
-    //       this.cancel();
+    //       this.goBack();
     //     });
     // }
     //
@@ -150,7 +123,25 @@ export class TestFormComponent implements OnInit, OnDestroy {
     //       duration: 3000,
     //     });
     //
-    //     form.reset();
+    //     this.testForm.reset();
     //   });
+  }
+
+  goBack() {
+    this.location.back();
+  }
+
+  copyOriginalTest() {
+    this.test = cloneDeep(this.originalTest);
+  }
+
+  private resizeArray(array: any[], index: number, element: any) {
+    while (array.length > index) {
+      array.pop();
+    }
+
+    while (array.length < index) {
+      array.push(element);
+    }
   }
 }
