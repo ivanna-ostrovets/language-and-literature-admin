@@ -1,4 +1,4 @@
-const PouchDB = require('pouchdb');
+import * as PouchDB from 'pouchdb';
 
 import { DatabaseDocument } from '../../models/databaseDocument';
 
@@ -11,7 +11,7 @@ interface PouchResponse {
 export abstract class Resource<T extends DatabaseDocument> {
   // If you don't have CouchDB installed locally, change baseUrl value to empty string.
   private baseUrl: string = 'https://couchdb-a243cf.smileupps.com/';
-  private db: any;
+  private db: PouchDB.Database<any>;
 
   protected abstract dbUrl: string;
 

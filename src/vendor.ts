@@ -17,4 +17,4 @@ import 'lodash.range';
 import 'lodash.clonedeep';
 import 'lodash.sortby';
 
-require('pouchdb');
+import 'pouchdb';

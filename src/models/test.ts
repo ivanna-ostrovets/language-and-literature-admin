@@ -6,7 +6,10 @@ export class Test extends DatabaseDocument {
   category: string;
   questions: Question[] = [];
 
-  addAttachment() {
-    // TODO: Implement
+  addAttachment(name: string, type: string, data: string) {
+    this._attachments[name] = {
+      content_type: type,
+      data: data
+    };
   }
 }

@@ -27,7 +27,6 @@ export class TestFormComponent implements OnInit, OnDestroy {
 
   test: Test = new Test();
   testCopy: Test = new Test();
-  questions: Question = new Question();
 
   subjects: Subject[] = [];
   categories: Category[] = [];
@@ -104,9 +103,18 @@ export class TestFormComponent implements OnInit, OnDestroy {
     question.answers = [];
   }
 
-  uploadImage(event: any, i: number): void {
-    let files = event.srcElement.files;
-    // this.images[questionIndex] = files[0];
+  uploadImage(event: any, questionIndex: number): void {
+    const file = event.srcElement.files[0];
+    const reader = new FileReader();
+
+    reader.addEventListener('load', () => {
+      this.test.addAttachment(file.name, file.type, reader.result);
+      this.test.questions[questionIndex].img = file.name;
+    });
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
   }
 
   clickOnElement(elementSelector: string): void {

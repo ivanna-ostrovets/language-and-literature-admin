@@ -6,5 +6,5 @@ export class DatabaseDocument {
       content_type: string;
       data: string;
     }
-  };
+  } = {};
 }
