@@ -41,7 +41,7 @@ export abstract class Resource<T extends DatabaseDocument> {
   }
 
   get(id: string): Promise<T> {
-    return this.db.get(id);
+    return this.db.get(id, {attachments: true});
   }
 
   update(id: string, body: T): Promise<PouchResponse> {
