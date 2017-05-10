@@ -9,14 +9,29 @@ import { WelcomePageComponent } from '../components/welcomePage/welcomePage.comp
 
 export const appRoutes =  [
   { path: '', component: WelcomePageComponent },
-  { path: 'categories', component: CategoriesListComponent },
-  { path: 'categories/:id', component: CategoryFormComponent },
-  { path: 'create-category', component: CategoryFormComponent },
-  { path: 'subjects', component: SubjectsListComponent },
-  { path: 'subjects/:id', component: SubjectFormComponent },
-  { path: 'create-subject', component: SubjectFormComponent },
-  { path: 'create-test', component: TestFormComponent },
-  { path: 'tests', component: TestsListComponent },
-  { path: 'tests/:id', component: TestFormComponent },
+  {
+    path: 'categories',
+    children: [
+      { path: '', component: CategoriesListComponent },
+      { path: ':id/edit', component: CategoryFormComponent },
+      { path: 'create', component: CategoryFormComponent },
+    ]
+  },
+  {
+    path: 'subjects',
+    children: [
+      { path: '', component: SubjectsListComponent },
+      { path: ':id/edit', component: SubjectFormComponent },
+      { path: 'create', component: SubjectFormComponent },
+    ]
+  },
+  {
+    path: 'tests',
+    children: [
+      { path: '', component: TestsListComponent },
+      { path: ':id/edit', component: TestFormComponent },
+      { path: 'create', component: TestFormComponent },
+    ]
+  },
   { path: '**', component: PageNotFoundComponent }
 ];
