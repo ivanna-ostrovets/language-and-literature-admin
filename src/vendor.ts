@@ -13,8 +13,6 @@ import '@angular/flex-layout';
 
 import 'rxjs';
 
-import 'lodash.range';
-import 'lodash.clonedeep';
-import 'lodash.sortby';
+import 'lodash';
 
 import 'pouchdb';

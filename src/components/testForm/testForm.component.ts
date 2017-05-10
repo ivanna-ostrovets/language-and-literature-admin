@@ -13,7 +13,7 @@ import { SubjectService } from '../../services/subject.service';
 import { CategoryService } from '../../services/category.service';
 import { TestService } from '../../services/test.service';
 
-const cloneDeep = require('lodash.clonedeep'); // TODO: Use full lodash
+import * as _ from 'lodash';
 
 @Component({
   templateUrl: './testForm.component.html',
@@ -132,7 +132,7 @@ export class TestFormComponent implements OnInit {
   }
 
   copyOriginalTest() {
-    this.test = cloneDeep(this.originalTest);
+    this.test = _.cloneDeep(this.originalTest);
   }
 
   private resizeArray(array: any[], index: number, element: any) {

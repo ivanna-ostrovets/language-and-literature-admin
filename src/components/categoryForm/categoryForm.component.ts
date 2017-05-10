@@ -10,8 +10,6 @@ import { SubjectService } from '../../services/subject.service';
 
 import { MdSnackBar } from '@angular/material';
 
-const sortBy = require('lodash.sortby');
-
 @Component({
   templateUrl: './categoryForm.component.html',
   styleUrls: ['./categoryForm.component.scss'],
@@ -35,7 +33,7 @@ export class CategoryFormComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subjectService.getAll().then(subjects => {
-      this.subjects = sortBy(subjects, ['name']);
+      this.subjects = subjects;
     });
 
     this.sub = this.route.params.subscribe(params => {

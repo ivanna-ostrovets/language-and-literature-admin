@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from '../models/subject';
 import { Resource } from './abstract/resource.abstract';
 
-const sortBy = require('lodash.sortby');
+import * as _ from 'lodash';
 
 @Injectable()
 export class SubjectService extends Resource<Subject> {
@@ -16,6 +16,6 @@ export class SubjectService extends Resource<Subject> {
 
   getAll() {
     return super.getAll()
-      .then(subjects => sortBy(subjects, ['name']));
+      .then(subjects => _.sortBy(subjects, ['name']));
   }
 }

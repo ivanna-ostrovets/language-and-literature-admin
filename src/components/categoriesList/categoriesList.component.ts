@@ -9,8 +9,7 @@ import { DialogService } from '../../services/dialog.service';
 
 import { MdSnackBar } from '@angular/material';
 
-const range = require('lodash.range');
-const sortBy = require('lodash.sortby');
+import * as _ from 'lodash';
 
 @Component({
   templateUrl: './categoriesList.component.html',
@@ -20,7 +19,6 @@ export class CategoriesListComponent implements OnInit {
   categories: Category[] = [];
   subjects: Subject[] = [];
   subject: string;
-  private _allCategories: Category[];
 
   constructor(
     private categoryService: CategoryService,
@@ -33,21 +31,19 @@ export class CategoriesListComponent implements OnInit {
   ngOnInit() {
     this.subjectService.getAll()
       .then(subjects => {
-      this.subjects = sortBy(subjects, ['name']);
+      this.subjects = subjects;
     });
-
-    this.categoryService.getAll()
-      .then(categories => {
-        this._allCategories = categories;
-      });
   }
 
   getPagingRange(num: number): number[] {
-    return range(0, Math.ceil(num / 7));
+    return _.range(0, Math.ceil(num / 7));
   }
 
   onSubjectChange(subjectId: string) {
-    this.categories = sortBy(this._allCategories.filter(category => category.subject === subjectId), ['name']);
+    this.categoryService.getAll(subjectId)
+      .then(categories => {
+        this.categories = categories;
+      });
   }
 
   confirmDelete(subjectId: string) {

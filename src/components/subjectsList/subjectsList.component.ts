@@ -7,8 +7,7 @@ import { DialogService } from '../../services/dialog.service';
 
 import { MdSnackBar } from '@angular/material';
 
-const range = require('lodash.range');
-const sortBy = require('lodash.sortby');
+import * as _ from 'lodash';
 
 @Component({
   templateUrl: './subjectsList.component.html',
@@ -26,12 +25,12 @@ export class SubjectsListComponent implements OnInit {
 
   ngOnInit() {
     this.subjectService.getAll().then(subjects => {
-      this.subjects = sortBy(subjects, ['name']);
+      this.subjects = subjects;
     });
   }
 
   getPagingRange(num: number): number[] {
-    return range(0, Math.ceil(num / 7));
+    return _.range(0, Math.ceil(num / 7));
   }
 
   confirmDelete(subjectId: string) {

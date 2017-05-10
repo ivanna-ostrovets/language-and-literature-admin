@@ -11,8 +11,7 @@ import { DialogService } from '../../services/dialog.service';
 
 import { MdSnackBar } from '@angular/material';
 
-const range = require('lodash.range');
-const sortBy = require('lodash.sortby');
+import * as _ from 'lodash';
 
 @Component({
   templateUrl: './testsList.component.html',
@@ -24,8 +23,6 @@ export class TestsListComponent implements OnInit {
   subjects: Subject[] = [];
   subject: string;
   category: string;
-  private _allCategories: Category[];
-  private _allTests: Test[];
 
   constructor(
     private categoryService: CategoryService,
@@ -37,32 +34,28 @@ export class TestsListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.testService.getAll()
-      .then(tests => {
-        this._allTests = tests;
-      });
-
     this.subjectService.getAll()
       .then(subjects => {
-        this.subjects = sortBy(subjects, ['name']);
-      });
-
-    this.categoryService.getAll()
-      .then(categories => {
-        this._allCategories = categories;
+        this.subjects = subjects;
       });
   }
 
   getPagingRange(num: number): number[] {
-    return range(0, Math.ceil(num / 7));
+    return _.range(0, Math.ceil(num / 7));
   }
 
   onSubjectChange(subjectId: string) {
-    this.categories = sortBy(this._allCategories.filter(category => category.subject === subjectId), ['name']);
+    this.categoryService.getAll(subjectId)
+      .then(categories => {
+        this.categories = categories;
+      });
   }
 
   onCategoryChange(categoryId: string) {
-    this.tests = this._allTests.filter(test => test.category === categoryId);
+    this.testService.getAll(categoryId)
+      .then(tests => {
+        this.tests = tests;
+      });
   }
 
   confirmDelete(testId: string) {

@@ -11,4 +11,16 @@ export class TestService extends Resource<Test> {
     super();
     this.init();
   }
+
+  getAll(categoryId?: string) {
+    return super.getAll()
+      .then(tests => {
+        if (categoryId) {
+          return tests
+            .filter(test => test.category === categoryId);
+        }
+
+        return tests;
+      });
+  }
 }
