@@ -1,0 +1,18 @@
+﻿<h1>Додати категорію</h1>
+
+<llta-category-form [category]="category" (formEmitter)="categoryForm = $event">
+</llta-category-form>
+
+<div class="block center-align">
+  <button md-raised-button
+          type="button"
+          (click)="categoryForm.reset()">
+    Очистити форму
+  </button>
+
+  <button md-raised-button
+          [disabled]="!categoryForm.form.valid"
+          (click)="submit()">
+    Додати
+  </button>
+</div>

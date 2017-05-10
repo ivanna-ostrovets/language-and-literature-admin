@@ -1,11 +1,14 @@
 import { CategoriesListComponent } from '../components/categoriesList/categoriesList.component';
-import { CategoryFormComponent } from '../components/categoryForm/categoryForm.component';
 import { PageNotFoundComponent } from '../components/pageNotFound/pageNotFound.component';
 import { SubjectFormComponent } from '../components/subjectForm/subjectForm.component';
 import { SubjectsListComponent } from '../components/subjectsList/subjectsList.component';
 import { TestFormComponent } from '../components/testForm/testForm.component';
 import { TestsListComponent } from '../components/testsList/testsList.component';
 import { WelcomePageComponent } from '../components/welcomePage/welcomePage.component';
+import { CreateCategoryComponent } from '../components/createCategory/createCategory.component';
+import { EditCategoryComponent } from '../components/editCategory/editCategory.component';
+
+import { CategoryResolver } from '../services/resolvers/categoryResolver.service';
 
 export const appRoutes =  [
   { path: '', component: WelcomePageComponent },
@@ -13,8 +16,14 @@ export const appRoutes =  [
     path: 'categories',
     children: [
       { path: '', component: CategoriesListComponent },
-      { path: ':id/edit', component: CategoryFormComponent },
-      { path: 'create', component: CategoryFormComponent },
+      {
+        path: ':id/edit',
+        component: EditCategoryComponent,
+        resolve: {
+          category: CategoryResolver
+        }
+      },
+      { path: 'create', component: CreateCategoryComponent },
     ]
   },
   {

@@ -23,11 +23,14 @@ import { WelcomePageComponent } from '../components/welcomePage/welcomePage.comp
 import { ConfirmDialogComponent } from '../services/dialog.service';
 import { SimpleQuestionComponent } from '../components/testForm/simpleQuestion/simpleQuestion.component';
 import { MatchingQuestionComponent } from '../components/testForm/matchingQuestion/matchingQuestion.component';
+import { CreateCategoryComponent } from '../components/createCategory/createCategory.component';
+import { EditCategoryComponent } from '../components/editCategory/editCategory.component';
 
 import { CategoryService } from '../services/category.service';
 import { SubjectService } from '../services/subject.service';
 import { TestService } from '../services/test.service';
 import { DialogService } from '../services/dialog.service';
+import { CategoryResolver } from '../services/resolvers/categoryResolver.service';
 
 import { appRoutes } from './app.routes';
 
@@ -55,7 +58,9 @@ import { appRoutes } from './app.routes';
     WelcomePageComponent,
     ConfirmDialogComponent,
     SimpleQuestionComponent,
-    MatchingQuestionComponent
+    MatchingQuestionComponent,
+    CreateCategoryComponent,
+    EditCategoryComponent
   ],
   entryComponents: [
     ConfirmDialogComponent
@@ -64,7 +69,8 @@ import { appRoutes } from './app.routes';
     CategoryService,
     SubjectService,
     TestService,
-    DialogService
+    DialogService,
+    CategoryResolver
   ],
   bootstrap: [
     AppComponent,
