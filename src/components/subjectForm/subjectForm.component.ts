@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 
@@ -9,9 +9,7 @@ import { SubjectService } from '../../services/subject.service';
 import { MdSnackBar } from '@angular/material';
 
 @Component({
-  templateUrl: './subjectForm.component.html',
-  styleUrls: ['./subjectForm.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  templateUrl: './subjectForm.component.html'
 })
 export class SubjectFormComponent implements OnInit, OnDestroy {
   id: string;

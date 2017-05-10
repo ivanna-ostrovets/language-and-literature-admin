@@ -10,8 +10,7 @@ import { MdSnackBar } from '@angular/material';
 import * as _ from 'lodash';
 
 @Component({
-  templateUrl: './subjectsList.component.html',
-  styleUrls: ['./subjectsList.component.scss']
+  templateUrl: './subjectsList.component.html'
 })
 export class SubjectsListComponent implements OnInit {
   subjects: Subject[] = [];

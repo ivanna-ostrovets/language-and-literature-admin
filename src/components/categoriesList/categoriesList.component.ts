@@ -12,8 +12,7 @@ import { MdSnackBar } from '@angular/material';
 import * as _ from 'lodash';
 
 @Component({
-  templateUrl: './categoriesList.component.html',
-  styleUrls: ['./categoriesList.component.scss']
+  templateUrl: './categoriesList.component.html'
 })
 export class CategoriesListComponent implements OnInit {
   categories: Category[] = [];

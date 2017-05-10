@@ -14,8 +14,7 @@ import { MdSnackBar } from '@angular/material';
 import * as _ from 'lodash';
 
 @Component({
-  templateUrl: './testsList.component.html',
-  styleUrls: ['./testsList.component.scss']
+  templateUrl: './testsList.component.html'
 })
 export class TestsListComponent implements OnInit {
   tests: Test[] = [];
