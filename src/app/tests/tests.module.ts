@@ -8,11 +8,17 @@ import { SimpleQuestionComponent } from './testForm/simpleQuestion/simpleQuestio
 import { TestFormComponent } from './testForm/testForm.component';
 import { TestsListComponent } from './testsList/testsList.component';
 
+import { SubjectsResolver } from '../../common/services/resolvers/subjectsResolver.service';
+
 const testsRoutes: Routes =  [
   {
     path: 'tests',
     children: [
-      { path: '', component: TestsListComponent },
+      {
+        path: '',
+        component: TestsListComponent,
+        resolve: { subjects: SubjectsResolver }
+      },
       { path: ':id/edit', component: TestFormComponent },
       { path: 'create', component: TestFormComponent },
     ]
