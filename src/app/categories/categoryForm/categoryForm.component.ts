@@ -1,10 +1,9 @@
 import { Component, OnInit, Input, Output, ViewChild, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 import { Category } from '../../../common/models/category';
 import { Subject } from '../../../common/models/subject';
-
-import { SubjectService } from '../../../common/services/subject.service';
 
 @Component({
   selector: 'llta-category-form',
@@ -17,14 +16,17 @@ export class CategoryFormComponent implements OnInit {
 
   subjects: Subject[] = [];
 
-  constructor(private subjectService: SubjectService) {
+  constructor(
+    private route: ActivatedRoute
+  ) {
   }
 
   ngOnInit() {
     this.formEmitter.emit(this.categoryForm);
 
-    this.subjectService.getAll().then(subjects => {
-      this.subjects = subjects;
-    });
+    this.route.data
+      .subscribe((data: { subjects: Subject[] }) => {
+        this.subjects = data.subjects;
+      });
   }
 }
