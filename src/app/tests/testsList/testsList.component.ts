@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { Category } from '../../../common/models/category';
 import { Subject } from '../../../common/models/subject';
 import { Test } from '../../../common/models/test';
 
 import { CategoryService } from '../../../common/services/category.service';
-import { SubjectService } from '../../../common/services/subject.service';
 import { TestService } from '../../../common/services/test.service';
 import { DialogService } from '../../../common/services/dialog.service';
 
 import { MdSnackBar } from '@angular/material';
 
-import * as _ from 'lodash';
+import { range } from 'lodash';
 
 @Component({
   templateUrl: './testsList.component.html'
@@ -25,22 +25,22 @@ export class TestsListComponent implements OnInit {
 
   constructor(
     private categoryService: CategoryService,
-    private subjectService: SubjectService,
-    private testService: TestService,
     private dialogService: DialogService,
+    private route: ActivatedRoute,
+    private testService: TestService,
     public snackBar: MdSnackBar
   ) {
   }
 
   ngOnInit() {
-    this.subjectService.getAll()
-      .then(subjects => {
-        this.subjects = subjects;
+    this.route.data
+      .subscribe((data: { subjects: Subject[] }) => {
+        this.subjects = data.subjects;
       });
   }
 
   getPagingRange(num: number): number[] {
-    return _.range(0, Math.ceil(num / 7));
+    return range(0, Math.ceil(num / 7));
   }
 
   onSubjectChange(subjectId: string) {

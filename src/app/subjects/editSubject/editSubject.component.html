@@ -1,0 +1,20 @@
+<llta-back-button></llta-back-button>
+
+<h1>Редагувати предмет</h1>
+
+<llta-subject-form [subject]="subject" (formEmitter)="subjectForm = $event">
+</llta-subject-form>
+
+<div class="block center-align">
+  <button md-raised-button
+          type="button"
+          (click)="copyOriginalSubject()">
+    Відмінити зміни
+  </button>
+
+  <button md-raised-button
+          [disabled]="!subjectForm.form.valid"
+          (click)="submit()">
+    Оновити
+  </button>
+</div>

@@ -12,6 +12,7 @@ import { CategoryResolver } from './services/resolvers/categoryResolver.service'
 import { CategoryService } from './services/category.service';
 import { DialogService } from './services/dialog.service';
 import { SubjectService } from './services/subject.service';
+import { SubjectResolver } from './services/resolvers/subjectResolver.service';
 import { SubjectsResolver } from './services/resolvers/subjectsResolver.service';
 import { TestService } from './services/test.service';
 
@@ -61,6 +62,7 @@ import { WelcomePageComponent } from './components/welcomePage/welcomePage.compo
     CategoryService,
     DialogService,
     SubjectService,
+    SubjectResolver,
     SubjectsResolver,
     TestService
   ]
