@@ -7,11 +7,10 @@ import { Category } from '../../models/category';
 import { Subject } from '../../models/subject';
 
 import { CategoryService } from '../../services/category.service';
-import { SubjectService } from '../../services/subject.service';
 
 import { MdSnackBar } from '@angular/material';
 
-import * as _ from 'lodash';
+import { cloneDeep } from 'lodash';
 
 @Component({
   templateUrl: './editCategory.component.html'
@@ -25,7 +24,6 @@ export class EditCategoryComponent implements OnInit {
 
   constructor(
     private categoryService: CategoryService,
-    private subjectService: SubjectService,
     private route: ActivatedRoute,
     private location: Location,
     public snackBar: MdSnackBar
@@ -34,13 +32,17 @@ export class EditCategoryComponent implements OnInit {
 
   ngOnInit() {
     this.route.data
-      .subscribe((data: { category: Category }) => {
+      .subscribe((data: {
+        category: Category,
+        subjects: Subject[]
+      }) => {
         this.originalCategory = data.category;
         this.copyOriginalCategory();
+        this.subjects = data.subjects;
       });
 
-    this.subjectService.getAll().then(subjects => {
-      this.subjects = subjects;
+    this.route.params.subscribe(params => {
+      this.id = params['id'];
     });
   }
 
@@ -60,6 +62,6 @@ export class EditCategoryComponent implements OnInit {
   }
 
   copyOriginalCategory() {
-    this.category = _.cloneDeep(this.originalCategory);
+    this.category = cloneDeep(this.originalCategory);
   }
 }

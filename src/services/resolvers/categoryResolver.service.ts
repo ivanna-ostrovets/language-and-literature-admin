@@ -8,7 +8,8 @@ import { CategoryService } from '../category.service';
 export class CategoryResolver implements Resolve<Category> {
   constructor(
     private categoryService: CategoryService
-  ) {}
+  ) {
+  }
 
   resolve(route: ActivatedRouteSnapshot): Promise<Category> {
     return this.categoryService.get(route.params.id);

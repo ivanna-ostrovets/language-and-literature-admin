@@ -31,6 +31,7 @@ import { SubjectService } from '../services/subject.service';
 import { TestService } from '../services/test.service';
 import { DialogService } from '../services/dialog.service';
 import { CategoryResolver } from '../services/resolvers/categoryResolver.service';
+import { SubjectsResolver } from '../services/resolvers/subjectsResolver.service';
 
 import { appRoutes } from './app.routes';
 
@@ -70,7 +71,8 @@ import { appRoutes } from './app.routes';
     SubjectService,
     TestService,
     DialogService,
-    CategoryResolver
+    CategoryResolver,
+    SubjectsResolver
   ],
   bootstrap: [
     AppComponent,

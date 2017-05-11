@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 import { Category } from '../../models/category';
 import { Subject } from '../../models/subject';
 
 import { CategoryService } from '../../services/category.service';
-import { SubjectService } from '../../services/subject.service';
 
 import { MdSnackBar } from '@angular/material';
 
@@ -19,15 +19,16 @@ export class CreateCategoryComponent implements OnInit {
 
   constructor(
     private categoryService: CategoryService,
-    private subjectService: SubjectService,
+    private route: ActivatedRoute,
     public snackBar: MdSnackBar
   ) {
   }
 
   ngOnInit() {
-    this.subjectService.getAll().then(subjects => {
-      this.subjects = subjects;
-    });
+    this.route.data
+      .subscribe((data: { subjects: Subject[] }) => {
+        this.subjects = data.subjects;
+      });
   }
 
   submit() {

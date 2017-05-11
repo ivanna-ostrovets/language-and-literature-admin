@@ -9,6 +9,7 @@ import { CreateCategoryComponent } from '../components/createCategory/createCate
 import { EditCategoryComponent } from '../components/editCategory/editCategory.component';
 
 import { CategoryResolver } from '../services/resolvers/categoryResolver.service';
+import { SubjectsResolver } from '../services/resolvers/subjectsResolver.service';
 
 export const appRoutes =  [
   { path: '', component: WelcomePageComponent },
@@ -20,10 +21,17 @@ export const appRoutes =  [
         path: ':id/edit',
         component: EditCategoryComponent,
         resolve: {
-          category: CategoryResolver
+          category: CategoryResolver,
+          subjects: SubjectsResolver
         }
       },
-      { path: 'create', component: CreateCategoryComponent },
+      {
+        path: 'create',
+        component: CreateCategoryComponent,
+        resolve: {
+          subjects: SubjectsResolver
+        }
+      },
     ]
   },
   {
