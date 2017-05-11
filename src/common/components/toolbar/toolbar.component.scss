@@ -1,0 +1,29 @@
+@import "../../../styles/variables";
+
+.llta-toolbar {
+  padding: 0 !important;
+}
+
+.toolbar-button {
+  font-size: 16px;
+}
+
+.toolbar-app-name {
+  font-size: 20px;
+}
+
+.mat-button {
+  line-height: 64px;
+
+  @media (max-width: 600px) and (orientation: portrait) {
+    line-height: 56px;
+  }
+
+  @media (max-width: 960px) and (orientation: landscape) {
+    line-height: 48px;
+  }
+}
+
+.active {
+  background-color: darken($primary, 11%);
+}
