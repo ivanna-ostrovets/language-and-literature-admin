@@ -17,8 +17,7 @@ const categoriesRoutes: Routes =  [
     children: [
       {
         path: '',
-        component: CategoriesListComponent,
-        resolve: { subjects: SubjectsResolver }
+        component: CategoriesListComponent
       },
       {
         path: ':id/edit',
