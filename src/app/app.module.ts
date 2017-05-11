@@ -25,6 +25,7 @@ import { SimpleQuestionComponent } from '../components/testForm/simpleQuestion/s
 import { MatchingQuestionComponent } from '../components/testForm/matchingQuestion/matchingQuestion.component';
 import { CreateCategoryComponent } from '../components/createCategory/createCategory.component';
 import { EditCategoryComponent } from '../components/editCategory/editCategory.component';
+import { BackButtonComponent } from '../components/backButton/backButton.component';
 
 import { CategoryService } from '../services/category.service';
 import { SubjectService } from '../services/subject.service';
@@ -61,7 +62,8 @@ import { appRoutes } from './app.routes';
     SimpleQuestionComponent,
     MatchingQuestionComponent,
     CreateCategoryComponent,
-    EditCategoryComponent
+    EditCategoryComponent,
+    BackButtonComponent
   ],
   entryComponents: [
     ConfirmDialogComponent
