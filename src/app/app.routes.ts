@@ -43,7 +43,13 @@ export const appRoutes =  [
   {
     path: 'subjects',
     children: [
-      { path: '', component: SubjectsListComponent },
+      {
+        path: '',
+        component: SubjectsListComponent,
+        resolve: {
+          subjects: SubjectsResolver
+        }
+      },
       { path: ':id/edit', component: SubjectFormComponent },
       { path: 'create', component: SubjectFormComponent },
     ]

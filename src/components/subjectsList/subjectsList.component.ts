@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { Subject } from '../../models/subject';
 
@@ -17,15 +18,17 @@ export class SubjectsListComponent implements OnInit {
 
   constructor(
     private subjectService: SubjectService,
+    private route: ActivatedRoute,
     private dialogService: DialogService,
     public snackBar: MdSnackBar
   ) {
   }
 
   ngOnInit() {
-    this.subjectService.getAll().then(subjects => {
-      this.subjects = subjects;
-    });
+    this.route.data
+      .subscribe((data: { subjects: Subject[] }) => {
+        this.subjects = data.subjects;
+      });
   }
 
   getPagingRange(num: number): number[] {
