@@ -16,7 +16,13 @@ export const appRoutes =  [
   {
     path: 'categories',
     children: [
-      { path: '', component: CategoriesListComponent },
+      {
+        path: '',
+        component: CategoriesListComponent,
+        resolve: {
+          subjects: SubjectsResolver
+        }
+      },
       {
         path: ':id/edit',
         component: EditCategoryComponent,
