@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
 import { Category } from '../../../common/models/category';
-import { Subject } from '../../../common/models/subject';
 
 import { CategoryService } from '../../../common/services/category.service';
 
@@ -20,7 +19,6 @@ export class EditCategoryComponent implements OnInit {
   categoryForm: NgForm;
   category: Category;
   originalCategory: Category;
-  subjects: Subject[] = [];
 
   constructor(
     private categoryService: CategoryService,
@@ -32,13 +30,9 @@ export class EditCategoryComponent implements OnInit {
 
   ngOnInit() {
     this.route.data
-      .subscribe((data: {
-        category: Category,
-        subjects: Subject[]
-      }) => {
+      .subscribe((data: { category: Category }) => {
         this.originalCategory = data.category;
         this.copyOriginalCategory();
-        this.subjects = data.subjects;
       });
 
     this.route.params.subscribe(params => {
