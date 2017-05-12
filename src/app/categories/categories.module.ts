@@ -23,9 +23,16 @@ const categoriesRoutes: Routes =  [
       {
         path: ':id/edit',
         component: EditCategoryComponent,
-        resolve: { category: CategoryResolver }
+        resolve: {
+          category: CategoryResolver,
+          subjects: SubjectsResolver
+        }
       },
-      { path: 'create', component: CreateCategoryComponent },
+      {
+        path: 'create',
+        component: CreateCategoryComponent,
+        resolve: { subjects: SubjectsResolver }
+      },
     ]
   }
 ];

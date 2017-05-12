@@ -14,7 +14,7 @@ export class CategoryFormComponent implements OnInit {
   @Input() category: Category;
   @Output() formEmitter: EventEmitter<NgForm> = new EventEmitter<NgForm>();
 
-  subjects: Subject[] = [];
+  subjects: Subject[];
 
   constructor(
     private route: ActivatedRoute
