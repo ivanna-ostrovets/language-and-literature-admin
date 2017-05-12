@@ -18,16 +18,12 @@ const subjectsRoutes: Routes =  [
       {
         path: '',
         component: SubjectsListComponent,
-        resolve: {
-          subjects: SubjectsResolver
-        }
+        resolve: { subjects: SubjectsResolver }
       },
       {
         path: ':id/edit',
         component: EditSubjectComponent,
-        resolve: {
-          subject: SubjectResolver
-        }
+        resolve: { subject: SubjectResolver }
       },
       { path: 'create', component: CreateSubjectComponent }
     ]
