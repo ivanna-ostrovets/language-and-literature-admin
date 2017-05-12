@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from './material.module';
@@ -31,7 +32,8 @@ import { WelcomePageComponent } from './components/welcomePage/welcomePage.compo
     FlexLayoutModule,
     FormsModule,
     HttpModule,
-    MaterialModule
+    MaterialModule,
+    RouterModule
   ],
   declarations: [
     BackButtonComponent,
