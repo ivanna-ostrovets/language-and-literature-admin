@@ -1,0 +1,20 @@
+﻿<h1>Додати тест</h1>
+
+<llta-test-form [test]="test"
+                [subjects]="subjects"
+                (formEmitter)="testForm = $event">
+</llta-test-form>
+
+<div class="block center-align">
+  <button md-raised-button
+          type="button"
+          (click)="testForm.reset()">
+    Очистити форму
+  </button>
+
+  <button md-raised-button
+          [disabled]="!testForm.form.valid"
+          (click)="submit()">
+    Додати
+  </button>
+</div>

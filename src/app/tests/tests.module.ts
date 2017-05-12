@@ -3,12 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppCommonModule } from '../../common/common.module';
 
+import { CreateTestComponent } from './createTest/createTest.component';
+import { EditTestComponent } from './editTest/editTest.component';
 import { MatchingQuestionComponent } from './testForm/matchingQuestion/matchingQuestion.component';
 import { SimpleQuestionComponent } from './testForm/simpleQuestion/simpleQuestion.component';
 import { TestFormComponent } from './testForm/testForm.component';
 import { TestsListComponent } from './testsList/testsList.component';
 
 import { SubjectsResolver } from '../../common/services/resolvers/subjectsResolver.service';
+import { TestResolver } from '../../common/services/resolvers/testResolver.service';
 
 const testsRoutes: Routes =  [
   {
@@ -19,8 +22,19 @@ const testsRoutes: Routes =  [
         component: TestsListComponent,
         resolve: { subjects: SubjectsResolver }
       },
-      { path: ':id/edit', component: TestFormComponent },
-      { path: 'create', component: TestFormComponent },
+      {
+        path: ':id/edit',
+        component: EditTestComponent,
+        resolve: {
+          subjects: SubjectsResolver,
+          test: TestResolver
+        }
+      },
+      {
+        path: 'create',
+        component: CreateTestComponent,
+        resolve: { subjects: SubjectsResolver }
+      },
     ]
   },
 ];
@@ -31,10 +45,12 @@ const testsRoutes: Routes =  [
     RouterModule.forChild(testsRoutes)
   ],
   declarations: [
+    CreateTestComponent,
+    EditTestComponent,
     MatchingQuestionComponent,
     SimpleQuestionComponent,
     TestFormComponent,
-    TestsListComponent
+    TestsListComponent,
   ]
 })
 export class TestsModule {

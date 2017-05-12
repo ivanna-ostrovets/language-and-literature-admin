@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, ViewChild, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 
 import { Subject } from '../../../common/models/subject';
 import { Category } from '../../../common/models/category';
@@ -17,24 +16,20 @@ import { CategoryService } from '../../../common/services/category.service';
 export class TestFormComponent implements OnInit {
   @ViewChild('testForm') testForm: NgForm;
   @Input() test: Test;
+  @Input() subjects: Subject[];
   @Output() formEmitter: EventEmitter<NgForm> = new EventEmitter<NgForm>();
 
   categories: Category[] = [];
-  subjects: Subject[] = [];
 
   constructor(
-    private categoryService: CategoryService,
-    private route: ActivatedRoute
+    private categoryService: CategoryService
   ) {
   }
 
   ngOnInit() {
+    console.log(this.test);
     this.formEmitter.emit(this.testForm);
-
-    this.route.data
-      .subscribe((data: { subjects: Subject[] }) => {
-        this.subjects = data.subjects;
-      });
+    this.onSubjectChange(this.test.subject);
   }
 
   onSubjectChange(subjectId: string) {
@@ -49,9 +44,9 @@ export class TestFormComponent implements OnInit {
   }
 
   onMatchingQuestionSelected(question: Question) {
-    question.numberedAnswersQuantity = null;
-    question.letteredAnswersQuantity = null;
-    question.answers = [];
+    // question.numberedAnswersQuantity = null;
+    // question.letteredAnswersQuantity = null;
+    // question.answers = [];
   }
 
   uploadImage(event: any, questionIndex: number): void {

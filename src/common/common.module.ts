@@ -9,13 +9,15 @@ import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from './material.module';
 
-import { CategoryResolver } from './services/resolvers/categoryResolver.service';
 import { CategoryService } from './services/category.service';
 import { DialogService } from './services/dialog.service';
 import { SubjectService } from './services/subject.service';
+import { TestService } from './services/test.service';
+
+import { CategoryResolver } from './services/resolvers/categoryResolver.service';
 import { SubjectResolver } from './services/resolvers/subjectResolver.service';
 import { SubjectsResolver } from './services/resolvers/subjectsResolver.service';
-import { TestService } from './services/test.service';
+import { TestResolver } from './services/resolvers/testResolver.service';
 
 import { BackButtonComponent } from './components/backButton/backButton.component';
 import { ConfirmDialogComponent } from './services/dialog.service';
@@ -60,13 +62,15 @@ import { WelcomePageComponent } from './components/welcomePage/welcomePage.compo
     WelcomePageComponent
   ],
   providers: [
-    CategoryResolver,
     CategoryService,
     DialogService,
     SubjectService,
+    TestService,
+
+    CategoryResolver,
     SubjectResolver,
     SubjectsResolver,
-    TestService
+    TestResolver
   ]
 })
 export class AppCommonModule {

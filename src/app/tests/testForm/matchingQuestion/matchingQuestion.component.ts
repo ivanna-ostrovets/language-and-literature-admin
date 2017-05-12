@@ -1,12 +1,11 @@
-import { Component, ViewEncapsulation, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { Question } from '../../../../common/models/question';
 
 @Component({
   selector: 'llta-matching-question',
   templateUrl: './matchingQuestion.component.html',
-  styleUrls: ['./matchingQuestion.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./matchingQuestion.component.scss']
 })
 export class MatchingQuestionComponent {
   @Input() question: Question;
