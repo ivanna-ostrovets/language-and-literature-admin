@@ -75,7 +75,7 @@
             Завдання на відповідність
             <md-slide-toggle [name]="'matching' + questionIndex"
                              [(ngModel)]="question.matchingQuestion"
-                             (ngModelChange)="onMatchingQuestionSelected(question)">
+                             (change)="onMatchingQuestionSelected(question)">
             </md-slide-toggle>
           </span>
         </md-nav-list>

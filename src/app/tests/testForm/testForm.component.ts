@@ -44,9 +44,9 @@ export class TestFormComponent implements OnInit {
   }
 
   onMatchingQuestionSelected(question: Question) {
-    // question.numberedAnswersQuantity = null;
-    // question.letteredAnswersQuantity = null;
-    // question.answers = [];
+    question.letteredAnswersQuantity = null;
+    question.numberedAnswersQuantity = null;
+    question.answers = [];
   }
 
   uploadImage(event: any, questionIndex: number): void {
