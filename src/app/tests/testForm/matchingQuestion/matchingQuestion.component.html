@@ -54,8 +54,8 @@
         <md-input-container class="block">
           <input mdInput
                  [name]="'answersNumbers' + j + '_' + questionIndex"
-                 [placeholder]="'Варіант ' + getPrefix(j, 0, false)"
-                 [disabled]="question.numberedAnswersQuantity < j + 1"
+                 [placeholder]="'Варіант ' + (j + 1)"
+                 [disabled]="question.numberedAnswersQuantity <= j"
                  [(ngModel)]="question.table[0][j]">
         </md-input-container>
       </td>
@@ -63,8 +63,8 @@
         <md-input-container class="block">
           <input mdInput
                  [name]="'answersLetters' + j + '_' + questionIndex"
-                 [placeholder]="'Варіант ' + getPrefix(j, 1, false)"
-                 [disabled]="question.letteredAnswersQuantity < j + 1"
+                 [placeholder]="'Варіант ' + getLetterLabel(j)"
+                 [disabled]="question.letteredAnswersQuantity <= j"
                  [(ngModel)]="question.table[1][j]">
         </md-input-container>
       </td>
@@ -75,36 +75,33 @@
 <div class="margin-bottom" *ngIf="question.answers.length > 0">
   <p>Правильні відповіді</p>
 
-  <table class="inputs-answers-table">
-    <thead>
-      <tr>
-        <th></th>
-        <th *ngFor="let _ of question.answers; let j=index"
-            [class.disabled]="question.letteredAnswersQuantity < j + 1">
-          {{ getPrefix(j, 1) }}
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <md-radio-group required
-                      *ngFor="let _ of question.answers; let j=index"
-                      [name]="j"
-                      [disabled]="question.numberedAnswersQuantity < j + 1"
-                      [(ngModel)]="question.answers[j]">
-        <tr>
-          <td class="number-label bold"
-              [class.disabled]="question.numberedAnswersQuantity < j + 1">
-            {{ j + 1 }}
-          </td>
+  <div fxLayout="column">
+    <div fxLayout="row">
+      <div class="cell"></div>
+      <div class="cell"
+           *ngFor="let _ of question.answers; let j=index"
+           [class.disabled]="question.letteredAnswersQuantity <= j">
+        <strong>{{ getLetterLabel(j) }}</strong>
+      </div>
+    </div>
 
-          <td *ngFor="let _ of question.answers; let k=index">
-            <md-radio-button [value]="k"
-                             [name]="j + '' + k"
-                             [disabled]="question.letteredAnswersQuantity < k + 1">
-            </md-radio-button>
-          </td>
-        </tr>
-      </md-radio-group>
-    </tbody>
-  </table>
+    <md-radio-group required
+                    *ngFor="let _ of question.answers; let j=index"
+                    [name]="j"
+                    fxLayout="row"
+                    [disabled]="question.numberedAnswersQuantity <= j"
+                    [(ngModel)]="question.answers[j]">
+      <div class="cell"
+           [class.disabled]="question.numberedAnswersQuantity <= j">
+        <strong>{{ j + 1 }}</strong>
+      </div>
+
+      <div class="cell" *ngFor="let _ of question.answers; let k=index">
+        <md-radio-button [value]="k"
+                         [name]="j.toString() + k.toString()"
+                         [disabled]="question.letteredAnswersQuantity <= k">
+        </md-radio-button>
+      </div>
+    </md-radio-group>
+  </div>
 </div>

@@ -87,6 +87,7 @@
                  [name]="'answersQuantity' + questionIndex"
                  placeholder="Кількість відповідей"
                  min="1"
+                 max="32"
                  [ngModel]="question.answers.length"
                  (ngModelChange)="onAnswersQuantityChange($event, question)">
         </md-input-container>

@@ -33,16 +33,7 @@ export class MatchingQuestionComponent {
     }
   }
 
-  getPrefix(parentIndex: number, index: number, withSuffix: boolean = true): string {
-    let suffix: string = '';
-
-    if (withSuffix) {
-      suffix = (index === 0 ? '.' : ')');
-    }
-
-    return index === 0
-      ? parentIndex + 1 + suffix
-      : 'АБВГДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ'[parentIndex] + suffix
-      ;
+  getLetterLabel(index: number): string {
+    return 'АБВГДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ'[index];
   }
 }

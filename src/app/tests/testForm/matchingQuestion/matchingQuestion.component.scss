@@ -14,28 +14,18 @@
   }
 }
 
-.inputs-answers-table,
-td,
-th {
+:host /deep/ .cell {
   border: 1px solid $table-border-color;
-}
+  width: 24px;
+  height: 24px;
+  padding: 8px;
+  text-align: center;
 
-.inputs-answers-table {
-  border-collapse: collapse;
-
-  td,
-  th {
-    padding: 5px;
+  .mat-radio-label {
+    padding-left: 2px;
   }
 
-  td:not(:first-of-type) {
-    padding-left: 13px;
-  }
-
-  min-width: 150px;
-  width: 150px;
-
-  .number-label {
-    padding: 0 13px;
+  strong {
+    vertical-align: sub;
   }
 }
