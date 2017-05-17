@@ -59,7 +59,7 @@ export class CategoriesListComponent implements OnInit {
   }
 
   delete(categoryId: string) {
-    return this.categoryService.remove(categoryId)
+    return this.categoryService.delete(categoryId)
       .then(() => {
         this.categories = this.categories.filter(category => category._id !== categoryId);
 

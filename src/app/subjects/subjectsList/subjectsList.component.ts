@@ -49,7 +49,7 @@ export class SubjectsListComponent implements OnInit {
   }
 
   delete(subjectId: string) {
-    return this.subjectService.remove(subjectId)
+    return this.subjectService.delete(subjectId)
       .then(() => {
         this.subjects = this.subjects.filter(subject => subject._id !== subjectId);
 
