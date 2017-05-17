@@ -96,12 +96,12 @@
         <strong>{{ j + 1 }}</strong>
       </div>
 
-      <div class="cell" *ngFor="let _ of question.answers; let k=index">
-        <md-radio-button [value]="k"
-                         [name]="j.toString() + k.toString()"
-                         [disabled]="question.letteredAnswersQuantity <= k">
-        </md-radio-button>
-      </div>
+      <md-radio-button class="cell"
+                       [value]="k"
+                       *ngFor="let _ of question.answers; let k=index"
+                       [name]="j.toString() + k.toString()"
+                       [disabled]="question.letteredAnswersQuantity <= k">
+      </md-radio-button>
     </md-radio-group>
   </div>
 </div>
