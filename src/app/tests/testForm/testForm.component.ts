@@ -27,7 +27,6 @@ export class TestFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.test);
     this.formEmitter.emit(this.testForm);
     this.onSubjectChange(this.test.subject);
   }
