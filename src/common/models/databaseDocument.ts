@@ -7,4 +7,5 @@ export class DatabaseDocument {
       data: string;
     }
   } = {};
+  deleted: boolean = false;
 }

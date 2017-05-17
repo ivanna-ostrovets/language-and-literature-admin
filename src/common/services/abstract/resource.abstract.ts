@@ -23,9 +23,11 @@ export abstract class Resource<T extends DatabaseDocument> {
   getAll(): Promise<T[]> {
     // TODO: https://pouchdb.com/guides/queries.html
 
-    return this.db.allDocs({include_docs: true, attachments: true}).
-      then(data => {
-        return data.rows.map(row => row.doc);
+    return this.db.allDocs({include_docs: true, attachments: true})
+      .then(data => {
+        return data.rows
+          .filter(row => !row.doc.deleted)
+          .map(row => row.doc);
     });
   }
 
@@ -45,16 +47,20 @@ export abstract class Resource<T extends DatabaseDocument> {
   }
 
   update(id: string, body: T): Promise<PouchResponse> {
-    return this.db.get(id).then(doc => {
-      body._rev = doc._rev;
+    return this.db.get(id)
+      .then(doc => {
+        body._rev = doc._rev;
 
-      return this.db.put(body);
+        return this.db.put(body);
     });
   }
 
   remove(id: string): Promise<PouchResponse> {
-    return this.db.get(id).then(doc => {
-      return this.db.remove(doc);
+    return this.db.get(id)
+      .then(doc => {
+        doc.deleted = true;
+
+        return this.db.put(doc);
     });
   }
 
