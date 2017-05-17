@@ -4,6 +4,12 @@
   margin-top: 30px;
 }
 
-.mat-slide-toggle {
-  margin-left: 12px;
+:host {
+  .mat-nav-list {
+    padding: 0;
+  }
+
+  .mat-slide-toggle {
+    margin-left: 12px;
+  }
 }

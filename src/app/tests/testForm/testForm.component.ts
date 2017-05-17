@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, ViewChild, EventEmitter } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { NgForm } from '@angular/forms';
 
 import { Subject } from '../../../common/models/subject';
@@ -20,9 +21,11 @@ export class TestFormComponent implements OnInit {
   @Output() formEmitter: EventEmitter<NgForm> = new EventEmitter<NgForm>();
 
   categories: Category[] = [];
+  imagesUrls: any[] = [''];
 
   constructor(
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private sanitizer: DomSanitizer
   ) {
   }
 
@@ -40,6 +43,7 @@ export class TestFormComponent implements OnInit {
 
   onQuestionsQuantityChange(quantity: number) {
     this.resizeArray(this.test.questions, quantity, new Question());
+    this.resizeArray(this.imagesUrls, quantity, '');
   }
 
   onMatchingQuestionSelected(question: Question) {
@@ -55,6 +59,7 @@ export class TestFormComponent implements OnInit {
     reader.addEventListener('load', () => {
       this.test.addAttachment(file.name, file.type, reader.result);
       this.test.questions[questionIndex].img = file.name;
+      this.imagesUrls[questionIndex] = this.sanitizer.bypassSecurityTrustStyle('url(' + reader.result + ')');
     });
 
     if (file) {

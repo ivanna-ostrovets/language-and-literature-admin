@@ -62,12 +62,14 @@
             Додати зображення
           </button>
 
-          <md-input-container class="margin-bottom"
-                              *ngIf="test.questions[questionIndex].img?.name">
-            <input mdInput
-                   disabled
-                   [value]="test.questions[questionIndex].img?.name">
-          </md-input-container>
+          <md-grid-list *ngIf="imagesUrls[questionIndex]" cols="1">
+            <md-grid-tile [style.background-image]="imagesUrls[questionIndex]">
+            </md-grid-tile>
+
+            <md-grid-tile-footer class="preview-footer">
+              <md-icon>delete_forever</md-icon>
+            </md-grid-tile-footer>
+          </md-grid-list>
         </div>
 
         <md-nav-list class="block slider-margin-bottom">
