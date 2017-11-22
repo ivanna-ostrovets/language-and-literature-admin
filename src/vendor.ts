@@ -16,3 +16,9 @@ import 'rxjs';
 import 'lodash';
 
 import 'pouchdb';
+
+import 'tinymce/tinymce.js';
+import 'tinymce/plugins/table/plugin.js';
+import 'tinymce/plugins/link/plugin.js';
+import 'tinymce/plugins/paste/plugin.js';
+import 'tinymce/themes/modern/theme.js';

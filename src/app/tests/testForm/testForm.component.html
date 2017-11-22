@@ -1,3 +1,7 @@
+<textarea [id]="'textarea' + 0"
+          required>
+</textarea>
+
 <form novalidate
       #testForm="ngForm"
       class="margin-top">
@@ -38,14 +42,19 @@
     <md-tab-group>
       <md-tab *ngFor="let question of test.questions; let questionIndex = index"
               [label]="questionIndex + 1">
-        <md-input-container class="block margin-bottom question-title">
-          <textarea mdInput
-                    required
-                    [name]="'task' + questionIndex"
-                    placeholder="Завдання"
-                    [(ngModel)]="question.question">
-          </textarea>
-        </md-input-container>
+        <!--<textarea [id]="'textarea' + questionIndex"-->
+                  <!--required>-->
+        <!--</textarea>-->
+
+        <!--<md-input-container class="block margin-bottom question-title">-->
+          <!--<textarea mdInput-->
+                    <!--id="textarea"-->
+                    <!--required-->
+                    <!--[name]="'task' + questionIndex"-->
+                    <!--placeholder="Завдання"-->
+                    <!--[(ngModel)]="question.question">-->
+          <!--</textarea>-->
+        <!--</md-input-container>-->
 
         <div>
           <input type="file"

@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const helpers = require('./helpers');
 
 module.exports = {
@@ -64,6 +65,15 @@ module.exports = {
 
     new HtmlWebpackPlugin({
       template: 'src/index.html'
-    })
+    }),
+
+    new CopyWebpackPlugin([
+      { from: 'src/assets/build', to: 'build' },
+      { from: 'src/assets/fonts', to: 'fonts' },
+      { from: 'src/assets/skins', to: 'skins' },
+      { from: 'src/assets/config.json', to: 'config.json' },
+      { from: 'src/assets/equation_editor.html', to: 'equation_editor.html' },
+      { from: 'src/assets/plugin.min.js', to: 'plugin.min.js' },
+    ])
   ]
 };
