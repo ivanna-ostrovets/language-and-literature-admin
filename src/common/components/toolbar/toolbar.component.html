@@ -1,52 +1,52 @@
-<md-toolbar color="primary" class="llta-toolbar mat-elevation-z3">
-  <a md-button
+<mat-toolbar color="primary" class="llta-toolbar mat-elevation-z3">
+  <a mat-button
      class="toolbar-app-name"
      routerLink="/">
-    <md-icon>check</md-icon>
+    <mat-icon>check</mat-icon>
     <span>М &amp; Л | admin</span>
   </a>
 
   <span class="toolbar-button" fxFlex></span>
 
-  <button md-button
+  <button mat-button
           class="toolbar-button"
-          [mdMenuTriggerFor]="add">
+          [matMenuTriggerFor]="add">
     Додати
-    <md-icon>arrow_drop_down</md-icon>
+    <mat-icon>arrow_drop_down</mat-icon>
   </button>
-  <md-menu #add="mdMenu">
-    <button md-menu-item
+  <mat-menu #add="matMenu">
+    <button mat-menu-item
             routerLink="/tests/create">
       Тест
     </button>
-    <button md-menu-item
+    <button mat-menu-item
             routerLink="/categories/create">
       Категорію
     </button>
-    <button md-menu-item
+    <button mat-menu-item
             routerLink="/subjects/create">
       Предмет
     </button>
-  </md-menu>
+  </mat-menu>
 
-  <button md-button
+  <button mat-button
           class="toolbar-button"
-          [mdMenuTriggerFor]="view">
+          [matMenuTriggerFor]="view">
     Переглянути
-    <md-icon>arrow_drop_down</md-icon>
+    <mat-icon>arrow_drop_down</mat-icon>
   </button>
-  <md-menu #view="mdMenu">
-    <button md-menu-item
+  <mat-menu #view="matMenu">
+    <button mat-menu-item
             routerLink="/tests">
       Cписок тестів
     </button>
-    <button md-menu-item
+    <button mat-menu-item
             routerLink="/categories">
       Cписок категорій
     </button>
-    <button md-menu-item
+    <button mat-menu-item
             routerLink="/subjects">
       Cписок предметів
     </button>
-  </md-menu>
-</md-toolbar>
+  </mat-menu>
+</mat-toolbar>

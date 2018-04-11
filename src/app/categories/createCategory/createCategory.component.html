@@ -6,13 +6,13 @@
 </llta-category-form>
 
 <div class="block center-align">
-  <button md-raised-button
+  <button mat-raised-button
           type="button"
           (click)="categoryForm.reset()">
     Очистити форму
   </button>
 
-  <button md-raised-button
+  <button mat-raised-button
           [disabled]="!categoryForm.form.valid"
           (click)="submit()">
     Додати

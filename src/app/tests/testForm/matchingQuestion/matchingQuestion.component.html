@@ -1,5 +1,5 @@
-<md-input-container class="block margin-bottom">
-  <input mdInput
+<mat-input-container class="block margin-bottom">
+  <input matInput
          required
          type="number"
          [name]="'numbersQuantity' + questionIndex"
@@ -8,10 +8,10 @@
          [max]="question.answers.length"
          [(ngModel)]="question.numberedAnswersQuantity"
          (ngModelChange)="onPartialQuantityChange()">
-</md-input-container>
+</mat-input-container>
 
-<md-input-container class="block margin-bottom">
-  <input mdInput
+<mat-input-container class="block margin-bottom">
+  <input matInput
          required
          type="number"
          [name]="'lettersQuantity' + questionIndex"
@@ -20,7 +20,7 @@
          [max]="question.answers.length"
          [(ngModel)]="question.letteredAnswersQuantity"
          (ngModelChange)="onPartialQuantityChange()">
-</md-input-container>
+</mat-input-container>
 
 
 <table class="answers-table margin-bottom"
@@ -28,22 +28,22 @@
   <thead>
     <tr>
       <th>
-        <md-input-container class="block">
-          <input mdInput
+        <mat-input-container class="block">
+          <input matInput
                  required
                  [name]="'answersTableTitle0_' + questionIndex"
                  placeholder="Заголовок"
                  [(ngModel)]="question.tableTitles.title1">
-        </md-input-container>
+        </mat-input-container>
       </th>
       <th>
-        <md-input-container class="block">
-          <input mdInput
+        <mat-input-container class="block">
+          <input matInput
                  required
                  [name]="'answersTableTitle1_' + questionIndex"
                  placeholder="Заголовок"
                  [(ngModel)]="question.tableTitles.title2">
-        </md-input-container>
+        </mat-input-container>
       </th>
     </tr>
   </thead>
@@ -51,22 +51,22 @@
   <tbody>
     <tr *ngFor="let _ of question.answers; let j=index">
       <td>
-        <md-input-container class="block">
-          <input mdInput
+        <mat-input-container class="block">
+          <input matInput
                  [name]="'answersNumbers' + j + '_' + questionIndex"
                  [placeholder]="'Варіант ' + (j + 1)"
                  [disabled]="question.numberedAnswersQuantity <= j"
                  [(ngModel)]="question.table[0][j]">
-        </md-input-container>
+        </mat-input-container>
       </td>
       <td>
-        <md-input-container class="block">
-          <input mdInput
+        <mat-input-container class="block">
+          <input matInput
                  [name]="'answersLetters' + j + '_' + questionIndex"
                  [placeholder]="'Варіант ' + getLetterLabel(j)"
                  [disabled]="question.letteredAnswersQuantity <= j"
                  [(ngModel)]="question.table[1][j]">
-        </md-input-container>
+        </mat-input-container>
       </td>
     </tr>
   </tbody>
@@ -85,7 +85,7 @@
       </div>
     </div>
 
-    <md-radio-group required
+    <mat-radio-group required
                     *ngFor="let _ of question.answers; let j=index"
                     [name]="j"
                     fxLayout="row"
@@ -96,12 +96,12 @@
         <strong>{{ j + 1 }}</strong>
       </div>
 
-      <md-radio-button class="cell"
+      <mat-radio-button class="cell"
                        [value]="k"
                        *ngFor="let _ of question.answers; let k=index"
                        [name]="j.toString() + k.toString()"
                        [disabled]="question.letteredAnswersQuantity <= k">
-      </md-radio-button>
-    </md-radio-group>
+      </mat-radio-button>
+    </mat-radio-group>
   </div>
 </div>

@@ -1,39 +1,39 @@
 <h1>Список категорій</h1>
 
-<md-select name="subject"
+<mat-select name="subject"
            required
            class="block margin-bottom margin-top"
            placeholder="Предмет"
            [(ngModel)]="subject"
            (ngModelChange)="onSubjectChange($event)">
 
-  <md-option *ngFor="let subject of subjects" [value]="subject._id">
+  <mat-option *ngFor="let subject of subjects" [value]="subject._id">
     {{ subject.name }}
-  </md-option>
+  </mat-option>
 
-</md-select>
+</mat-select>
 
-<md-tab-group *ngIf="subject && categories.length">
-  <md-tab *ngFor="let number of getPagingRange(categories.length)"
+<mat-tab-group *ngIf="subject && categories.length">
+  <mat-tab *ngFor="let number of getPagingRange(categories.length)"
           [label]="number + 1">
-    <md-list>
-      <md-list-item *ngFor="let category of categories | slice: number * 7: number * 7 + 7">
+    <mat-list>
+      <mat-list-item *ngFor="let category of categories | slice: number * 7: number * 7 + 7">
 
         <div fxFlex="30">{{ category.name }}</div>
 
-        <button md-button
+        <button mat-button
                 [routerLink]="category._id + '/edit'">
-          <md-icon class="gray-icon">mode_edit</md-icon>
+          <mat-icon class="gray-icon">mode_edit</mat-icon>
           <span>Редагувати</span>
         </button>
 
-        <button md-button
+        <button mat-button
                 (click)="confirmDelete(category._id)">
-          <md-icon class="gray-icon">delete_forever</md-icon>
+          <mat-icon class="gray-icon">delete_forever</mat-icon>
           <span>Видалити</span>
         </button>
 
-      </md-list-item>
-    </md-list>
-  </md-tab>
-</md-tab-group>
+      </mat-list-item>
+    </mat-list>
+  </mat-tab>
+</mat-tab-group>

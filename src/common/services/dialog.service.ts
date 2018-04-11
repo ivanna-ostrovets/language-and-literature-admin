@@ -18,27 +18,26 @@ export class DialogService {
   }
 }
 
-
 @Component({
   template: `
-    <h3 md-dialog-title>{{ data.title }}</h3>
+    <h3 mat-dialog-title>{{ data.title }}</h3>
 
-    <md-dialog-content>
+    <mat-dialog-content>
       <p>{{ data.message }}</p>
-    </md-dialog-content>
+    </mat-dialog-content>
 
-    <md-dialog-actions fxLayout="row" fxLayoutAlign="end">
-      <button md-button
+    <mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
+      <button mat-button
               (click)="dialogRef.close(false)"
               color="primary">
         {{ data.cancelLabel || 'Ні' }}
       </button>
-      <button md-button
+      <button mat-button
               (click)="dialogRef.close(true)"
               color="primary">
         {{ data.okLabel || 'Так' }}
       </button>
-    </md-dialog-actions>
+    </mat-dialog-actions>
   `
 })
 export class ConfirmDialogComponent {

@@ -6,13 +6,13 @@
 </llta-subject-form>
 
 <div class="block center-align">
-  <button md-raised-button
+  <button mat-raised-button
           type="button"
           (click)="copyOriginalSubject()">
     Відмінити зміни
   </button>
 
-  <button md-raised-button
+  <button mat-raised-button
           [disabled]="!subjectForm.form.valid"
           (click)="submit()">
     Оновити

@@ -6,17 +6,17 @@
      class="margin-bottom"
      fxLayout="row"
      fxLayoutAlign="space-between center">
-  <md-checkbox class="answer-checkbox"
+  <mat-checkbox class="answer-checkbox"
                [name]="'rightAnswer' + questionIndex + '_' + j"
                [(ngModel)]="answer.correct">
-  </md-checkbox>
+  </mat-checkbox>
 
-  <md-input-container fxFlex>
-    <textarea mdInput
+  <mat-input-container fxFlex>
+    <textarea matInput
               required
               [name]="'answer_' + j + '_' + questionIndex"
               [placeholder]="'Відповідь ' + (j + 1)"
               [(ngModel)]="answer.text">
     </textarea>
-  </md-input-container>
+  </mat-input-container>
 </div>

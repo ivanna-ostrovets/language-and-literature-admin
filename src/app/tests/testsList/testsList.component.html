@@ -1,19 +1,19 @@
 <h1>Список тестів</h1>
 
-<md-select name="subject"
+<mat-select name="subject"
            required
            class="block margin-bottom margin-top"
            placeholder="Предмет"
            [(ngModel)]="subject"
            (ngModelChange)="onSubjectChange($event)">
 
-  <md-option *ngFor="let subject of subjects" [value]="subject._id">
+  <mat-option *ngFor="let subject of subjects" [value]="subject._id">
     {{ subject.name }}
-  </md-option>
+  </mat-option>
 
-</md-select>
+</mat-select>
 
-<md-select *ngIf="subject"
+<mat-select *ngIf="subject"
            required
            name="category"
            class="block margin-bottom"
@@ -21,33 +21,33 @@
            [(ngModel)]="category"
            (ngModelChange)="onCategoryChange($event)">
 
-  <md-option *ngFor="let category of categories" [value]="category._id">
+  <mat-option *ngFor="let category of categories" [value]="category._id">
     {{ category.name }}
-  </md-option>
+  </mat-option>
 
-</md-select>
+</mat-select>
 
-<md-tab-group *ngIf="category && tests.length">
-  <md-tab *ngFor="let number of getPagingRange(tests.length)"
+<mat-tab-group *ngIf="category && tests.length">
+  <mat-tab *ngFor="let number of getPagingRange(tests.length)"
           [label]="number + 1">
-    <md-list>
-      <md-list-item *ngFor="let test of tests | slice: number * 7: number * 7 + 7; let i=index">
+    <mat-list>
+      <mat-list-item *ngFor="let test of tests | slice: number * 7: number * 7 + 7; let i=index">
 
         <div fxFlex="30">Тест {{ i + 1 }}</div>
 
-        <button md-button
+        <button mat-button
                 [routerLink]="test._id + '/edit'">
-          <md-icon class="gray-icon">mode_edit</md-icon>
+          <mat-icon class="gray-icon">mode_edit</mat-icon>
           <span>Редагувати</span>
         </button>
 
-        <button md-button
+        <button mat-button
                 (click)="confirmDelete(test._id)">
-          <md-icon class="gray-icon">delete_forever</md-icon>
+          <mat-icon class="gray-icon">delete_forever</mat-icon>
           <span>Видалити</span>
         </button>
 
-      </md-list-item>
-    </md-list>
-  </md-tab>
-</md-tab-group>
+      </mat-list-item>
+    </mat-list>
+  </mat-tab>
+</mat-tab-group>

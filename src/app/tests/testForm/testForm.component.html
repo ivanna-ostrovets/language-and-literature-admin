@@ -2,29 +2,29 @@
       #testForm="ngForm"
       class="margin-top">
 
-  <md-select required
+  <mat-select required
              name="subject"
              class="block margin-bottom"
              placeholder="Предмет"
              [(ngModel)]="test.subject"
              (ngModelChange)="onSubjectChange($event)">
-    <md-option *ngFor="let subject of subjects" [value]="subject._id">
+    <mat-option *ngFor="let subject of subjects" [value]="subject._id">
       {{ subject.name }}
-    </md-option>
-  </md-select>
+    </mat-option>
+  </mat-select>
 
-  <md-select required
+  <mat-select required
              name="category"
              class="block margin-bottom"
              placeholder="Категорія"
              [(ngModel)]="test.category">
-    <md-option *ngFor="let category of categories" [value]="category._id">
+    <mat-option *ngFor="let category of categories" [value]="category._id">
       {{ category.name }}
-    </md-option>
-  </md-select>
+    </mat-option>
+  </mat-select>
 
-  <md-input-container class="block margin-bottom">
-    <input mdInput
+  <mat-input-container class="block margin-bottom">
+    <input matInput
            required
            type="number"
            name="tasksQuantity"
@@ -32,20 +32,20 @@
            min="1"
            [ngModel]="test.questions.length"
            (ngModelChange)="onQuestionsQuantityChange($event)">
-  </md-input-container>
+  </mat-input-container>
 
   <div *ngIf="test.questions.length">
-    <md-tab-group>
-      <md-tab *ngFor="let question of test.questions; let questionIndex = index"
+    <mat-tab-group>
+      <mat-tab *ngFor="let question of test.questions; let questionIndex = index"
               [label]="questionIndex + 1">
-        <md-input-container class="block margin-bottom question-title">
-          <textarea mdInput
+        <mat-input-container class="block margin-bottom question-title">
+          <textarea matInput
                     required
                     [name]="'task' + questionIndex"
                     placeholder="Завдання"
                     [(ngModel)]="question.question">
           </textarea>
-        </md-input-container>
+        </mat-input-container>
 
         <div>
           <input type="file"
@@ -55,35 +55,35 @@
                  accept="image/*"
                  #fileInput>
 
-          <button md-raised-button
+          <button mat-raised-button
                   type="button"
                   class="margin-bottom"
                   (click)="fileInput.click()">
             Додати зображення
           </button>
 
-          <md-grid-list *ngIf="imagesUrls[questionIndex]" cols="1">
-            <md-grid-tile [style.background-image]="imagesUrls[questionIndex]">
-            </md-grid-tile>
+          <mat-grid-list *ngIf="imagesUrls[questionIndex]" cols="1">
+            <mat-grid-tile [style.background-image]="imagesUrls[questionIndex]">
+            </mat-grid-tile>
 
-            <md-grid-tile-footer class="preview-footer">
-              <md-icon>delete_forever</md-icon>
-            </md-grid-tile-footer>
-          </md-grid-list>
+            <mat-grid-tile-footer class="preview-footer">
+              <mat-icon>delete_forever</mat-icon>
+            </mat-grid-tile-footer>
+          </mat-grid-list>
         </div>
 
-        <md-nav-list class="block slider-margin-bottom">
+        <mat-nav-list class="block slider-margin-bottom">
           <span>
             Завдання на відповідність
-            <md-slide-toggle [name]="'matching' + questionIndex"
+            <mat-slide-toggle [name]="'matching' + questionIndex"
                              [(ngModel)]="question.matchingQuestion"
                              (change)="onMatchingQuestionSelected(question)">
-            </md-slide-toggle>
+            </mat-slide-toggle>
           </span>
-        </md-nav-list>
+        </mat-nav-list>
 
-        <md-input-container class="block margin-bottom">
-          <input mdInput
+        <mat-input-container class="block margin-bottom">
+          <input matInput
                  required
                  type="number"
                  [name]="'answersQuantity' + questionIndex"
@@ -92,7 +92,7 @@
                  max="32"
                  [ngModel]="question.answers.length"
                  (ngModelChange)="onAnswersQuantityChange($event, question)">
-        </md-input-container>
+        </mat-input-container>
 
         <llta-simple-question *ngIf="!question.matchingQuestion"
                               [question]="question"
@@ -104,7 +104,7 @@
                                 [question]="question"
                                 [questionIndex]="questionIndex">
         </llta-matching-question>
-      </md-tab>
-    </md-tab-group>
+      </mat-tab>
+    </mat-tab-group>
   </div>
 </form>
