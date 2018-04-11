@@ -8,7 +8,7 @@ import { Subject } from '../../../common/models/subject';
 
 import { CategoryService } from '../../../common/services/category.service';
 
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 
 import { cloneDeep } from 'lodash';
 
@@ -26,7 +26,7 @@ export class EditCategoryComponent implements OnInit {
     private categoryService: CategoryService,
     private location: Location,
     private route: ActivatedRoute,
-    public snackBar: MdSnackBar
+    public snackBar: MatSnackBar
   ) {
   }
 

@@ -1,5 +1,5 @@
 import { Component, Inject, Injectable } from '@angular/core';
-import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 interface DialogOptions {
   title?: string;
@@ -10,7 +10,7 @@ interface DialogOptions {
 
 @Injectable()
 export class DialogService {
-  constructor(private dialog: MdDialog) {
+  constructor(private dialog: MatDialog) {
   }
 
   confirm(options: DialogOptions) {
@@ -22,11 +22,11 @@ export class DialogService {
 @Component({
   template: `
     <h3 md-dialog-title>{{ data.title }}</h3>
-    
+
     <md-dialog-content>
       <p>{{ data.message }}</p>
     </md-dialog-content>
-    
+
     <md-dialog-actions fxLayout="row" fxLayoutAlign="end">
       <button md-button
               (click)="dialogRef.close(false)"
@@ -42,7 +42,7 @@ export class DialogService {
   `
 })
 export class ConfirmDialogComponent {
-  constructor(public dialogRef: MdDialogRef<ConfirmDialogComponent>,
-              @Inject(MD_DIALOG_DATA) public data: any) {
+  constructor(public dialogRef: MatDialogRef<ConfirmDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) {
   }
 }

@@ -1,52 +1,52 @@
 import { NgModule } from '@angular/core';
 
-import { MdButtonModule } from '@angular/material';
-import { MdCheckboxModule } from '@angular/material';
-import { MdDialogModule } from '@angular/material';
-import { MdGridListModule } from '@angular/material';
-import { MdIconModule } from '@angular/material';
-import { MdInputModule } from '@angular/material';
-import { MdListModule } from '@angular/material';
-import { MdMenuModule } from '@angular/material';
-import { MdRadioModule } from '@angular/material';
-import { MdSelectModule } from '@angular/material';
-import { MdSlideToggleModule } from '@angular/material';
-import { MdSnackBarModule } from '@angular/material';
-import { MdTabsModule } from '@angular/material';
-import { MdToolbarModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material';
+import { MatCheckboxModule } from '@angular/material';
+import { MatDialogModule } from '@angular/material';
+import { MatGridListModule } from '@angular/material';
+import { MatIconModule } from '@angular/material';
+import { MatInputModule } from '@angular/material';
+import { MatListModule } from '@angular/material';
+import { MatMenuModule } from '@angular/material';
+import { MatRadioModule } from '@angular/material';
+import { MatSelectModule } from '@angular/material';
+import { MatSlideToggleModule } from '@angular/material';
+import { MatSnackBarModule } from '@angular/material';
+import { MatTabsModule } from '@angular/material';
+import { MatToolbarModule } from '@angular/material';
 
 @NgModule({
   imports: [
-    MdButtonModule,
-    MdCheckboxModule,
-    MdDialogModule,
-    MdGridListModule,
-    MdIconModule,
-    MdInputModule,
-    MdListModule,
-    MdMenuModule,
-    MdRadioModule,
-    MdSelectModule,
-    MdSlideToggleModule,
-    MdSnackBarModule,
-    MdTabsModule,
-    MdToolbarModule
+    MatButtonModule,
+    MatCheckboxModule,
+    MatDialogModule,
+    MatGridListModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
+    MatTabsModule,
+    MatToolbarModule
   ],
   exports: [
-    MdButtonModule,
-    MdCheckboxModule,
-    MdDialogModule,
-    MdGridListModule,
-    MdIconModule,
-    MdInputModule,
-    MdListModule,
-    MdMenuModule,
-    MdRadioModule,
-    MdSelectModule,
-    MdSlideToggleModule,
-    MdSnackBarModule,
-    MdTabsModule,
-    MdToolbarModule
+    MatButtonModule,
+    MatCheckboxModule,
+    MatDialogModule,
+    MatGridListModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
+    MatTabsModule,
+    MatToolbarModule
   ],
 })
 export class MaterialModule {

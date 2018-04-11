@@ -6,7 +6,7 @@ import { Subject } from '../../../common/models/subject';
 import { SubjectService } from '../../../common/services/subject.service';
 import { DialogService } from '../../../common/services/dialog.service';
 
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 
 import * as _ from 'lodash';
 
@@ -20,7 +20,7 @@ export class SubjectsListComponent implements OnInit {
     private subjectService: SubjectService,
     private route: ActivatedRoute,
     private dialogService: DialogService,
-    public snackBar: MdSnackBar
+    public snackBar: MatSnackBar
   ) {
   }
 

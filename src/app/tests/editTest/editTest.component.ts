@@ -8,7 +8,7 @@ import { Subject } from '../../../common/models/subject';
 
 import { TestService } from '../../../common/services/test.service';
 
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 
 import { cloneDeep } from 'lodash';
 
@@ -26,7 +26,7 @@ export class EditTestComponent implements OnInit {
     private location: Location,
     private route: ActivatedRoute,
     private testService: TestService,
-    public snackBar: MdSnackBar
+    public snackBar: MatSnackBar
   ) {
   }
 

@@ -7,7 +7,7 @@ import { Subject } from '../../../common/models/subject';
 
 import { SubjectService } from '../../../common/services/subject.service';
 
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 
 import { cloneDeep } from 'lodash';
 
@@ -24,7 +24,7 @@ export class EditSubjectComponent implements OnInit {
     private subjectService: SubjectService,
     private route: ActivatedRoute,
     private location: Location,
-    public snackBar: MdSnackBar
+    public snackBar: MatSnackBar
   ) {
   }
 

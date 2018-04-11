@@ -7,7 +7,7 @@ import { Subject } from '../../../common/models/subject';
 import { CategoryService } from '../../../common/services/category.service';
 import { DialogService } from '../../../common/services/dialog.service';
 
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 
 import * as _ from 'lodash';
 
@@ -23,7 +23,7 @@ export class CategoriesListComponent implements OnInit {
     private categoryService: CategoryService,
     private route: ActivatedRoute,
     private dialogService: DialogService,
-    public snackBar: MdSnackBar
+    public snackBar: MatSnackBar
   ) {
   }
 

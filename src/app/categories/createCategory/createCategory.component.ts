@@ -7,7 +7,7 @@ import { Subject } from '../../../common/models/subject';
 
 import { CategoryService } from '../../../common/services/category.service';
 
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   templateUrl: './createCategory.component.html'
@@ -20,7 +20,7 @@ export class CreateCategoryComponent implements OnInit {
   constructor(
     private categoryService: CategoryService,
     private route: ActivatedRoute,
-    public snackBar: MdSnackBar
+    public snackBar: MatSnackBar
   ) {
   }
 

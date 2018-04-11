@@ -7,7 +7,7 @@ import { Subject } from '../../../common/models/subject';
 
 import { TestService } from '../../../common/services/test.service';
 
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   templateUrl: './createTest.component.html'
@@ -20,7 +20,7 @@ export class CreateTestComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private testService: TestService,
-    public snackBar: MdSnackBar
+    public snackBar: MatSnackBar
   ) {
   }
 

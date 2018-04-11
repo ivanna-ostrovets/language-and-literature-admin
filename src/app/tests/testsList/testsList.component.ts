@@ -9,7 +9,7 @@ import { CategoryService } from '../../../common/services/category.service';
 import { TestService } from '../../../common/services/test.service';
 import { DialogService } from '../../../common/services/dialog.service';
 
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 
 import { range } from 'lodash';
 
@@ -28,7 +28,7 @@ export class TestsListComponent implements OnInit {
     private dialogService: DialogService,
     private route: ActivatedRoute,
     private testService: TestService,
-    public snackBar: MdSnackBar
+    public snackBar: MatSnackBar
   ) {
   }
 

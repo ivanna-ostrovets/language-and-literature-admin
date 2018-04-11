@@ -5,7 +5,7 @@ import { Subject } from '../../../common/models/subject';
 
 import { SubjectService } from '../../../common/services/subject.service';
 
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   templateUrl: './createSubject.component.html'
@@ -16,7 +16,7 @@ export class CreateSubjectComponent {
 
   constructor(
     private subjectService: SubjectService,
-    public snackBar: MdSnackBar
+    public snackBar: MatSnackBar
   ) {
   }
 
