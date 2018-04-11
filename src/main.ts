@@ -1,18 +1,12 @@
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { enableProdMode } from '@angular/core';
-
-import * as PouchDB from 'pouchdb';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
+import { environment } from './environments/environment';
 
-import './styles/theme.scss';
-import './styles/main.scss';
-
-if (process.env.ENV === 'production') {
+if (environment.production) {
   enableProdMode();
-} else {
-  // PouchDB.debug.enable('*');
-  PouchDB.debug.disable();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule);
+platformBrowserDynamic().bootstrapModule(AppModule)
+  .catch(err => console.log(err));
