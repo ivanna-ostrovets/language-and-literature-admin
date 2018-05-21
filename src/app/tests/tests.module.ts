@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AppCommonModule } from '../../common/common.module';
+import { SharedModule } from '../../shared/shared.module';
 
 import { CreateTestComponent } from './createTest/createTest.component';
 import { EditTestComponent } from './editTest/editTest.component';
@@ -10,39 +10,39 @@ import { SimpleQuestionComponent } from './testForm/simpleQuestion/simpleQuestio
 import { TestFormComponent } from './testForm/testForm.component';
 import { TestsListComponent } from './testsList/testsList.component';
 
-import { SubjectsResolver } from '../../common/services/resolvers/subjectsResolver.service';
-import { TestResolver } from '../../common/services/resolvers/testResolver.service';
+import { SubjectsResolver } from '../../shared/resolvers/subjects.resolver';
+import { TestResolver } from '../../shared/resolvers/test.resolver';
 
-const testsRoutes: Routes =  [
+const testsRoutes: Routes = [
   {
     path: 'tests',
     children: [
       {
         path: '',
         component: TestsListComponent,
-        resolve: { subjects: SubjectsResolver }
+        resolve: { subjects: SubjectsResolver },
       },
       {
         path: ':id/edit',
         component: EditTestComponent,
         resolve: {
           subjects: SubjectsResolver,
-          test: TestResolver
-        }
+          test: TestResolver,
+        },
       },
       {
         path: 'create',
         component: CreateTestComponent,
-        resolve: { subjects: SubjectsResolver }
+        resolve: { subjects: SubjectsResolver },
       },
-    ]
+    ],
   },
 ];
 
 @NgModule({
   imports: [
-    AppCommonModule,
-    RouterModule.forChild(testsRoutes)
+    SharedModule,
+    RouterModule.forChild(testsRoutes),
   ],
   declarations: [
     CreateTestComponent,
@@ -51,7 +51,7 @@ const testsRoutes: Routes =  [
     SimpleQuestionComponent,
     TestFormComponent,
     TestsListComponent,
-  ]
+  ],
 })
 export class TestsModule {
 

@@ -16,7 +16,7 @@
   text-decoration: none;
 }
 
-.llta-button {
+.nt-button {
   width: 100%;
   height: 100%;
   vertical-align: middle;
@@ -43,8 +43,12 @@
   font-weight: bold;
 }
 
-.gray-icon {
+.grey {
   color: $text-color;
+}
+
+.light-grey {
+  color: rgba(0, 0, 0, 0.41);
 }
 
 .text-right {
@@ -57,4 +61,11 @@
 
 .back-button {
   font-size: 18px !important;
+}
+
+.form-label {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 16px;
+  margin-bottom: 15px;
+  color: rgba(0, 0, 0, 0.54);
 }

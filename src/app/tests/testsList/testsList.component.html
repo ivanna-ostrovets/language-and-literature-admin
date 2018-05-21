@@ -1,49 +1,47 @@
 <h1>Список тестів</h1>
 
-<mat-select name="subject"
-           required
-           class="block margin-bottom margin-top"
-           placeholder="Предмет"
-           [(ngModel)]="subject"
-           (ngModelChange)="onSubjectChange($event)">
+<mat-form-field class="block margin-bottom margin-top">
+  <mat-select name="subject"
+              required
+              placeholder="Предмет"
+              [(ngModel)]="subject"
+              (ngModelChange)="onSubjectChange($event)">
+    <mat-option *ngFor="let subject of subjects" [value]="subject._id">
+      {{subject.name}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
 
-  <mat-option *ngFor="let subject of subjects" [value]="subject._id">
-    {{ subject.name }}
-  </mat-option>
-
-</mat-select>
-
-<mat-select *ngIf="subject"
-           required
-           name="category"
-           class="block margin-bottom"
-           placeholder="Категорія"
-           [(ngModel)]="category"
-           (ngModelChange)="onCategoryChange($event)">
-
-  <mat-option *ngFor="let category of categories" [value]="category._id">
-    {{ category.name }}
-  </mat-option>
-
-</mat-select>
+<mat-form-field *ngIf="subject"
+                class="block margin-bottom">
+  <mat-select required
+              name="category"
+              placeholder="Тема"
+              [(ngModel)]="category"
+              (ngModelChange)="onCategoryChange($event)">
+    <mat-option *ngFor="let category of categories" [value]="category._id">
+      {{category.name}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
 
 <mat-tab-group *ngIf="category && tests.length">
   <mat-tab *ngFor="let number of getPagingRange(tests.length)"
-          [label]="number + 1">
+           [label]="number + 1">
     <mat-list>
-      <mat-list-item *ngFor="let test of tests | slice: number * 7: number * 7 + 7; let i=index">
+      <mat-list-item *ngFor="let test of tests | slice:(number * 7):(number * 7 + 7); let i=index">
 
-        <div fxFlex="30">Тест {{ i + 1 }}</div>
+        <div fxFlex="30">{{test.name}}</div>
 
         <button mat-button
                 [routerLink]="test._id + '/edit'">
-          <mat-icon class="gray-icon">mode_edit</mat-icon>
+          <mat-icon class="grey">mode_edit</mat-icon>
           <span>Редагувати</span>
         </button>
 
         <button mat-button
                 (click)="confirmDelete(test._id)">
-          <mat-icon class="gray-icon">delete_forever</mat-icon>
+          <mat-icon class="grey">delete_forever</mat-icon>
           <span>Видалити</span>
         </button>
 

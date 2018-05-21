@@ -1,23 +1,22 @@
 ﻿<form novalidate
       #categoryForm="ngForm"
       class="margin-top">
-  <mat-select name="subject"
-             required
-             class="block margin-bottom"
-             placeholder="Предмет"
-             [(ngModel)]="category.subject">
-
-    <mat-option *ngFor="let subject of subjects" [value]="subject._id">
-      {{ subject.name }}
-    </mat-option>
-
-  </mat-select>
+  <mat-form-field class="block margin-bottom">
+    <mat-select name="subject"
+                required
+                placeholder="Предмет"
+                [(ngModel)]="category.subject">
+      <mat-option *ngFor="let subject of subjects" [value]="subject._id">
+        {{subject.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
   <mat-input-container class="block margin-bottom">
     <input matInput
            required
            name="category"
-           placeholder="Назва категорії"
+           placeholder="Назва теми"
            min="1"
            [(ngModel)]="category.name">
   </mat-input-container>

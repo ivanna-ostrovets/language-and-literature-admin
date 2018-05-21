@@ -3,16 +3,15 @@ import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
-import { Subject } from '../../../common/models/subject';
-
-import { SubjectService } from '../../../common/services/subject.service';
-
 import { MatSnackBar } from '@angular/material';
 
-import { cloneDeep } from 'lodash';
+import cloneDeep from 'lodash-es/cloneDeep';
+
+import { SubjectsService } from '../../../shared/services/resources/subjects.service';
+import { Subject } from '../../../shared/models/subject.model';
 
 @Component({
-  templateUrl: './editSubject.component.html'
+  templateUrl: './editSubject.component.html',
 })
 export class EditSubjectComponent implements OnInit {
   id: string;
@@ -20,12 +19,10 @@ export class EditSubjectComponent implements OnInit {
   subject: Subject;
   originalSubject: Subject;
 
-  constructor(
-    private subjectService: SubjectService,
-    private route: ActivatedRoute,
-    private location: Location,
-    public snackBar: MatSnackBar
-  ) {
+  constructor(private subjectsService: SubjectsService,
+              private route: ActivatedRoute,
+              private location: Location,
+              public snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -41,8 +38,8 @@ export class EditSubjectComponent implements OnInit {
   }
 
   submit() {
-    return this.subjectService.update(this.id, this.subject)
-      .then(() => {
+    return this.subjectsService.update(this.id, this.subject)
+      .subscribe(() => {
         this.snackBar.open('Предмет оновлено!', 'OK', {
           duration: 3000,
         });

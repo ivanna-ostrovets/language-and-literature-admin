@@ -1,34 +1,34 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AppCommonModule } from '../common/common.module';
+import { SharedModule } from '../shared/shared.module';
 import { CategoriesModule } from './categories/categories.module';
 import { SubjectsModule } from './subjects/subjects.module';
 import { TestsModule } from './tests/tests.module';
 
 import { AppComponent } from './app.component';
-import { PageNotFoundComponent } from '../common/components/pageNotFound/pageNotFound.component';
-import { WelcomePageComponent } from '../common/components/welcomePage/welcomePage.component';
+import { PageNotFoundComponent } from '../shared/components/pageNotFound/pageNotFound.component';
+import { WelcomePageComponent } from '../shared/components/welcomePage/welcomePage.component';
 
-const appRoutes: Routes =  [
+const appRoutes: Routes = [
   { path: '', component: WelcomePageComponent },
-  { path: '**', component: PageNotFoundComponent }
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({
   imports: [
-    AppCommonModule,
+    SharedModule,
     CategoriesModule,
     SubjectsModule,
     TestsModule,
     RouterModule.forRoot(appRoutes),
   ],
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   bootstrap: [
-    AppComponent
-  ]
+    AppComponent,
+  ],
 })
 export class AppModule {
 

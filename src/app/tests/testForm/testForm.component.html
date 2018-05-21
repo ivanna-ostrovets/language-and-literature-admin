@@ -1,27 +1,45 @@
 <form novalidate
       #testForm="ngForm"
       class="margin-top">
+  <mat-form-field class="block margin-bottom">
+    <mat-select required
+                name="subject"
+                placeholder="Предмет"
+                [(ngModel)]="test.subject"
+                (ngModelChange)="onSubjectChange($event)">
+      <mat-option *ngFor="let subject of subjects" [value]="subject._id">
+        {{subject.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
-  <mat-select required
-             name="subject"
-             class="block margin-bottom"
-             placeholder="Предмет"
-             [(ngModel)]="test.subject"
-             (ngModelChange)="onSubjectChange($event)">
-    <mat-option *ngFor="let subject of subjects" [value]="subject._id">
-      {{ subject.name }}
-    </mat-option>
-  </mat-select>
+  <mat-form-field class="block margin-bottom">
+    <mat-select required
+                name="category"
+                placeholder="Тема"
+                [(ngModel)]="test.category">
+      <mat-option *ngFor="let category of categories" [value]="category._id">
+        {{category.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
-  <mat-select required
-             name="category"
-             class="block margin-bottom"
-             placeholder="Категорія"
-             [(ngModel)]="test.category">
-    <mat-option *ngFor="let category of categories" [value]="category._id">
-      {{ category.name }}
-    </mat-option>
-  </mat-select>
+  <mat-input-container class="block margin-bottom">
+    <input matInput
+           required
+           type="text"
+           name="testName"
+           placeholder="Назва тесту"
+           [(ngModel)]="test.name">
+  </mat-input-container>
+
+  <div class="block margin-bottom question-title">
+    <div class="form-label">Примітка</div>
+
+    <nt-text-editor elementId="comment"
+                    [(text)]="test.comment">
+    </nt-text-editor>
+  </div>
 
   <mat-input-container class="block margin-bottom">
     <input matInput
@@ -34,76 +52,40 @@
            (ngModelChange)="onQuestionsQuantityChange($event)">
   </mat-input-container>
 
-  <div *ngIf="test.questions.length">
-    <mat-tab-group>
+  <div *ngIf="test.questions.length > 0">
+    <mat-tab-group [(selectedIndex)]="selectedIndex">
       <mat-tab *ngFor="let question of test.questions; let questionIndex = index"
-              [label]="questionIndex + 1">
-        <mat-input-container class="block margin-bottom question-title">
-          <textarea matInput
-                    required
-                    [name]="'task' + questionIndex"
-                    placeholder="Завдання"
-                    [(ngModel)]="question.question">
-          </textarea>
-        </mat-input-container>
+               [label]="questionIndex + 1">
+        <div class="block margin-bottom question-title">
+          <div class="form-label">Завдання*</div>
 
-        <div>
-          <input type="file"
-                 hidden
-                 [id]="'image' + questionIndex"
-                 (change)="uploadImage($event, questionIndex)"
-                 accept="image/*"
-                 #fileInput>
-
-          <button mat-raised-button
-                  type="button"
-                  class="margin-bottom"
-                  (click)="fileInput.click()">
-            Додати зображення
-          </button>
-
-          <mat-grid-list *ngIf="imagesUrls[questionIndex]" cols="1">
-            <mat-grid-tile [style.background-image]="imagesUrls[questionIndex]">
-            </mat-grid-tile>
-
-            <mat-grid-tile-footer class="preview-footer">
-              <mat-icon>delete_forever</mat-icon>
-            </mat-grid-tile-footer>
-          </mat-grid-list>
+          <nt-text-editor *ngIf="questionIndex === selectedIndex"
+                          [elementId]="'question' + questionIndex"
+                          [(text)]="question.question">
+          </nt-text-editor>
         </div>
 
         <mat-nav-list class="block slider-margin-bottom">
           <span>
             Завдання на відповідність
             <mat-slide-toggle [name]="'matching' + questionIndex"
-                             [(ngModel)]="question.matchingQuestion"
-                             (change)="onMatchingQuestionSelected(question)">
+                              [(ngModel)]="question.matchingQuestion"
+                              (change)="onMatchingQuestionSelected(questionIndex)">
             </mat-slide-toggle>
           </span>
         </mat-nav-list>
 
-        <mat-input-container class="block margin-bottom">
-          <input matInput
-                 required
-                 type="number"
-                 [name]="'answersQuantity' + questionIndex"
-                 placeholder="Кількість відповідей"
-                 min="1"
-                 max="32"
-                 [ngModel]="question.answers.length"
-                 (ngModelChange)="onAnswersQuantityChange($event, question)">
-        </mat-input-container>
+        <nt-simple-question *ngIf="!question.matchingQuestion"
+                            [question]="question"
+                            [questionIndex]="questionIndex"
+                            [selectedIndex]="selectedIndex">
+        </nt-simple-question>
 
-        <llta-simple-question *ngIf="!question.matchingQuestion"
+        <nt-matching-question *ngIf="question.matchingQuestion"
                               [question]="question"
-                              [questionIndex]="questionIndex">
-
-        </llta-simple-question>
-
-        <llta-matching-question *ngIf="question.matchingQuestion"
-                                [question]="question"
-                                [questionIndex]="questionIndex">
-        </llta-matching-question>
+                              [questionIndex]="questionIndex"
+                              [selectedIndex]="selectedIndex">
+        </nt-matching-question>
       </mat-tab>
     </mat-tab-group>
   </div>

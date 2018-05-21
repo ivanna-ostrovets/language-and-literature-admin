@@ -3,11 +3,10 @@
          required
          type="number"
          [name]="'numbersQuantity' + questionIndex"
-         placeholder="Кількість відповідей (1 - x)"
+         placeholder="Кількість варіантів відповідей (1 - x)"
          min="1"
-         [max]="question.answers.length"
          [(ngModel)]="question.numberedAnswersQuantity"
-         (ngModelChange)="onPartialQuantityChange()">
+         (ngModelChange)="onNumberedAnswersQuantityChange()">
 </mat-input-container>
 
 <mat-input-container class="block margin-bottom">
@@ -15,92 +14,90 @@
          required
          type="number"
          [name]="'lettersQuantity' + questionIndex"
-         placeholder="Кількість відповідей (A - Я)"
+         placeholder="Кількість варіантів відповідей (A - Я)"
          min="1"
-         [max]="question.answers.length"
-         [(ngModel)]="question.letteredAnswersQuantity"
-         (ngModelChange)="onPartialQuantityChange()">
+         [(ngModel)]="question.letteredAnswersQuantity">
 </mat-input-container>
 
-
-<table class="answers-table margin-bottom"
-       *ngIf="question.answers.length">
+<table *ngIf="question.numberedAnswersQuantity > 0 && question.letteredAnswersQuantity > 0"
+       class="answers-table margin-bottom">
   <thead>
     <tr>
       <th>
-        <mat-input-container class="block">
-          <input matInput
-                 required
-                 [name]="'answersTableTitle0_' + questionIndex"
-                 placeholder="Заголовок"
-                 [(ngModel)]="question.tableTitles.title1">
-        </mat-input-container>
+        Заголовок*
+        <nt-text-editor *ngIf="questionIndex === selectedIndex"
+                        [elementId]="'answersTableTitle0_' + questionIndex"
+                        [(text)]="question.tableTitles.title1">
+        </nt-text-editor>
       </th>
+
       <th>
-        <mat-input-container class="block">
-          <input matInput
-                 required
-                 [name]="'answersTableTitle1_' + questionIndex"
-                 placeholder="Заголовок"
-                 [(ngModel)]="question.tableTitles.title2">
-        </mat-input-container>
+        Заголовок*
+        <nt-text-editor *ngIf="questionIndex === selectedIndex"
+                        [elementId]="'answersTableTitle1_' + questionIndex"
+                        [(text)]="question.tableTitles.title2">
+        </nt-text-editor>
       </th>
     </tr>
   </thead>
 
   <tbody>
-    <tr *ngFor="let _ of question.answers; let j=index">
+    <tr *ngFor="let _ of getAnswersRange(); let j=index">
       <td>
-        <mat-input-container class="block">
-          <input matInput
-                 [name]="'answersNumbers' + j + '_' + questionIndex"
-                 [placeholder]="'Варіант ' + (j + 1)"
-                 [disabled]="question.numberedAnswersQuantity <= j"
-                 [(ngModel)]="question.table[0][j]">
-        </mat-input-container>
+        <span [class.light-grey]="question.numberedAnswersQuantity <= j">
+         Варіант {{(j + 1)}}
+        </span>
+        <nt-text-editor *ngIf="questionIndex === selectedIndex"
+                        [elementId]="'answersNumbers' + j + '_' + questionIndex"
+                        [(text)]="question.table[0][j]"
+                        [readonly]="question.numberedAnswersQuantity <= j">
+        </nt-text-editor>
       </td>
       <td>
-        <mat-input-container class="block">
-          <input matInput
-                 [name]="'answersLetters' + j + '_' + questionIndex"
-                 [placeholder]="'Варіант ' + getLetterLabel(j)"
-                 [disabled]="question.letteredAnswersQuantity <= j"
-                 [(ngModel)]="question.table[1][j]">
-        </mat-input-container>
+        <span [class.light-grey]="question.numberedAnswersQuantity <= j">
+         Варіант {{getLetterLabel(j)}}
+        </span>
+        <nt-text-editor *ngIf="questionIndex === selectedIndex"
+                        [elementId]="'answersLetters' + j + '_' + questionIndex"
+                        [(text)]="question.table[1][j]"
+                        [readonly]="question.letteredAnswersQuantity <= j">
+        </nt-text-editor>
       </td>
     </tr>
   </tbody>
 </table>
 
-<div class="margin-bottom" *ngIf="question.answers.length > 0">
+<div *ngIf="question.numberedAnswersQuantity > 0 && question.letteredAnswersQuantity > 0"
+     class="margin-bottom">
   <p>Правильні відповіді</p>
 
   <div fxLayout="column">
     <div fxLayout="row">
       <div class="cell"></div>
-      <div class="cell"
-           *ngFor="let _ of question.answers; let j=index"
+      <div *ngFor="let _ of getLetteredAnswersRange(); let j=index"
+           class="cell"
            [class.disabled]="question.letteredAnswersQuantity <= j">
         <strong>{{ getLetterLabel(j) }}</strong>
       </div>
     </div>
 
-    <mat-radio-group required
-                    *ngFor="let _ of question.answers; let j=index"
-                    [name]="j"
-                    fxLayout="row"
-                    [disabled]="question.numberedAnswersQuantity <= j"
-                    [(ngModel)]="question.answers[j]">
+    <mat-radio-group *ngFor="let _ of question.answers; let j=index"
+                     required
+                     [name]="j"
+                     fxLayout="row"
+                     [disabled]="question.numberedAnswersQuantity <= j"
+                     [ngModel]="question.answers[j]"
+                     (ngModelChange)="onCorrectAnswerChange($event, j)">
       <div class="cell"
            [class.disabled]="question.numberedAnswersQuantity <= j">
         <strong>{{ j + 1 }}</strong>
       </div>
 
-      <mat-radio-button class="cell"
-                       [value]="k"
-                       *ngFor="let _ of question.answers; let k=index"
-                       [name]="j.toString() + k.toString()"
-                       [disabled]="question.letteredAnswersQuantity <= k">
+      <mat-radio-button *ngFor="let _ of getLetteredAnswersRange(); let k=index"
+                        class="cell"
+                        [value]="k"
+                        [name]="j.toString() + k.toString()"
+                        [disabled]="question.letteredAnswersQuantity <= k">
       </mat-radio-button>
     </mat-radio-group>
   </div>

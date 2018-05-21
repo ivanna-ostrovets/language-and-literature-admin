@@ -8,7 +8,37 @@
       "root": "src",
       "outDir": "dist",
       "assets": [
-        "assets"
+        "assets",
+        {
+          "glob": "**/*",
+          "input": "./formula-editor/build",
+          "output": "./build"
+        },
+        {
+          "glob": "**/*",
+          "input": "./formula-editor/fonts",
+          "output": "./fonts"
+        },
+        {
+          "glob": "**/*",
+          "input": "./formula-editor/skins",
+          "output": "./skins"
+        },
+        {
+          "glob": "config.json",
+          "input": "./formula-editor/",
+          "output": "./config.json"
+        },
+        {
+          "glob": "equation_editor.html",
+          "input": "./formula-editor/",
+          "output": "./equation_editor.html"
+        },
+        {
+          "glob": "plugin.min.js",
+          "input": "./formula-editor/",
+          "output": "./plugin.min.js"
+        }
       ],
       "index": "index.html",
       "main": "main.ts",
@@ -16,14 +46,22 @@
       "test": "test.ts",
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "tsconfig.spec.json",
-      "prefix": "llta",
+      "prefix": "nt",
       "styles": [
         "styles/theme.scss",
         "styles/main.scss",
         "../node_modules/material-design-icons/iconfont/material-icons.css"
       ],
       "scripts": [
-        "../node_modules/hammerjs/hammer.js"
+        "../node_modules/hammerjs/hammer.js",
+        "../node_modules/jquery/dist/jquery.js",
+        "../node_modules/tinymce/tinymce.js",
+        "../node_modules/tinymce/plugins/table/plugin.js",
+        "../node_modules/tinymce/plugins/link/plugin.js",
+        "../node_modules/tinymce/plugins/paste/plugin.js",
+        "../node_modules/tinymce/themes/modern/theme.js",
+        "./formula-editor/build/js/equation_editor.js",
+        "./formula-editor/build/js/mathquill.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

@@ -2,20 +2,20 @@
 
 <mat-tab-group class="margin-top" *ngIf="subjects.length">
   <mat-tab *ngFor="let number of getPagingRange(subjects.length)"
-          [label]="number + 1">
+           [label]="number + 1">
     <mat-list>
-      <mat-list-item *ngFor="let subject of subjects | slice: number * 7: number * 7 + 7">
-        <div fxFlex="30">{{ subject.name }}</div>
+      <mat-list-item *ngFor="let subject of subjects | slice:(number * 7):(number * 7 + 7)">
+        <div fxFlex="30">{{subject.name}}</div>
 
         <button mat-button
                 [routerLink]="subject._id + '/edit'">
-          <mat-icon class="gray-icon">mode_edit</mat-icon>
+          <mat-icon class="grey">mode_edit</mat-icon>
           <span>Редагувати</span>
         </button>
 
         <button mat-button
                 (click)="confirmDelete(subject._id)">
-          <mat-icon class="gray-icon">delete_forever</mat-icon>
+          <mat-icon class="grey">delete_forever</mat-icon>
           <span>Видалити</span>
         </button>
       </mat-list-item>

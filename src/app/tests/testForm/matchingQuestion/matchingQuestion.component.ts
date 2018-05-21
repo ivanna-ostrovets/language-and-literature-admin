@@ -1,36 +1,42 @@
 import { Component, Input } from '@angular/core';
 
-import { Question } from '../../../../common/models/question';
+import range from 'lodash-es/range';
+
+import { MatchingQuestion } from '../../../../shared/models/matchingQuestion.model';
+import resizeArray from '../../../../shared/utils/resizeArray';
 
 @Component({
-  selector: 'llta-matching-question',
+  selector: 'nt-matching-question',
   templateUrl: './matchingQuestion.component.html',
-  styleUrls: ['./matchingQuestion.component.scss']
+  styleUrls: ['./matchingQuestion.component.scss'],
 })
 export class MatchingQuestionComponent {
-  @Input() question: Question;
+  @Input() question: MatchingQuestion;
   @Input() questionIndex: number;
+  @Input() selectedIndex: number;
 
-
-  setArrayDimension(array: any[], index: number, element: any) {
-    while (array.length > index) {
-      array.pop();
-    }
-
-    while (array.length < index) {
-      array.push(element);
-    }
+  onNumberedAnswersQuantityChange() {
+    resizeArray(
+      this.question.answers,
+      this.question.numberedAnswersQuantity,
+      null,
+    );
   }
 
-  onPartialQuantityChange() {
-    if (this.question.answers.length > this.question.letteredAnswersQuantity
-      && this.question.answers.length > this.question.numberedAnswersQuantity ) {
-      this.setArrayDimension(
-        this.question.answers,
-        Math.max(this.question.letteredAnswersQuantity, this.question.numberedAnswersQuantity),
-        {}
-      );
-    }
+  onCorrectAnswerChange(event: any, index: number) {
+    this.question.answers[index] = event;
+  }
+
+  getAnswersRange() {
+    return range(Math.max(
+      this.question.numberedAnswersQuantity,
+      this.question.letteredAnswersQuantity,
+      ),
+    );
+  }
+
+  getLetteredAnswersRange() {
+    return range(Math.max(this.question.letteredAnswersQuantity));
   }
 
   getLetterLabel(index: number): string {

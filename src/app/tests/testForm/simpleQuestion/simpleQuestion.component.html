@@ -1,22 +1,31 @@
+<mat-input-container class="block margin-bottom">
+  <input matInput
+         required
+         type="number"
+         [name]="'answersQuantity' + questionIndex"
+         placeholder="Кількість варіантів відповідей"
+         min="1"
+         max="32"
+         [ngModel]="question.answers.length"
+         (ngModelChange)="onAnswersQuantityChange($event, question)">
+</mat-input-container>
+
 <div *ngIf="question.answers.length" class="hint">
-  <p>Для вибору правильної відповіді натисніть на прапорець зправа від поля введення.</p>
+  <p>Для вибору правильного варіанту відповіді натисніть на прапорець справа від поля введення.</p>
 </div>
 
-<div *ngFor="let answer of question.answers; let j=index;"
+<div *ngFor="let answer of question.answers; let answerIndex=index;"
      class="margin-bottom"
      fxLayout="row"
      fxLayoutAlign="space-between center">
   <mat-checkbox class="answer-checkbox"
-               [name]="'rightAnswer' + questionIndex + '_' + j"
-               [(ngModel)]="answer.correct">
+                [name]="'rightAnswer' + questionIndex + '_' + answerIndex"
+                [(ngModel)]="answer.correct">
   </mat-checkbox>
 
-  <mat-input-container fxFlex>
-    <textarea matInput
-              required
-              [name]="'answer_' + j + '_' + questionIndex"
-              [placeholder]="'Відповідь ' + (j + 1)"
-              [(ngModel)]="answer.text">
-    </textarea>
-  </mat-input-container>
+  <nt-text-editor *ngIf="questionIndex === selectedIndex"
+                  [elementId]="questionIndex + 'answer' + answerIndex"
+                  [(text)]="answer.text"
+                  fxFlex>
+  </nt-text-editor>
 </div>

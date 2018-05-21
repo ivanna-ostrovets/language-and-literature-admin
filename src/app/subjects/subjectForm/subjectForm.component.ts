@@ -1,11 +1,11 @@
 import { Component, OnInit, Input, Output, ViewChild, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { Subject } from '../../../common/models/subject';
+import { Subject } from '../../../shared/models/subject.model';
 
 @Component({
-  selector: 'llta-subject-form',
-  templateUrl: './subjectForm.component.html'
+  selector: 'nt-subject-form',
+  templateUrl: './subjectForm.component.html',
 })
 export class SubjectFormComponent implements OnInit {
   @ViewChild('subjectForm') subjectForm: NgForm;

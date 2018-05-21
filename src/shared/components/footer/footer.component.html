@@ -1,0 +1,16 @@
+<footer>
+  <mat-toolbar color="primary" class="page-footer">
+    <span>
+      Островець Іванна, Коженов Юрій &copy; {{creationYear}}
+      <span *ngIf="currentYear !== creationYear">- {{currentYear}}</span>
+    </span>
+
+    <span fxFlex></span>
+
+    <a class="right link"
+       href="https://github.com/ivanna-ostrovets/language-and-literature-admin/blob/master/LICENSE.mat"
+       target="_blank">
+      MIT License
+    </a>
+  </mat-toolbar>
+</footer>

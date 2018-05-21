@@ -1,30 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Category } from '../../../common/models/category';
-import { Subject } from '../../../common/models/subject';
-
-import { CategoryService } from '../../../common/services/category.service';
-import { DialogService } from '../../../common/services/dialog.service';
-
 import { MatSnackBar } from '@angular/material';
 
-import * as _ from 'lodash';
+import range from 'lodash-es/range';
+
+import { CategoriesService } from '../../../shared/services/resources/categories.service';
+import { DialogService } from '../../../shared/services/dialog.service';
+import { Category } from '../../../shared/models/category.model';
+import { Subject } from '../../../shared/models/subject.model';
 
 @Component({
-  templateUrl: './categoriesList.component.html'
+  templateUrl: './categoriesList.component.html',
 })
 export class CategoriesListComponent implements OnInit {
   categories: Category[] = [];
   subjects: Subject[] = [];
   subject: string;
 
-  constructor(
-    private categoryService: CategoryService,
-    private route: ActivatedRoute,
-    private dialogService: DialogService,
-    public snackBar: MatSnackBar
-  ) {
+  constructor(private categoriesService: CategoriesService,
+              private route: ActivatedRoute,
+              private dialogService: DialogService,
+              public snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -35,20 +32,22 @@ export class CategoriesListComponent implements OnInit {
   }
 
   getPagingRange(num: number): number[] {
-    return _.range(0, Math.ceil(num / 7));
+    const itemsPerPage = 7;
+
+    return range(0, Math.ceil(num / itemsPerPage));
   }
 
   onSubjectChange(subjectId: string) {
-    this.categoryService.getAll(subjectId)
-      .then(categories => {
+    this.categoriesService.getBySubjectId(subjectId)
+      .subscribe(categories => {
         this.categories = categories;
       });
   }
 
   confirmDelete(subjectId: string) {
     const dialogRef = this.dialogService.confirm({
-      title: 'Видалити категорію?',
-      message: 'Зауважте, що пов\'язані тести також будуть видалені!'
+      title: 'Видалити тему?',
+      message: 'Зауважте, що пов\'язані тести також будуть видалені!',
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -59,11 +58,11 @@ export class CategoriesListComponent implements OnInit {
   }
 
   delete(categoryId: string) {
-    return this.categoryService.delete(categoryId)
-      .then(() => {
+    return this.categoriesService.delete(categoryId)
+      .subscribe(() => {
         this.categories = this.categories.filter(category => category._id !== categoryId);
 
-        this.snackBar.open('Категорію видалено!', 'OK', {
+        this.snackBar.open('Тему видалено!', 'OK', {
           duration: 3000,
         });
       });

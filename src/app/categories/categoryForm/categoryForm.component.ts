@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, Output, ViewChild, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { Category } from '../../../common/models/category';
-import { Subject } from '../../../common/models/subject';
+import { Category } from '../../../shared/models/category.model';
+import { Subject } from '../../../shared/models/subject.model';
 
 @Component({
-  selector: 'llta-category-form',
-  templateUrl: './categoryForm.component.html'
+  selector: 'nt-category-form',
+  templateUrl: './categoryForm.component.html',
 })
 export class CategoryFormComponent implements OnInit {
   @ViewChild('categoryForm') categoryForm: NgForm;

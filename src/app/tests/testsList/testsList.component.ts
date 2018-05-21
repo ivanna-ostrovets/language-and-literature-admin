@@ -1,20 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Category } from '../../../common/models/category';
-import { Subject } from '../../../common/models/subject';
-import { Test } from '../../../common/models/test';
-
-import { CategoryService } from '../../../common/services/category.service';
-import { TestService } from '../../../common/services/test.service';
-import { DialogService } from '../../../common/services/dialog.service';
-
 import { MatSnackBar } from '@angular/material';
 
-import { range } from 'lodash';
+import range from 'lodash-es/range';
+
+import { CategoriesService } from '../../../shared/services/resources/categories.service';
+import { TestsService } from '../../../shared/services/resources/tests.service';
+import { DialogService } from '../../../shared/services/dialog.service';
+import { Category } from '../../../shared/models/category.model';
+import { Subject } from '../../../shared/models/subject.model';
+import { Test } from '../../../shared/models/test.model';
 
 @Component({
-  templateUrl: './testsList.component.html'
+  templateUrl: './testsList.component.html',
 })
 export class TestsListComponent implements OnInit {
   tests: Test[] = [];
@@ -23,13 +22,11 @@ export class TestsListComponent implements OnInit {
   subject: string;
   category: string;
 
-  constructor(
-    private categoryService: CategoryService,
-    private dialogService: DialogService,
-    private route: ActivatedRoute,
-    private testService: TestService,
-    public snackBar: MatSnackBar
-  ) {
+  constructor(private categoriesService: CategoriesService,
+              private dialogService: DialogService,
+              private route: ActivatedRoute,
+              private testsService: TestsService,
+              public snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -40,19 +37,21 @@ export class TestsListComponent implements OnInit {
   }
 
   getPagingRange(num: number): number[] {
-    return range(0, Math.ceil(num / 7));
+    const itemsPerPage = 7;
+
+    return range(0, Math.ceil(num / itemsPerPage));
   }
 
   onSubjectChange(subjectId: string) {
-    this.categoryService.getAll(subjectId)
-      .then(categories => {
+    this.categoriesService.getBySubjectId(subjectId)
+      .subscribe(categories => {
         this.categories = categories;
       });
   }
 
   onCategoryChange(categoryId: string) {
-    this.testService.getAll(categoryId)
-      .then(tests => {
+    this.testsService.getByCategoryId(categoryId)
+      .subscribe(tests => {
         this.tests = tests;
       });
   }
@@ -70,8 +69,8 @@ export class TestsListComponent implements OnInit {
   }
 
   delete(testId: string) {
-    return this.testService.remove(testId)
-      .then(() => {
+    return this.testsService.delete(testId)
+      .subscribe(() => {
         this.tests = this.tests.filter(test => test._id !== testId);
 
         this.snackBar.open('Тест видалено!', 'OK', {

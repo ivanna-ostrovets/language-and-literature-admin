@@ -3,17 +3,16 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { NgForm } from '@angular/forms';
 
-import { Test } from '../../../common/models/test';
-import { Subject } from '../../../common/models/subject';
-
-import { TestService } from '../../../common/services/test.service';
-
 import { MatSnackBar } from '@angular/material';
 
-import { cloneDeep } from 'lodash';
+import cloneDeep from 'lodash-es/cloneDeep';
+
+import { TestsService } from '../../../shared/services/resources/tests.service';
+import { Test } from '../../../shared/models/test.model';
+import { Subject } from '../../../shared/models/subject.model';
 
 @Component({
-  templateUrl: './editTest.component.html'
+  templateUrl: './editTest.component.html',
 })
 export class EditTestComponent implements OnInit {
   id: string;
@@ -22,12 +21,10 @@ export class EditTestComponent implements OnInit {
   test: Test;
   testForm: NgForm;
 
-  constructor(
-    private location: Location,
-    private route: ActivatedRoute,
-    private testService: TestService,
-    public snackBar: MatSnackBar
-  ) {
+  constructor(private location: Location,
+              private route: ActivatedRoute,
+              private testsService: TestsService,
+              public snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -44,8 +41,8 @@ export class EditTestComponent implements OnInit {
   }
 
   submit() {
-    return this.testService.update(this.id, this.test)
-      .then(() => {
+    return this.testsService.update(this.id, this.test)
+      .subscribe(() => {
         this.snackBar.open('Тест оновлено!', 'OK', {
           duration: 3000,
         });

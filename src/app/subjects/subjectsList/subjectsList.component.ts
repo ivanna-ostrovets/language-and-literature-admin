@@ -1,27 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Subject } from '../../../common/models/subject';
-
-import { SubjectService } from '../../../common/services/subject.service';
-import { DialogService } from '../../../common/services/dialog.service';
-
 import { MatSnackBar } from '@angular/material';
 
-import * as _ from 'lodash';
+import range from 'lodash-es/range';
+
+import { SubjectsService } from '../../../shared/services/resources/subjects.service';
+import { DialogService } from '../../../shared/services/dialog.service';
+import { Subject } from '../../../shared/models/subject.model';
 
 @Component({
-  templateUrl: './subjectsList.component.html'
+  templateUrl: './subjectsList.component.html',
 })
 export class SubjectsListComponent implements OnInit {
   subjects: Subject[] = [];
 
-  constructor(
-    private subjectService: SubjectService,
-    private route: ActivatedRoute,
-    private dialogService: DialogService,
-    public snackBar: MatSnackBar
-  ) {
+  constructor(private subjectsService: SubjectsService,
+              private route: ActivatedRoute,
+              private dialogService: DialogService,
+              public snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -32,13 +29,15 @@ export class SubjectsListComponent implements OnInit {
   }
 
   getPagingRange(num: number): number[] {
-    return _.range(0, Math.ceil(num / 7));
+    const itemsPerPage = 7;
+
+    return range(0, Math.ceil(num / itemsPerPage));
   }
 
   confirmDelete(subjectId: string) {
     const dialogRef = this.dialogService.confirm({
       title: 'Видалити предмет?',
-      message: 'Зауважте, що пов\'язані категорії та тести також будуть видалені!'
+      message: 'Зауважте, що пов\'язані теми та тести також будуть видалені!',
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -49,8 +48,8 @@ export class SubjectsListComponent implements OnInit {
   }
 
   delete(subjectId: string) {
-    return this.subjectService.delete(subjectId)
-      .then(() => {
+    return this.subjectsService.delete(subjectId)
+      .subscribe(() => {
         this.subjects = this.subjects.filter(subject => subject._id !== subjectId);
 
         this.snackBar.open('Предмет видалено!', 'OK', {
