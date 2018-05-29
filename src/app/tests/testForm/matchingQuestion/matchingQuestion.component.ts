@@ -17,14 +17,14 @@ export class MatchingQuestionComponent {
 
   onNumberedAnswersQuantityChange() {
     resizeArray(
-      this.question.answers,
+      this.question.matchingQuestionAnswers,
       this.question.numberedAnswersQuantity,
       null,
     );
   }
 
   onCorrectAnswerChange(event: any, index: number) {
-    this.question.answers[index] = event;
+    this.question.matchingQuestionAnswers[index] = event;
   }
 
   getAnswersRange() {

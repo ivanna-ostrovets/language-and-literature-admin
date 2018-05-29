@@ -8,5 +8,5 @@ export class MatchingQuestion {
     title2: '',
   };
   table: string[][] = [[], []];
-  answers: string[] = [];
+  matchingQuestionAnswers: string[] = [];
 }

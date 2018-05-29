@@ -81,12 +81,12 @@
       </div>
     </div>
 
-    <mat-radio-group *ngFor="let _ of question.answers; let j=index"
+    <mat-radio-group *ngFor="let _ of question.matchingQuestionAnswers; let j=index"
                      required
                      [name]="j"
                      fxLayout="row"
                      [disabled]="question.numberedAnswersQuantity <= j"
-                     [ngModel]="question.answers[j]"
+                     [ngModel]="question.matchingQuestionAnswers[j]"
                      (ngModelChange)="onCorrectAnswerChange($event, j)">
       <div class="cell"
            [class.disabled]="question.numberedAnswersQuantity <= j">

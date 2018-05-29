@@ -6,15 +6,15 @@
          placeholder="Кількість варіантів відповідей"
          min="1"
          max="32"
-         [ngModel]="question.answers.length"
+         [ngModel]="question.simpleQuestionAnswers.length"
          (ngModelChange)="onAnswersQuantityChange($event, question)">
 </mat-input-container>
 
-<div *ngIf="question.answers.length" class="hint">
+<div *ngIf="question.simpleQuestionAnswers.length" class="hint">
   <p>Для вибору правильного варіанту відповіді натисніть на прапорець справа від поля введення.</p>
 </div>
 
-<div *ngFor="let answer of question.answers; let answerIndex=index;"
+<div *ngFor="let answer of question.simpleQuestionAnswers; let answerIndex=index;"
      class="margin-bottom"
      fxLayout="row"
      fxLayoutAlign="space-between center">
