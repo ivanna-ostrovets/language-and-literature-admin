@@ -63,10 +63,6 @@ export class TestFormComponent implements OnInit {
       question.letteredAnswersQuantity = null;
       question.table = [[], []];
       question.matchingQuestionAnswers = [];
-      question.tableTitles = {
-        title1: '',
-        title2: '',
-      };
     } else {
       (question as SimpleQuestion).simpleQuestionAnswers = [];
     }

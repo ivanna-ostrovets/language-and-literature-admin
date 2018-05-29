@@ -21,26 +21,6 @@
 
 <table *ngIf="question.numberedAnswersQuantity > 0 && question.letteredAnswersQuantity > 0"
        class="answers-table margin-bottom">
-  <thead>
-    <tr>
-      <th>
-        Заголовок*
-        <nt-text-editor *ngIf="questionIndex === selectedIndex"
-                        [elementId]="'answersTableTitle0_' + questionIndex"
-                        [(text)]="question.tableTitles.title1">
-        </nt-text-editor>
-      </th>
-
-      <th>
-        Заголовок*
-        <nt-text-editor *ngIf="questionIndex === selectedIndex"
-                        [elementId]="'answersTableTitle1_' + questionIndex"
-                        [(text)]="question.tableTitles.title2">
-        </nt-text-editor>
-      </th>
-    </tr>
-  </thead>
-
   <tbody>
     <tr *ngFor="let _ of getAnswersRange(); let j=index">
       <td>
