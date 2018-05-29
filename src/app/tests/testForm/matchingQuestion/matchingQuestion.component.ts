@@ -19,7 +19,7 @@ export class MatchingQuestionComponent {
     resizeArray(
       this.question.matchingQuestionAnswers,
       this.question.numberedAnswersQuantity,
-      null,
+      () => null,
     );
   }
 

@@ -14,8 +14,6 @@ import { Category } from '../../../shared/models/category.model';
 import { Test } from '../../../shared/models/test.model';
 import { resizeArray } from '../../../shared/utils/resizeArray';
 import { SimpleQuestion } from '../../../shared/models/simpleQuestion.model';
-import { MatchingQuestion } from '../../../shared/models/matchingQuestion.model';
-import { Question } from '../../../shared/models/question.model';
 
 @Component({
   selector: 'nt-test-form',
@@ -52,11 +50,11 @@ export class TestFormComponent implements OnInit {
   }
 
   onQuestionsQuantityChange(quantity: number) {
-    resizeArray(this.test.questions, quantity, new SimpleQuestion());
+    resizeArray(this.test.questions, quantity, () => new SimpleQuestion());
   }
 
   onMatchingQuestionSelected(questionIndex: number) {
-    const question: Question = this.test.questions[questionIndex];
+    const question = this.test.questions[questionIndex];
 
     if (question.matchingQuestion) {
       question.numberedAnswersQuantity = null;

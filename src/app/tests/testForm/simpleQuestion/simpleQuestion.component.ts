@@ -14,6 +14,6 @@ export class SimpleQuestionComponent {
   @Input() selectedIndex: number;
 
   onAnswersQuantityChange(quantity: number, question: SimpleQuestion) {
-    resizeArray(question.simpleQuestionAnswers, quantity, {});
+    resizeArray(question.simpleQuestionAnswers, quantity, () => ({ text: null }));
   }
 }

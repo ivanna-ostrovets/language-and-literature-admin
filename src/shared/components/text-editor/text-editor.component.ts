@@ -51,8 +51,8 @@ export class TextEditorComponent implements AfterViewChecked, OnDestroy {
       });
     }
 
-    if (this.editor && this.readonly) {
-      tinymce.get(this.elementId).setMode('readonly');
+    if (this.editor) {
+      tinymce.get(this.elementId).setMode(this.readonly ? 'readonly' : 'design');
     }
   }
 

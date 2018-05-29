@@ -34,7 +34,7 @@
         </nt-text-editor>
       </td>
       <td>
-        <span [class.light-grey]="question.numberedAnswersQuantity <= j">
+        <span [class.light-grey]="question.letteredAnswersQuantity <= j">
          Варіант {{getLetterLabel(j)}}
         </span>
         <nt-text-editor *ngIf="questionIndex === selectedIndex"

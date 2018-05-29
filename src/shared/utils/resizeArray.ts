@@ -1,10 +1,10 @@
-export const resizeArray = (array: any[], index: number, element: any) => {
+export const resizeArray = (array: any[], index: number, getNewElement: any) => {
   while (array.length > index) {
     array.pop();
   }
 
   while (array.length < index) {
-    array.push(element);
+    array.push(getNewElement());
   }
 };
 
