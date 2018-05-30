@@ -61,7 +61,7 @@
       </div>
     </div>
 
-    <mat-radio-group *ngFor="let _ of question.matchingQuestionAnswers; let j=index"
+    <mat-radio-group *ngFor="let answer of question.matchingQuestionAnswers; let j=index"
                      required
                      [name]="j"
                      fxLayout="row"
@@ -73,9 +73,11 @@
         <strong>{{ j + 1 }}</strong>
       </div>
 
-      <mat-radio-button *ngFor="let _ of getLetteredAnswersRange(); let k=index"
+      <mat-radio-button *ngFor="let k of getLetteredAnswersRange()"
                         class="cell"
                         [value]="k"
+                        [checked]="k === answer"
+                        [disableRipple]="k !== answer"
                         [name]="j.toString() + k.toString()"
                         [disabled]="question.letteredAnswersQuantity <= k">
       </mat-radio-button>
