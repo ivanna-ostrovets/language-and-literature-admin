@@ -5,9 +5,14 @@
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
+    "electron": "electron .",
+    "pack": "electron-packager dist \"NUWEE Tests\" --platform=win32 --arch=ia32",
     "start:local": "ng serve --proxy-config proxy.conf.json",
     "postinstall": "npm run build",
+    "watch": "ng build --watch",
     "build": "ng build --prod",
+    "watch:electron": "ng build --watch --base-href ./",
+    "build:electron": "ng build --prod --base-href ./",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -46,6 +51,8 @@
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "~6.0.60",
     "codelyzer": "^4.0.1",
+    "electron": "^2.0.2",
+    "electron-packager": "^12.1.0",
     "jasmine-core": "~2.8.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~2.0.0",
